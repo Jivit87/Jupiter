@@ -18,9 +18,20 @@ export function SearchButton({ onClick, className }: SearchButtonProps) {
       title="Search products"
       onClick={onClick}
     >
-      <span aria-hidden className="text-lg leading-none">
-        ⌕
-      </span>
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 22 22"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="10" cy="10" r="6.5" />
+        <line x1="15" y1="15" x2="19" y2="19" />
+      </svg>
     </Button>
   );
 }

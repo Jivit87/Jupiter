@@ -2,7 +2,7 @@
 
 import type { ActionResult } from './shared';
 import type { Product } from '@/types';
-import { createSupabaseAdminClient } from '@/lib/supabase';
+import { createSupabaseAdminClient, mapProductRecord } from '@/lib/supabase';
 import { readAllProductSlugs, readFeaturedProducts, readNewArrivals, readProductBySlug, readProducts, readRelatedProducts } from '@/lib/product-queries';
 import { isBuildPhase } from '@/lib/supabase/utils';
 import { productSchema } from '@/lib/validators/product';

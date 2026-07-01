@@ -12,10 +12,17 @@ export function AnnouncementBar({
   return (
     <div
       className={cn(
-        'border-b border-primary/10 bg-brand text-primary',
-        'px-4 py-2 text-center font-mono text-[11px] uppercase tracking-[0.28em] sm:text-xs',
+        'w-full border-b text-center font-sans uppercase tracking-[0.28em]',
         className,
       )}
+      style={{
+        backgroundColor: 'rgb(30 23 64)',
+        color: 'rgb(200 148 48)',
+        fontSize: '9px',
+        padding: '11px 16px',
+        letterSpacing: '0.3em',
+        height: '31px',
+      }}
     >
       <p className="text-balance">{text}</p>
     </div>

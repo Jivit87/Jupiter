@@ -3,8 +3,8 @@ import { createSupabaseServerClient, mapProductRecord } from '@/lib/supabase';
 import { isBuildPhase } from '@/lib/supabase/utils';
 
 const WITH_CATEGORY = '*, categories(id,name,slug)';
-type SupabaseClientType = Awaited<ReturnType<typeof createSupabaseServerClient>>;
-type ProductQuery = ReturnType<SupabaseClientType['from']>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ProductQuery = any;
 
 export type ProductSortOption = 'newest' | 'featured' | 'price_asc' | 'price_desc' | 'alpha';
 

@@ -9,6 +9,7 @@ export const colors = {
   text: {
     primary: 'rgb(var(--color-text-primary) / <alpha-value>)',
     muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
+    heading: 'rgb(var(--color-text-heading) / <alpha-value>)',
   },
   border: 'rgb(var(--color-border) / <alpha-value>)',
   starlight: 'rgb(var(--color-white) / <alpha-value>)',

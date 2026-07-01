@@ -9,6 +9,7 @@ import { getPublicEnv } from '@/lib/env';
 import { JsonLd } from '@/lib/json-ld';
 import { buildOrganizationJsonLd } from '@/lib/seo';
 import { cn } from '@/lib/utils';
+import 'remixicon/fonts/remixicon.css';
 import './globals.css';
 
 export const metadata: Metadata = {

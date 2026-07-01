@@ -9,14 +9,38 @@ type WishlistButtonProps = {
 
 export function WishlistButton({ count = 0, className }: WishlistButtonProps) {
   return (
-    <Button asChild variant="ghost" size="sm" className={cn('relative', className)}>
+    <Button
+      asChild
+      variant="ghost"
+      size="icon"
+      className={cn('relative', className)}
+    >
       <Link href="/wishlist" aria-label={`Wishlist${count > 0 ? `, ${count} saved items` : ''}`}>
-        <span aria-hidden className="text-base leading-none">
-          ♡
-        </span>
-        <span>Wishlist</span>
+        <svg
+          width="19"
+          height="19"
+          viewBox="0 0 22 22"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M11 19s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 18 9c0 5.5-7 10-7 10z" />
+        </svg>
+        {/* Counter pill — only when items exist */}
         {count > 0 ? (
-          <span className="ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1.5 text-[11px] font-semibold text-starlight">
+          <span
+            className="absolute top-[6px] right-[6px] flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-[5px] font-semibold"
+            style={{
+              fontSize: '10px',
+              backgroundColor: '#C89430',
+              color: '#FDFAF5',
+              lineHeight: 1,
+            }}
+            aria-hidden="true"
+          >
             {count}
           </span>
         ) : null}

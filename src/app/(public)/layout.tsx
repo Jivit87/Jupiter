@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { AnnouncementBar } from '@/components/layout/announcement-bar';
 import { FloatingWhatsApp } from '@/components/layout/floating-whatsapp';
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
@@ -20,17 +19,11 @@ export default async function PublicLayout({ children }: { children: ReactNode }
       ]);
   const catalogCategories = getCatalogCategories(categories);
   const siteSettings = normalizeSiteSettings(settings);
-
-  const announcementText =
-    typeof siteSettings.announcementBar === 'string'
-      ? siteSettings.announcementBar
-      : 'Free shipping on orders above NPR 1500 within Kathmandu Valley';
-  const announcementActive = siteSettings.announcementBarActive !== false;
+  void siteSettings.announcementBar;
 
   return (
     <SiteSettingsProvider settings={siteSettings}>
       <SiteShell>
-        {announcementActive && <AnnouncementBar text={announcementText} />}
         <Navbar categories={catalogCategories} />
         <main id="main-content" className="relative">
           {children}

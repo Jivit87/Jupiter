@@ -75,7 +75,7 @@ export default function MadeInNepalPage() {
       <Section spacing="md">
         <div className="space-y-4">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-text-muted">Why it matters</p>
-          <h2 className="font-heading text-3xl text-primary">What "Made in Nepal" really means</h2>
+          <h2 className="font-heading text-3xl text-primary">What &ldquo;Made in Nepal&rdquo; really means</h2>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {reasons.map((r) => (

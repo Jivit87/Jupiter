@@ -26,7 +26,7 @@ export function AdminShell({ children }: AdminShellProps) {
             <Link href="/admin/dashboard" className="font-display text-2xl">
               Jupiter Admin
             </Link>
-            <UserButton afterSignOutUrl="/admin/sign-in" />
+            <UserButton />
           </div>
         </Container>
       </div>
