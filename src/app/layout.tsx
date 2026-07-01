@@ -1,6 +1,7 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
+import { Caveat, Jost, Marcellus, Cormorant_Garamond } from 'next/font/google';
 import Script from 'next/script';
 import { AppProviders } from '@/components/providers/app-providers';
 import { SkipLink } from '@/components/layout/skip-link';
@@ -11,6 +12,35 @@ import { buildOrganizationJsonLd } from '@/lib/seo';
 import { cn } from '@/lib/utils';
 import 'remixicon/fonts/remixicon.css';
 import './globals.css';
+
+const marcellus = Marcellus({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-display',
+});
+
+const jost = Jost({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  display: 'swap',
+  variable: '--font-body',
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-script',
+});
+
+const caveat = Caveat({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+  variable: '--font-hand',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -53,7 +83,13 @@ export default function RootLayout({
 
   return (
     <html lang={siteConfig.language} suppressHydrationWarning>
-      <body className={cn('min-h-screen bg-background font-sans text-text-primary antialiased')}>
+      <body className={cn(
+        'min-h-screen bg-background font-sans text-text-primary antialiased',
+        marcellus.variable,
+        jost.variable,
+        cormorantGaramond.variable,
+        caveat.variable,
+      )}>
         <JsonLd data={buildOrganizationJsonLd()} />
         <ClerkProvider>
           <AppProviders>

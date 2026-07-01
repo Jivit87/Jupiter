@@ -5,10 +5,10 @@ import { Hero } from './hero';
 import { TrustFeatures } from './trust-features';
 import { ExploreUniverse } from './explore-universe';
 import { CuratedCollections } from './curated-collections';
-import { FreshWorkshop } from './fresh-workshop';
 import { HowToOrder } from './how-to-order';
 import { WallOfLove } from './wall-of-love';
 import { FollowJourney } from './follow-journey';
+import { InstagramSection } from './instagram-section';
 import { FeatureStrip } from './feature-strip';
 
 export async function HomePage() {
@@ -25,10 +25,10 @@ export async function HomePage() {
       <TrustFeatures />
       <ExploreUniverse />
       <CuratedCollections />
-      <FreshWorkshop />
       <HowToOrder />
       <WallOfLove />
       <FollowJourney />
+      <InstagramSection />
       <FeatureStrip />
     </div>
   );

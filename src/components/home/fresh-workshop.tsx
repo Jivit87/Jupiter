@@ -8,14 +8,14 @@ import Link from 'next/link';
   .new-badge { position:absolute; top:10px; left:10px; background:var(--copper); }
 */
 
-type Arrival = { cat: string; name: string; price: string; slug: string; tbd?: boolean };
+type Arrival = { cat: string; name: string; price: string; slug: string; tbd?: boolean; image: string };
 
 const NEW_ARRIVALS: Arrival[] = [
-  { cat: 'Moon Lamps',       name: 'Crescent Textured Lamp',     price: 'NPR 3,600',        slug: 'crescent-textured-lamp'    },
-  { cat: 'Wire Jewelry',     name: 'Orbit Wrap Bracelet',        price: 'NPR 1,650',        slug: 'orbit-wrap-bracelet'       },
-  { cat: 'Home Décor',       name: 'Terracotta Incense Holder',  price: 'NPR 890',          slug: 'terracotta-incense-holder' },
-  { cat: 'Customized Gifts', name: 'Initial Constellation Tag',  price: 'Price on request', slug: 'initial-constellation-tag', tbd: true },
-  { cat: 'Mandala Art',      name: 'Indigo Night Mandala',       price: 'NPR 5,200',        slug: 'indigo-night-mandala'      },
+  { cat: 'Moon Lamps',       name: 'Crescent Textured Lamp',     price: 'NPR 3,600',        slug: 'crescent-textured-lamp',    image: '/products/642458228_17984579045950228_2502309061041822413_n.jpg' },
+  { cat: 'Wire Jewelry',     name: 'Orbit Wrap Bracelet',        price: 'NPR 1,650',        slug: 'orbit-wrap-bracelet',       image: '/products/641757644_17984458352950228_6773523526454917524_n.jpg' },
+  { cat: 'Home Décor',       name: 'Terracotta Incense Holder',  price: 'NPR 890',          slug: 'terracotta-incense-holder', image: '/products/653929738_17987038052950228_4155596580084070347_n.jpg' },
+  { cat: 'Customized Gifts', name: 'Initial Constellation Tag',  price: 'Price on request', slug: 'initial-constellation-tag', tbd: true, image: '/products/657378721_17988004061950228_8155633251410794495_n.jpg' },
+  { cat: 'Mandala Art',      name: 'Indigo Night Mandala',       price: 'NPR 5,200',        slug: 'indigo-night-mandala',      image: '/products/683417806_17992733117950228_3135012803392676979_n.jpg' },
 ];
 
 export function FreshWorkshop() {
@@ -67,7 +67,7 @@ export function FreshWorkshop() {
             {/* Image */}
             <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1' }}>
               <Image
-                src="/dummy_image.png"
+                src={item.image}
                 alt={item.name}
                 fill
                 sizes="220px"

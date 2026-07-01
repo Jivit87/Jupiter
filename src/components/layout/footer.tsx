@@ -115,7 +115,7 @@ export function Footer({ settings: _settings }: { settings?: SiteSettingsState }
 
   return (
     <footer style={{
-      backgroundColor: 'var(--insp-indigo)',
+      backgroundColor: '#17111f',
       color: '#c7bfd9',
       padding: '72px 48px 28px',
     }}>

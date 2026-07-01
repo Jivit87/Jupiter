@@ -7,14 +7,14 @@ export function Hero() {
       <svg className="stars" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <pattern id="starfield" width="200" height="200" patternUnits="userSpaceOnUse">
-            <circle cx="10" cy="20" r="1.1" fill="#fff" opacity=".7" />
-            <circle cx="60" cy="70" r="0.8" fill="#fff" opacity=".5" />
-            <circle cx="120" cy="30" r="1.3" fill="#fff" opacity=".75" />
-            <circle cx="150" cy="120" r="0.9" fill="#fff" opacity=".55" />
-            <circle cx="30" cy="150" r="1" fill="#fff" opacity=".5" />
-            <circle cx="90" cy="160" r="1.2" fill="#fff" opacity=".65" />
-            <circle cx="175" cy="55" r="0.7" fill="#fff" opacity=".45" />
-            <circle cx="45" cy="100" r="0.7" fill="#fff" opacity=".4" />
+            <circle className="star-major" cx="10" cy="20" r="1.3" fill="#fff" opacity=".52" />
+            <circle cx="60" cy="70" r="0.8" fill="#fff" opacity=".28" />
+            <circle className="star-major" cx="120" cy="30" r="1.45" fill="#fff" opacity=".56" />
+            <circle cx="150" cy="120" r="0.9" fill="#fff" opacity=".32" />
+            <circle cx="30" cy="150" r="1" fill="#fff" opacity=".26" />
+            <circle className="star-major" cx="90" cy="160" r="1.35" fill="#fff" opacity=".5" />
+            <circle cx="175" cy="55" r="0.7" fill="#fff" opacity=".22" />
+            <circle cx="45" cy="100" r="0.7" fill="#fff" opacity=".2" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#starfield)" />

@@ -25,21 +25,13 @@ export function InstagramSection() {
       </div>
 
       <div className="story-right">
-        <svg viewBox="0 0 500 430" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="500" height="430" fill="#b49a78" />
-          <rect width="500" height="430" fill="url(#storyGrad)" />
-          <defs><linearGradient id="storyGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#c9b190" /><stop offset="1" stopColor="#5f4a36" /></linearGradient></defs>
-          <ellipse cx="250" cy="330" rx="150" ry="90" fill="#7a6248" opacity=".6" />
-          <path d="M180 300 Q250 260 320 300 Q320 340 250 355 Q180 340 180 300Z" fill="#c9ac86" />
-          <circle cx="250" cy="290" r="16" fill="none" stroke="#c8933f" strokeWidth="3" />
-          <path d="M250 278c5 0 8 4 8 8s-3 6-6 6-5-2-5-4.5 2-4 4-4" stroke="#c8933f" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-        </svg>
-        <button className="play-btn" aria-label="Watch our story">
-          <span className="play-circle">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M8 5l12 7-12 7V5z" fill="currentColor" /></svg>
-          </span>
-          <span className="label">Watch Our Story</span>
-        </button>
+        <iframe
+          src="https://drive.google.com/file/d/1mGn1uFM8kvkO_Q3LJiaZB--hsJGxR1OY/preview"
+          allow="autoplay"
+          allowFullScreen
+          style={{ width: '100%', maxWidth: 520, aspectRatio: '1/1', border: 0 }}
+          title="Our Story"
+        />
       </div>
     </section>
   );
