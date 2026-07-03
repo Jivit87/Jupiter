@@ -10,7 +10,7 @@ const FALLBACK_REVIEWS = [
     name: 'Sanjana Bhatt',
     loc: 'Kathmandu',
     initials: 'SB',
-    image: 'https://unavatar.io/instagram/s__anjanabhatt',
+    image: '',
     link: 'https://www.instagram.com/s__anjanabhatt/?hl=en'
   },
   {
@@ -19,7 +19,7 @@ const FALLBACK_REVIEWS = [
     name: 'Bimmaya',
     loc: 'Pokhara',
     initials: 'B',
-    image: 'https://unavatar.io/instagram/binidimdung',
+    image: '',
     link: 'https://www.instagram.com/binidimdung/?hl=en'
   },
   {
@@ -28,10 +28,34 @@ const FALLBACK_REVIEWS = [
     name: 'Jivit Rana',
     loc: 'Lalitpur',
     initials: 'JR',
-    image: 'https://unavatar.io/instagram/jivitrana',
+    image: 'https://github.com/jivitrana.png',
     link: 'https://www.instagram.com/jivitrana/?hl=en'
   },
 ] as const;
+
+function ReviewAvatar({ r }: { r: any }) {
+  const [error, setError] = useState(false);
+
+  if (!r.image || error) {
+    return (
+      <div
+        className="w-12 h-12 rounded-full flex shrink-0 items-center justify-center bg-[#F9FAFB] border border-[#E5E7EB] text-black text-xs font-bold tracking-wider"
+        aria-hidden="true"
+      >
+        {r.initials}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={r.image}
+      alt={r.name}
+      className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#E5E7EB] bg-[#F9FAFB]"
+      onError={() => setError(true)}
+    />
+  );
+}
 
 export function WallOfLove({ reviews = [] }: { reviews?: Review[] }) {
   const displayData = reviews.length > 0 ? reviews.map(r => ({
@@ -117,23 +141,7 @@ export function WallOfLove({ reviews = [] }: { reviews?: Review[] }) {
 
                 <div className="flex items-center gap-4 relative z-10">
                   <a href={r.link} target="_blank" rel="noopener noreferrer" className="block shrink-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={r.image}
-                      alt={r.name}
-                      className="w-12 h-12 rounded-full object-cover border border-[#E5E7EB] bg-[#F9FAFB]"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                        e.currentTarget.nextElementSibling?.classList.add('flex');
-                      }}
-                    />
-                    <div
-                      className="w-12 h-12 rounded-full hidden items-center justify-center bg-[#F9FAFB] border border-[#E5E7EB] text-black text-xs font-bold tracking-wider"
-                      aria-hidden="true"
-                    >
-                      {r.initials}
-                    </div>
+                    <ReviewAvatar r={r} />
                   </a>
                   <div>
                     <a href={r.link} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-black leading-snug hover:underline decoration-black/20 underline-offset-4">
