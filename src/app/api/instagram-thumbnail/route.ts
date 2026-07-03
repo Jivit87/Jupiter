@@ -5,7 +5,9 @@ function isAllowedInstagramImageUrl(url: URL) {
     url.hostname === 'instagram.com' ||
     url.hostname.endsWith('.instagram.com') ||
     url.hostname === 'fbcdn.net' ||
-    url.hostname.endsWith('.fbcdn.net')
+    url.hostname.endsWith('.fbcdn.net') ||
+    url.hostname === 'cdninstagram.com' ||
+    url.hostname.endsWith('.cdninstagram.com')
   );
 }
 
