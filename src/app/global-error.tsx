@@ -3,12 +3,13 @@
 import { Button } from '@/components/ui/button';
 
 export default function GlobalError({
-  error: _error,
+  error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  console.error('Global Error caught:', error);
   return (
     <html lang="en">
       <body>

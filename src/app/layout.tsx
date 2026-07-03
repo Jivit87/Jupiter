@@ -1,6 +1,6 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata, Viewport } from 'next';
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from '@vercel/analytics/react';
 import type { ReactNode } from 'react';
 import { Caveat, Jost, Marcellus, Cormorant_Garamond } from 'next/font/google';
 import Script from 'next/script';

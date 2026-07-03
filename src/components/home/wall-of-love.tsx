@@ -33,7 +33,7 @@ const FALLBACK_REVIEWS = [
   },
 ] as const;
 
-function ReviewAvatar({ r }: { r: any }) {
+function ReviewAvatar({ r }: { r: { initials: string; image?: string; name: string } }) {
   const [error, setError] = useState(false);
 
   if (!r.image || error) {
