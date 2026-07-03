@@ -2,7 +2,7 @@ import type { Category } from '@/types';
 import { categories as staticCategories } from '@/config/categories';
 
 type CatalogCategory = Category & {
-  emoji: string;
+  icon: string;
 };
 
 export function getCatalogCategories(categories?: Category[] | null): CatalogCategory[] {
@@ -24,7 +24,7 @@ export function getCatalogCategories(categories?: Category[] | null): CatalogCat
       isActive: live?.isActive ?? true,
       createdAt: live?.createdAt,
       updatedAt: live?.updatedAt,
-      emoji: entry.emoji,
+      icon: entry.icon,
     };
   });
 
@@ -32,7 +32,7 @@ export function getCatalogCategories(categories?: Category[] | null): CatalogCat
     .filter((category) => !seen.has(category.slug))
     .map((category) => ({
       ...category,
-      emoji: '🌿',
+      icon: 'ri-leaf-line',
     }));
 
   return [...merged, ...extras];

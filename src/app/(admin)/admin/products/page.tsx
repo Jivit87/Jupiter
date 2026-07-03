@@ -25,7 +25,7 @@ export default async function AdminProductsPage() {
           }
         />
 
-        <div className="overflow-hidden rounded-2xl border border-border">
+        <div className="overflow-x-auto overflow-y-hidden rounded-sm border border-border">
           <table className="min-w-full text-sm">
             <thead className="bg-background/80">
               <tr>
@@ -55,7 +55,7 @@ export default async function AdminProductsPage() {
                       {typeof p.price === 'number' ? formatPrice(p.price) : '—'}
                     </td>
                     <td className="px-4 py-3 text-text-muted">{p.stockStatus ?? '—'}</td>
-                    <td className="px-4 py-3">{p.isPublished ? '✅' : '⬜'}</td>
+                    <td className="px-4 py-3">{p.isPublished ? <i className="ri-checkbox-circle-fill text-green-500 text-lg" title="Published"></i> : <i className="ri-close-circle-line text-[#E5E7EB] text-lg"></i>}</td>
                     <td className="px-4 py-3">
                       <AdminProductActions id={p.id} isPublished={p.isPublished ?? false} />
                     </td>

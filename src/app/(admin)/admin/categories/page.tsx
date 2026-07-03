@@ -11,12 +11,12 @@ export const metadata: Metadata = { title: 'Categories | Jupiter Admin' };
 export default async function AdminCategoriesPage() {
   const categories = await getAdminCategories();
   return (
-    <AdminPageFrame eyebrow="Categories" title="Categories" description={`${categories.length} categories`}>
+    <AdminPageFrame eyebrow="Categories" title="Categories" description={`${categories.length} categories total`}>
       <div className="space-y-6">
         <AdminToolbar title="Add category" description="Create a new product category." />
         <AdminCategoryForm />
 
-        <div className="overflow-hidden rounded-2xl border border-border">
+        <div className="overflow-x-auto overflow-y-hidden rounded-sm border border-border">
           <table className="min-w-full text-sm">
             <thead className="bg-background/80">
               <tr>
@@ -35,7 +35,7 @@ export default async function AdminCategoriesPage() {
                   <td className="px-4 py-3 text-text-muted">
                     <AdminCategorySortAction id={c.id} initialSortOrder={c.sortOrder ?? 0} />
                   </td>
-                  <td className="px-4 py-3">{c.isActive ? '✅' : '⬜'}</td>
+                  <td className="px-4 py-3">{c.isActive ? <i className="ri-checkbox-circle-fill text-green-500 text-lg" title="Active"></i> : <i className="ri-close-circle-line text-[#E5E7EB] text-lg"></i>}</td>
                   <td className="px-4 py-3"><AdminCategoryActions id={c.id} isActive={c.isActive ?? true} /></td>
                 </tr>
               ))}

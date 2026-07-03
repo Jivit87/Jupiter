@@ -4,16 +4,16 @@ import { cn } from '@/lib/utils';
 
 const buttonStyles = {
   primary:
-    'bg-brand text-starlight shadow-glow hover:bg-brand/90 active:bg-brand/85 disabled:bg-brand/60',
+    'bg-amber-600 text-white shadow-sm hover:bg-amber-700 active:bg-amber-800 disabled:bg-amber-600/60',
   secondary:
-    'bg-primary text-starlight shadow-soft hover:bg-primary/95 active:bg-primary/90 disabled:bg-primary/60',
+    'bg-black text-white shadow-sm hover:bg-black/90 active:bg-black/80 disabled:bg-black/60',
   outline:
-    'border border-border bg-transparent text-text-primary hover:bg-surface active:bg-surface/80',
-  ghost: 'bg-transparent text-text-primary hover:bg-surface active:bg-surface/80',
+    'border border-[#E5E7EB] bg-transparent text-black hover:border-black active:bg-gray-50',
+  ghost: 'bg-transparent text-black hover:bg-gray-100 active:bg-gray-200',
   whatsapp:
-    'bg-[#25D366] text-white shadow-soft hover:bg-[#1fb85a] active:bg-[#1aa24f] disabled:bg-[#25D366]/60',
+    'bg-[#25D366] text-white shadow-sm hover:bg-[#25D366]/90 active:bg-[#25D366]/80 disabled:bg-[#25D366]/60',
   destructive:
-    'bg-copper text-starlight shadow-soft hover:bg-copper/90 active:bg-copper/85 disabled:bg-copper/60',
+    'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800 disabled:bg-red-600/60',
 } as const;
 
 const buttonSizes = {
@@ -36,8 +36,8 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', type = 'button', asChild = false, children, ...props }, ref) => {
     const sharedClassName = cn(
-      'inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors duration-200 ease-standard',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+      'inline-flex items-center justify-center gap-2 rounded-sm font-medium transition-colors duration-200 ease-standard',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white',
       'disabled:pointer-events-none disabled:cursor-not-allowed',
       buttonStyles[variant],
       buttonSizes[size],

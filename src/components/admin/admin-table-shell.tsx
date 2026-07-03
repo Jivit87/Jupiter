@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Card } from '@/components/ui/card';
 
 type AdminTableShellProps = {
   columns: ReadonlyArray<string>;
@@ -9,31 +8,31 @@ type AdminTableShellProps = {
 
 export function AdminTableShell({ columns, rows, emptyState }: AdminTableShellProps) {
   return (
-    <Card className="overflow-hidden">
+    <div className="rounded-md border border-[#E5E7EB] bg-white overflow-hidden shadow-sm">
       <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse text-left">
-          <thead className="bg-background/80">
+        <table className="min-w-full border-collapse text-left text-sm">
+          <thead className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
             <tr>
               {columns.map((column) => (
-                <th key={column} className="border-b border-border px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">
+                <th key={column} className="px-5 py-3 font-medium text-[#6B7280]">
                   {column}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-[#E5E7EB]">
             {rows?.length ? (
               rows
             ) : (
               <tr>
-                <td className="px-6 py-10 text-sm leading-7 text-text-muted" colSpan={columns.length}>
-                  {emptyState ?? 'This table shell is ready for future data.'}
+                <td className="px-5 py-10 text-center text-sm text-[#9CA3AF]" colSpan={columns.length}>
+                  {emptyState ?? 'No data available.'}
                 </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
-    </Card>
+    </div>
   );
 }

@@ -49,7 +49,7 @@ export function ReviewCard({ review, className }: ReviewCardProps) {
         <p className="text-sm leading-7 text-text-muted">“{review.reviewText}”</p>
 
         {review.reviewImage ? (
-          <div className="rounded-2xl border border-border bg-earthy-cosmos p-4 text-xs uppercase tracking-[0.25em] text-text-muted">
+          <div className="rounded-sm border border-[#E5E7EB] bg-[#F9FAFB] p-4 text-xs uppercase tracking-[0.25em] text-[#6B7280]">
             Review image shell
           </div>
         ) : null}

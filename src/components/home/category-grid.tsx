@@ -17,12 +17,12 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
       title="Explore our universe"
       description="Every piece is handcrafted in Nepal with intention and love."
     >
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {display.map((category) => (
           <Link
             key={category.slug}
             href={`/collections/${category.slug}`}
-            className="group relative block overflow-hidden rounded-2xl bg-primary"
+            className="group relative block overflow-hidden rounded-sm bg-white border border-[#E5E7EB] hover:border-black transition-colors duration-300"
             style={{ minHeight: '220px' }}
           >
             {category.imageUrl ? (
@@ -34,25 +34,22 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-primary via-[#3b2a6e] to-[#6b4e9b]" />
+              <div className="absolute inset-0 bg-[#F9FAFB]" />
             )}
 
-            {/* gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/25 to-transparent" />
-
-            {/* gold ring on hover */}
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-transparent transition-all duration-300 group-hover:ring-brand/50" />
+            {/* Subtle overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
             <div className="absolute inset-0 flex flex-col justify-end p-5">
-              <span className="mb-1 text-lg leading-none">{category.emoji}</span>
-              <h3 className="font-heading text-xl leading-snug text-starlight group-hover:text-brand transition-colors duration-300">
+              <span className="mb-2 text-xl leading-none text-white"><i className={category.icon}></i></span>
+              <h3 className="font-sans font-semibold text-lg leading-snug text-white">
                 {category.name}
               </h3>
-              <p className="mt-1 text-xs leading-5 text-starlight/55 line-clamp-2">
+              <p className="mt-1 text-xs leading-5 text-gray-300 line-clamp-2">
                 {category.description}
               </p>
-              <span className="mt-3 inline-block text-xs font-medium text-brand opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                Explore →
+              <span className="mt-3 inline-block text-[10px] uppercase font-bold tracking-widest text-white opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                Explore <i className="ri-arrow-right-line"></i>
               </span>
             </div>
           </Link>

@@ -17,25 +17,10 @@ export function AdminOrderActions({ id, currentStatus, currentNotes }: AdminOrde
   const [isPending, startTransition] = useTransition();
   const [notes, setNotes] = useState(currentNotes ?? '');
 
-  const next: Record<string, Status> = {
-    pending: 'in_progress',
-    in_progress: 'completed',
-  };
-
-  const nextStatus = next[currentStatus];
-
-  function advance() {
-    if (!nextStatus) return;
+  function handleStatusChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const newStatus = e.target.value as Status;
     startTransition(async () => {
-      await updateCustomOrderRequestStatus(id, nextStatus);
-      router.refresh();
-    });
-  }
-
-  function decline() {
-    if (!confirm('Decline this request?')) return;
-    startTransition(async () => {
-      await updateCustomOrderRequestStatus(id, 'declined', notes);
+      await updateCustomOrderRequestStatus(id, newStatus, notes);
       router.refresh();
     });
   }
@@ -48,34 +33,39 @@ export function AdminOrderActions({ id, currentStatus, currentNotes }: AdminOrde
   }
 
   return (
-    <div className="flex gap-2">
-      {nextStatus && (
-        <button disabled={isPending} onClick={advance}
-          className="rounded-lg border border-border px-2.5 py-1 text-xs text-text-primary hover:border-brand disabled:opacity-50 capitalize">
-          → {nextStatus.replace('_', ' ')}
-        </button>
-      )}
-      {currentStatus !== 'declined' && currentStatus !== 'completed' && (
-        <button disabled={isPending} onClick={decline}
-          className="rounded-lg border border-red-200 px-2.5 py-1 text-xs text-red-600 hover:bg-red-50 disabled:opacity-50">
-          Decline
-        </button>
-      )}
-      <div className="flex flex-col gap-2">
-        <textarea
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          placeholder="Admin note"
-          rows={2}
-          className="w-48 rounded-lg border border-border bg-background px-2 py-1 text-xs text-text-primary"
-        />
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-4 items-end">
+        <div className="flex-1 space-y-1">
+          <label className="text-xs uppercase tracking-wider text-[#4B5563]">Status</label>
+          <select
+            value={currentStatus}
+            disabled={isPending}
+            onChange={handleStatusChange}
+            className="w-full rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 text-[13px] text-black shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+          >
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="declined">Declined</option>
+          </select>
+        </div>
+        <div className="flex-1 space-y-1">
+          <label className="text-xs uppercase tracking-wider text-[#4B5563]">Notes</label>
+          <input
+            type="text"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Private admin notes..."
+            className="w-full rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 text-[13px] text-black shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+          />
+        </div>
         <button
           type="button"
           disabled={isPending}
           onClick={saveNotes}
-          className="rounded-lg border border-border px-2.5 py-1 text-xs text-text-primary hover:border-brand disabled:opacity-50"
+          className="rounded-sm border border-[#E5E7EB] bg-black px-4 py-2 text-[13px] font-medium text-white shadow-sm hover:bg-black/90 transition-colors disabled:opacity-50 whitespace-nowrap"
         >
-          Save note
+          {isPending ? 'Saving...' : 'Save Notes'}
         </button>
       </div>
     </div>

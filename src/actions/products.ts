@@ -3,7 +3,8 @@
 import type { ActionResult } from './shared';
 import type { Product } from '@/types';
 import { createSupabaseAdminClient, mapProductRecord } from '@/lib/supabase';
-import { readAllProductSlugs, readFeaturedProducts, readNewArrivals, readProductBySlug, readProducts, readRelatedProducts } from '@/lib/product-queries';
+import { readAllProductSlugs, readFeaturedProducts, readNewArrivals, readProductBySlug, readProducts, readRelatedProducts, type ProductSortOption } from '@/lib/product-queries';
+export type { ProductSortOption };
 import { isBuildPhase } from '@/lib/supabase/utils';
 import { productSchema } from '@/lib/validators/product';
 import { generateSlug } from '@/lib/utils';

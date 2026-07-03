@@ -6,8 +6,6 @@ export const siteSettingKeySchema = z.enum([
   'hero_tagline',
   'shipping_info',
   'featured_section_title',
-  'announcement_bar',
-  'announcement_bar_active',
 ]);
 
 export const siteSettingValueSchema = z.union([z.string(), z.boolean(), z.number(), z.record(z.string(), z.any()), z.array(z.any())]);

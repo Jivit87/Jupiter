@@ -18,8 +18,8 @@ type Props = {
 export function HandmadeWithSoul({
   className,
   style,
-  color = '#FDFAF5',
-  goldColor = '#C89430',
+  color = 'rgb(var(--ivory))',
+  goldColor = 'rgb(var(--gold))',
 }: Props) {
   return (
     <h1

@@ -18,7 +18,7 @@ export default async function EditProductPage({ params }: Props) {
   const [product, categories] = await Promise.all([getAdminProductById(id), getAdminCategories()]);
   if (!product) notFound();
   return (
-    <AdminPageFrame eyebrow="Products" title={`Edit: ${product.name}`} description="Update product details below.">
+    <AdminPageFrame eyebrow="Products" title={`Edit: ${product.name}`} description="Modify product details.">
       <ProductForm product={product} categories={categories} />
     </AdminPageFrame>
   );

@@ -1,7 +1,4 @@
 import type { ReactNode } from 'react';
-import { Card } from '@/components/ui/card';
-import { PageHeader } from '@/components/ui/page-header';
-import { Section } from '@/components/ui/section';
 
 type AdminPageFrameProps = {
   eyebrow: string;
@@ -12,21 +9,25 @@ type AdminPageFrameProps = {
 
 export function AdminPageFrame({ eyebrow, title, description, children }: AdminPageFrameProps) {
   return (
-    <>
-      <PageHeader eyebrow={eyebrow} title={title} description={description} />
-      <Section spacing="md">
-        <Card>
-          <div className="p-6">
-            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-text-muted">
-              Admin shell
-            </p>
-            <div className="mt-4 text-sm leading-7 text-text-muted">
-              Manage products, categories, reviews, custom orders, and site content from this dashboard.
-            </div>
-          </div>
-        </Card>
-      </Section>
-      {children}
-    </>
+    <div className="space-y-6">
+      <div>
+        <p className="text-sm font-medium text-[#6B7280] mb-1">{eyebrow}</p>
+        <h1 className="text-2xl font-bold text-black">{title}</h1>
+        <p className="mt-2 text-sm text-[#6B7280]">{description}</p>
+      </div>
+      
+      <div className="rounded-md border border-[#E5E7EB] bg-[#F9FAFB] p-5 shadow-sm">
+        <p className="text-[12px] font-semibold uppercase tracking-wider text-[#9CA3AF]">
+          Admin Shell
+        </p>
+        <div className="mt-2 text-sm text-[#6B7280]">
+          Manage products, categories, reviews, custom orders, and site content from this dashboard.
+        </div>
+      </div>
+      
+      <div>
+        {children}
+      </div>
+    </div>
   );
 }

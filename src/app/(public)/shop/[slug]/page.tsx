@@ -15,15 +15,24 @@ import { Container } from '@/components/ui/container';
 import { JsonLd } from '@/lib/json-ld';
 import { buildProductJsonLd } from '@/lib/seo';
 import { siteConfig } from '@/config/site';
-import { readProductBySlug, readRelatedProducts } from '@/lib/product-queries';
+import { getProductBySlug, getRelatedProducts, getAllProductSlugs } from '@/actions/products';
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const product = await readProductBySlug(slug).catch(() => null);
+export async function generateStaticParams() {
+  try {
+    const slugs = await getAllProductSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
+}
+
+export async function generateMetadata(props: ProductPageProps): Promise<Metadata> {
+  const params = await props.params;
+  const product = await getProductBySlug(params.slug).catch(() => null);
   if (!product) return { title: 'Not found' };
 
   return {
@@ -39,14 +48,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = await readProductBySlug(slug).catch(() => null);
+  const product = await getProductBySlug(slug).catch(() => null);
   if (!product) notFound();
 
   const [reviews, related] = await Promise.all([
     getProductReviews(product.id),
-    product.categoryId
-      ? readRelatedProducts(product.id, product.categoryId, 4)
-      : Promise.resolve([]),
+    getRelatedProducts(product.id, product.categoryId || '', 4).catch(() => []),
   ]);
 
   const productUrl = `${siteConfig.url}/shop/${product.slug}`;
@@ -71,25 +78,25 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <JsonLd data={jsonLd} />
 
       {/* Breadcrumb */}
-      <div className="border-b border-border bg-background py-3">
+      <div className="border-b border-[#E5E7EB] bg-white py-3">
         <Container>
           <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted">
-              <li><Link href="/" className="hover:text-primary">Home</Link></li>
+            <ol className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-[#4B5563]">
+              <li><Link href="/" className="hover:text-black">Home</Link></li>
               <li aria-hidden>/</li>
-              <li><Link href="/shop" className="hover:text-primary">Shop</Link></li>
+              <li><Link href="/shop" className="hover:text-black">Shop</Link></li>
               {product.category && (
                 <>
                   <li aria-hidden>/</li>
                   <li>
-                    <Link href={`/collections/${product.category.slug}`} className="hover:text-primary">
+                    <Link href={`/collections/${product.category.slug}`} className="hover:text-black">
                       {product.category.name}
                     </Link>
                   </li>
                 </>
               )}
               <li aria-hidden>/</li>
-              <li className="text-primary" aria-current="page">{product.name}</li>
+              <li className="text-black" aria-current="page">{product.name}</li>
             </ol>
           </nav>
         </Container>
@@ -112,7 +119,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               />
               <div className="flex gap-3">
                 <ProductWishlistButton product={product} className="flex-1" />
-                <ShareButton url={productUrl} title={product.name} label="📤 Share" />
+                <ShareButton url={productUrl} title={product.name} label="Share" />
               </div>
             </div>
           </div>
@@ -126,7 +133,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
             { label: 'Dimensions', value: product.dimensions },
             { label: 'Weight', value: product.weight },
             { label: 'Colors', value: product.colors?.join(', ') },
-            { label: 'SKU', value: product.sku },
             { label: 'Handmade time', value: product.handmadeTime },
           ].filter((d): d is { label: string; value: string } => typeof d.value === 'string')}
         />

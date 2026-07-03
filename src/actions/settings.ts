@@ -4,6 +4,7 @@ import type { ActionResult } from './shared';
 import { createSupabaseServerClient, createSupabaseAdminClient, mapSiteSettingRecord } from '@/lib/supabase';
 import { isBuildPhase } from '@/lib/supabase/utils';
 import { revalidatePath } from 'next/cache';
+import { auth } from '@clerk/nextjs/server';
 
 export async function getSiteSettings(): Promise<Record<string, unknown>> {
   if (isBuildPhase()) {
@@ -22,7 +23,13 @@ export async function getSiteSettings(): Promise<Record<string, unknown>> {
   );
 }
 
+async function requireAuth() {
+  const { userId } = await auth();
+  if (!userId) throw new Error('Unauthorized');
+}
+
 export async function updateSiteSetting(key: string, value: unknown): Promise<ActionResult> {
+  await requireAuth();
   if (!key?.trim()) return { success: false, error: 'Key is required.' };
 
   const supabase = createSupabaseAdminClient();
@@ -37,6 +44,7 @@ export async function updateSiteSetting(key: string, value: unknown): Promise<Ac
 }
 
 export async function updateSiteSettings(settings: Record<string, unknown>): Promise<ActionResult> {
+  await requireAuth();
   const supabase = createSupabaseAdminClient();
   const rows = Object.entries(settings).map(([key, value]) => ({ key, value: value as never }));
 

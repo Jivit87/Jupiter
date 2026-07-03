@@ -1,37 +1,70 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function InstagramSection() {
+  const [isPlaying, setIsPlaying] = useState(false);
   return (
-    <section className="story" id="story">
-      <div className="story-left">
-        <svg className="flourish-mtn" viewBox="0 0 500 140" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0,140 L60,80 L120,120 L180,60 L250,110 L320,50 L400,100 L500,70 L500,140Z" fill="#241d3a" opacity="0.5" />
-        </svg>
-        <svg className="flourish-swirl" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <circle cx="20" cy="20" r="18" stroke="#e7cd9c" strokeWidth="1" />
-          <path d="M20 28c-4.7 0-8.5-3.1-8.5-6.8s3.7-6.8 8.5-6.8 5.2 1.9 5.2 4.3-2.3 4.3-5.2 4.3-3.4-1.2-3.4-2.6 1.1-2.6 2.6-2.6" stroke="#e7cd9c" strokeWidth="1.2" fill="none" strokeLinecap="round" />
-        </svg>
-        <span className="eyebrow">Our Story</span>
-        <h2>Crafted with Purpose.<br />Inspired by <span className="accent-script accent">Everything.</span></h2>
-        <p>Every piece from Jupiter is a reflection of our journey, our roots, and our deep connection with the universe and nature. Thank you for being part of our story.</p>
-        <Link href="/our-story" className="btn btn-outline" style={{ width: 'fit-content' }}>
-          Discover Our Story
-          <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.6" /></svg>
+    <section className="grid grid-cols-1 md:grid-cols-2 min-h-[400px] md:min-h-[540px] border-b border-[#E5E7EB]" id="story">
+      {/* Left side text */}
+      <div className="bg-black text-white px-6 sm:px-16 py-12 md:py-20 flex flex-col justify-center relative overflow-hidden">
+        
+        <span className="inline-block text-[11px] font-semibold tracking-widest text-[#9CA3AF] uppercase mb-6">
+          Our Story
+        </span>
+
+        <h2 className="text-4xl sm:text-5xl leading-tight font-display text-white mb-6 tracking-tight">
+          Crafted with Purpose.<br />
+          Inspired by <span className="italic text-[#9CA3AF]">Everything.</span>
+        </h2>
+
+        <p className="text-sm leading-relaxed text-[#D1D5DB] max-w-md mb-10">
+          Every piece from Jupiter is a reflection of our journey, our roots, and our deep connection with the universe and nature. Thank you for being part of our story.
+        </p>
+
+        <Link
+          href="/our-story"
+          className="w-fit flex items-center justify-center gap-2 pb-1 border-b border-white text-xs font-semibold tracking-widest uppercase hover:text-[#9CA3AF] hover:border-[#9CA3AF] transition-colors"
+        >
+          Discover Our Story <i className="ri-arrow-right-line text-sm"></i>
         </Link>
-        <div className="story-signature">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.5-4.7-9.8-9.4C.6 6.9 2.6 3 6.4 3c2.1 0 3.7 1.2 4.6 2.7C11.9 4.2 13.5 3 15.6 3c3.8 0 5.8 3.9 4.2 7.6C19.5 15.3 12 20 12 20z" stroke="currentColor" strokeWidth="1.4" /></svg>
-          <span className="sig-text">With love, Jupiter Team</span>
+
+        <div className="mt-16 flex items-center gap-3">
+          <i className="ri-heart-2-fill text-[#9CA3AF]"></i>
+          <span className="font-sans text-sm text-[#9CA3AF] font-medium tracking-wide">With love, Jupiter Team</span>
         </div>
       </div>
 
-      <div className="story-right">
-        <iframe
-          src="https://drive.google.com/file/d/1mGn1uFM8kvkO_Q3LJiaZB--hsJGxR1OY/preview"
-          allow="autoplay"
-          allowFullScreen
-          style={{ width: '100%', maxWidth: 520, aspectRatio: '1/1', border: 0 }}
-          title="Our Story"
-        />
+      {/* Right side video frame */}
+      <div className="relative overflow-hidden flex items-center justify-center w-full aspect-video md:aspect-auto bg-[#F9FAFB] md:h-full">
+        {!isPlaying ? (
+          <>
+            <Image 
+              src="/story/12.jpg"
+              alt="Jupiter story video poster"
+              fill
+              className="object-cover scale-110 sm:scale-125"
+            />
+            <div 
+              className="absolute inset-0 flex items-center justify-center z-20 cursor-pointer group"
+              onClick={() => setIsPlaying(true)}
+            >
+              <div className="w-16 h-16 rounded-full border border-white/40 flex items-center justify-center backdrop-blur-md bg-black/40 group-hover:bg-black/60 transition-colors">
+                <i className="ri-play-fill text-white text-2xl ml-1"></i>
+              </div>
+            </div>
+          </>
+        ) : (
+          <iframe
+            src="https://drive.google.com/file/d/1mGn1uFM8kvkO_Q3LJiaZB--hsJGxR1OY/preview?autoplay=1"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full border-none"
+            title="Our Story — Jupiter"
+          />
+        )}
       </div>
     </section>
   );

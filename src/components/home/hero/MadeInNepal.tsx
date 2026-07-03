@@ -20,7 +20,7 @@ type Props = {
 export function MadeInNepal({
   className,
   style,
-  color = '#C89430',
+  color = 'rgb(var(--gold))',
 }: Props) {
   return (
     <div

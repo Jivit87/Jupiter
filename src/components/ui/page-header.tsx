@@ -22,16 +22,21 @@ export function PageHeader({
   const alignClass = align === 'center' ? 'items-center text-center' : 'items-start text-left';
 
   return (
-    <section className={cn('py-12 sm:py-16', className)}>
+    <section className={cn('pt-12 pb-0 sm:pt-16 sm:pb-0', className)}>
       <Container>
         <div className={cn('flex max-w-3xl flex-col gap-4', alignClass)}>
           {eyebrow ? (
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-text-muted">{eyebrow}</p>
+            <span className={cn(
+              "flex items-center gap-2.5 text-[11px] tracking-[0.28em] uppercase text-black font-medium before:content-[''] before:w-5 before:h-px before:bg-black",
+              align === 'center' && "justify-center after:content-[''] after:w-5 after:h-px after:bg-black"
+            )}>
+              {eyebrow}
+            </span>
           ) : null}
           <div className="space-y-3">
-            <h1 className="font-display text-4xl leading-tight text-primary sm:text-5xl lg:text-6xl">{title}</h1>
+            <h1 className="font-display text-4xl leading-tight text-black sm:text-5xl lg:text-6xl tracking-[0.005em]">{title}</h1>
             {description ? (
-              <p className="text-base leading-7 text-text-muted sm:text-lg">{description}</p>
+              <p className="text-base leading-7 text-[#4B5563] sm:text-lg font-body">{description}</p>
             ) : null}
           </div>
           {actions ? <div className="flex flex-wrap gap-3 pt-2">{actions}</div> : null}

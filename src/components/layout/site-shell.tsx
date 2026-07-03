@@ -10,7 +10,7 @@ export function SiteShell({ children, className }: SiteShellProps) {
   return (
     <div
       className={cn(
-        'relative min-h-[calc(100vh-1px)] overflow-hidden bg-background text-text-primary',
+        'relative min-h-[calc(100vh-1px)] overflow-hidden bg-background text-text',
         className,
       )}
     >

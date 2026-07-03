@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
 const occasions = [
   {
     occasion: 'Birthday',
-    emoji: '🎂',
+    icon: 'ri-cake-3-line',
     tagline: 'Something personal, something lasting',
     description: 'A handmade piece is better than anything you can buy off a shelf. Wire jewelry, custom rings, or a mandala art frame — all unique, all made with intention.',
     suggestions: ['Wire wrapped ring', 'Custom name pendant', 'Mandala art frame', 'Moon lamp'],
@@ -23,7 +23,7 @@ const occasions = [
   },
   {
     occasion: 'Anniversary',
-    emoji: '💍',
+    icon: 'ri-vip-diamond-line',
     tagline: 'Mark the moment with something made to last',
     description: 'Matching wire rings, a custom piece made from a detail in your story, or a framed mandala as a keepsake. We can engrave meaning into every twist of wire.',
     suggestions: ['Matching copper rings', 'Custom couple piece', 'Brass statement ring', 'Custom gift box'],
@@ -32,7 +32,7 @@ const occasions = [
   },
   {
     occasion: 'Wedding',
-    emoji: '🌸',
+    icon: 'ri-flower-line',
     tagline: 'For the couple, the bridesmaids, or the host',
     description: 'Bulk custom orders for wedding favors, bridesmaid gifts, or a one-of-a-kind piece for the bride. We love working on wedding orders — reach out early.',
     suggestions: ['Wire jewelry set', 'Dried bouquets', 'Custom favors', 'Handmade keepsakes'],
@@ -41,7 +41,7 @@ const occasions = [
   },
   {
     occasion: 'Dashain & Tihar',
-    emoji: '🪔',
+    icon: 'ri-fire-line',
     tagline: 'A Nepali gift for a Nepali festival',
     description: 'Give something rooted in Nepal. Handmade jewelry, moon lamps, and gift boxes carry meaning and warmth that imported products never can.',
     suggestions: ['Moon lamp', 'Wire jewelry set', 'Custom gift box', 'Home décor piece'],
@@ -50,7 +50,7 @@ const occasions = [
   },
   {
     occasion: 'Just Because',
-    emoji: '💛',
+    icon: 'ri-heart-3-line',
     tagline: 'The best gifts need no reason',
     description: 'Sometimes you see something and just know someone will love it. Browse the full collection and trust your instincts — every piece is already a good gift.',
     suggestions: ['Browse the shop', 'Keychains & accessories', 'Mandala art', 'Small wire pieces'],
@@ -73,7 +73,7 @@ export default function GiftGuidePage() {
           {occasions.map((item) => (
             <Card key={item.occasion}>
               <div className="grid gap-6 p-7 md:grid-cols-[auto_1fr_auto] md:items-start">
-                <div className="text-4xl">{item.emoji}</div>
+                <div className="text-4xl"><i className={item.icon}></i></div>
                 <div className="space-y-3">
                   <div>
                     <h2 className="font-heading text-2xl text-primary">{item.occasion}</h2>

@@ -2,11 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
 import type { Product } from '@/types';
 import { formatPrice } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { toggleWishlistItem, isWishlisted } from '@/lib/wishlist';
+import { useWishlist } from '@/hooks/use-wishlist';
 
 type ProductCardRealProps = {
   product: Product;
@@ -14,93 +13,69 @@ type ProductCardRealProps = {
 
 export function ProductCardReal({ product }: ProductCardRealProps) {
   const firstImage = product.images?.[0];
-  const secondImage = product.images?.[1];
-  const price =
-    typeof product.price === 'number' ? formatPrice(product.price) : null;
 
-  const [wishlisted, setWishlisted] = useState(false);
+  const price = typeof product.price === 'number' ? formatPrice(product.price) : null;
 
-  useEffect(() => {
-    setWishlisted(isWishlisted(product.id));
-  }, [product.id]);
+  const { items, toggleItem } = useWishlist();
+  const wishlisted = items.some((item) => item.id === product.id);
 
   function handleWishlist(e: React.MouseEvent) {
     e.preventDefault();
-    toggleWishlistItem({
+    toggleItem({
       id: product.id,
       name: product.name,
       slug: product.slug,
-      price: product.price,
-      images: product.images,
+      price: product.price ?? 0,
+      images: product.images ?? [],
     });
-    setWishlisted((prev) => !prev);
   }
 
   return (
-    <Link
-      href={`/shop/${product.slug}`}
-      className="group block overflow-hidden rounded-2xl bg-surface ring-1 ring-border transition-all duration-300 hover:ring-brand/40 hover:shadow-card"
-    >
-      {/* Image area */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-earthy-cosmos">
+    <Link href={`/shop/${product.slug}`} className="block relative group bg-white border border-[#E5E7EB] rounded-sm p-3 transition-colors hover:border-black flex flex-col h-full">
+      <div className="relative rounded-sm overflow-hidden aspect-[4/5] mb-4 border border-[#E5E7EB]">
         {firstImage ? (
-          <>
-            <Image
-              src={firstImage}
-              alt={product.name}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className={`object-cover transition-all duration-700 group-hover:scale-[1.04] ${secondImage ? 'group-hover:opacity-0' : ''}`}
-            />
-            {secondImage && (
-              <Image
-                src={secondImage}
-                alt={product.name}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-              />
-            )}
-          </>
+          <Image
+            src={firstImage}
+            alt={product.name}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+          />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-[#e8d8c4] to-[#f0e8d8]" />
+          <div className="absolute inset-0 bg-[#F9FAFB]" />
         )}
+        
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.03] transition-all duration-300 pointer-events-none" />
 
-        {/* Badges */}
-        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-          {product.isNew && <Badge tone="brand">New</Badge>}
-          {product.isBestseller && <Badge tone="copper">Bestseller</Badge>}
-          {product.stockStatus === 'out_of_stock' && <Badge tone="outline">Sold out</Badge>}
-          {product.stockStatus === 'made_to_order' && <Badge tone="sage">Made to order</Badge>}
+        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5 pointer-events-none z-10">
+          {product.isNew && <Badge tone="amber">New</Badge>}
+          {product.isBestseller && <Badge tone="black">Bestseller</Badge>}
+          {product.stockStatus === 'out_of_stock' && <Badge tone="gray">Sold out</Badge>}
+          {product.stockStatus === 'made_to_order' && <Badge tone="outline">Made to order</Badge>}
         </div>
-
-        {/* Wishlist heart */}
+        
         <button
           onClick={handleWishlist}
           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
-          className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-200 ${
-            wishlisted
-              ? 'bg-brand text-starlight'
-              : 'bg-starlight/80 text-text-muted opacity-0 group-hover:opacity-100 hover:bg-starlight hover:text-brand'
-          }`}
+          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-black z-20 cursor-pointer transition-all duration-200 hover:border-black hover:scale-110 shadow-sm"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill={wishlisted ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2}>
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-          </svg>
+          <i className={wishlisted ? "ri-heart-fill text-red-500 text-base" : "ri-heart-line text-base hover:text-red-500"}></i>
         </button>
       </div>
 
-      {/* Card info */}
-      <div className="space-y-1.5 p-4">
-        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-text-muted">
+      <div className="flex flex-col flex-1">
+        <div className="text-[10px] text-[#4B5563] tracking-[0.06em] mb-1.5 uppercase font-body">
           {product.category?.name ?? 'Handmade'}
-        </p>
-        <h3 className="font-heading text-lg leading-snug text-primary line-clamp-2">
+        </div>
+        
+        <h3 className="text-sm font-medium font-body mb-2 text-black leading-tight line-clamp-2">
           {product.name}
         </h3>
-        <p className="text-sm font-semibold text-brand">
-          {price ?? <span className="font-normal text-text-muted">Price on request</span>}
-        </p>
+        
+        <div className="mt-auto text-sm text-[#4B5563] font-body flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#E5E7EB]">
+          <span className="font-medium text-black">{price ?? 'Price on request'}</span>
+          {product.isCustomizable ? <Badge tone="outline">Customizable</Badge> : null}
+        </div>
       </div>
     </Link>
   );

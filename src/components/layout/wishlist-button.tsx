@@ -32,13 +32,7 @@ export function WishlistButton({ count = 0, className }: WishlistButtonProps) {
         {/* Counter pill — only when items exist */}
         {count > 0 ? (
           <span
-            className="absolute top-[6px] right-[6px] flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-[5px] font-semibold"
-            style={{
-              fontSize: '10px',
-              backgroundColor: '#C89430',
-              color: '#FDFAF5',
-              lineHeight: 1,
-            }}
+            className="absolute top-1.5 right-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-gold px-[5px] text-[10px] font-semibold leading-none text-ivory"
             aria-hidden="true"
           >
             {count}

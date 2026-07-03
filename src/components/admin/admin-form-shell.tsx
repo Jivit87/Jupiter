@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Card } from '@/components/ui/card';
 
 type AdminFormShellProps = {
   title: string;
@@ -9,15 +8,17 @@ type AdminFormShellProps = {
 
 export function AdminFormShell({ title, description, children }: AdminFormShellProps) {
   return (
-    <Card>
-      <div className="space-y-6 p-6">
-        <div className="space-y-2">
-          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-text-muted">Form shell</p>
-          <h3 className="font-heading text-3xl text-primary">{title}</h3>
-          <p className="max-w-3xl text-sm leading-7 text-text-muted">{description}</p>
+    <div className="rounded-md border border-[#E5E7EB] bg-white p-6 shadow-sm">
+      <div className="space-y-6">
+        <div className="border-b border-[#E5E7EB] pb-4">
+          <p className="text-sm font-medium text-[#6B7280] mb-1">Form</p>
+          <h3 className="font-display text-3xl font-bold text-black">{title}</h3>
+          <p className="mt-2 text-sm text-[#6B7280] max-w-2xl">{description}</p>
         </div>
-        {children}
+        <div>
+          {children}
+        </div>
       </div>
-    </Card>
+    </div>
   );
 }

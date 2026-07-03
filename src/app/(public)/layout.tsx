@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { FloatingWhatsApp } from '@/components/layout/floating-whatsapp';
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
 import { SiteShell } from '@/components/layout/site-shell';
@@ -19,7 +18,6 @@ export default async function PublicLayout({ children }: { children: ReactNode }
       ]);
   const catalogCategories = getCatalogCategories(categories);
   const siteSettings = normalizeSiteSettings(settings);
-  void siteSettings.announcementBar;
 
   return (
     <SiteSettingsProvider settings={siteSettings}>
@@ -28,8 +26,7 @@ export default async function PublicLayout({ children }: { children: ReactNode }
         <main id="main-content" className="relative">
           {children}
         </main>
-        <Footer settings={siteSettings} />
-        <FloatingWhatsApp />
+        <Footer />
       </SiteShell>
     </SiteSettingsProvider>
   );

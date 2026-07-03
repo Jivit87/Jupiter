@@ -16,7 +16,7 @@ export function ProductWishlistButton({ product, className }: ProductWishlistBut
   return (
     <Button
       type="button"
-      variant="ghost"
+      variant="outline"
       className={className}
       aria-pressed={isSaved}
       onClick={() =>
@@ -29,7 +29,11 @@ export function ProductWishlistButton({ product, className }: ProductWishlistBut
         })
       }
     >
-      {isSaved ? 'Saved' : 'Save'}
+      {isSaved ? (
+        <><i className="ri-heart-fill text-lg -ml-1 text-red-500"></i> Saved</>
+      ) : (
+        <><i className="ri-heart-line text-lg -ml-1"></i> Save</>
+      )}
     </Button>
   );
 }

@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
 type AdminToolbarProps = {
@@ -11,15 +10,14 @@ type AdminToolbarProps = {
 
 export function AdminToolbar({ title, description, actions, className }: AdminToolbarProps) {
   return (
-    <Card className={cn(className)}>
-      <div className="flex flex-col gap-4 p-6 lg:flex-row lg:items-center lg:justify-between">
-        <div className="space-y-2">
-          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-text-muted">Admin surface</p>
-          <h2 className="font-heading text-3xl text-primary">{title}</h2>
-          {description ? <p className="max-w-2xl text-sm leading-7 text-text-muted">{description}</p> : null}
+    <div className={cn("rounded-md border border-[#E5E7EB] bg-white p-5 shadow-sm", className)}>
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <h2 className="font-display text-2xl font-bold text-black">{title}</h2>
+          {description ? <p className="mt-1 max-w-2xl text-sm text-[#6B7280]">{description}</p> : null}
         </div>
-        {actions ? <div className="flex flex-wrap gap-3">{actions}</div> : null}
+        {actions ? <div className="flex flex-wrap items-center gap-3">{actions}</div> : null}
       </div>
-    </Card>
+    </div>
   );
 }

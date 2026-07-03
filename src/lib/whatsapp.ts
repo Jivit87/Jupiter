@@ -26,7 +26,7 @@ export function generateWhatsAppURL(product: WhatsAppProduct, productUrl: string
   }
 
   const message = [
-    'Hi Jupiter! 🪐',
+    'Hi Jupiter!',
     '',
     "I'm interested in ordering:",
     '',
@@ -38,7 +38,7 @@ export function generateWhatsAppURL(product: WhatsAppProduct, productUrl: string
     `*Product Link:* ${productUrl}`,
     product.images?.[0] ? `*Product Image:* ${product.images[0]}` : null,
     '',
-    'Could you please confirm availability and delivery details? 🌿',
+    'Could you please confirm availability and delivery details?',
   ]
     .filter((line): line is string => Boolean(line))
     .join('\n');
@@ -68,7 +68,7 @@ export function generateCustomOrderWhatsAppURL(details: {
   }
 
   const message = [
-    'Hi Jupiter! 🪐',
+    'Hi Jupiter!',
     '',
     "I'd like to place a *Custom Order*:",
     '',
@@ -81,7 +81,7 @@ export function generateCustomOrderWhatsAppURL(details: {
     details.referenceImage ? `*Reference Image:* ${details.referenceImage}` : null,
     details.deadline ? `*Deadline:* ${details.deadline}` : null,
     '',
-    'Looking forward to hearing from you! ✨',
+    'Looking forward to hearing from you!',
   ]
     .filter((line): line is string => Boolean(line))
     .join('\n');

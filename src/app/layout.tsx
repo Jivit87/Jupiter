@@ -73,7 +73,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#1A1040',
+  themeColor: '#1E1740',
 };
 
 export default function RootLayout({
@@ -82,7 +82,7 @@ export default function RootLayout({
   const publicEnv = getPublicEnv();
 
   return (
-    <html lang={siteConfig.language} suppressHydrationWarning>
+    <html lang={siteConfig.language} dir="ltr" suppressHydrationWarning>
       <body className={cn(
         'min-h-screen bg-background font-sans text-text-primary antialiased',
         marcellus.variable,

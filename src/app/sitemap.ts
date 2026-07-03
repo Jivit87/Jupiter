@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { routeConstants } from '@/lib/route-constants';
 import { getAllCategorySlugs } from '@/actions/categories';
-import { readAllProductSlugs } from '@/lib/product-queries';
+import { getAllProductSlugs } from '@/actions/products';
 import { getCatalogCategories } from '@/lib/catalog';
 
 const staticRoutes = [
@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://jupiterhandmade.com';
 
   const [productSlugs, categorySlugs] = await Promise.all([
-    readAllProductSlugs().catch(() => [] as string[]),
+    getAllProductSlugs().catch(() => [] as string[]),
     getAllCategorySlugs().catch(() => [] as string[]),
   ]);
   const catalogCategorySlugs = categorySlugs.length > 0 ? categorySlugs : getCatalogCategories().map((category) => category.slug);

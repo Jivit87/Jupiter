@@ -1,25 +1,76 @@
 export const colors = {
-  background: 'rgb(var(--color-background) / <alpha-value>)',
-  surface: 'rgb(var(--color-surface) / <alpha-value>)',
-  primary: 'rgb(var(--color-primary) / <alpha-value>)',
-  brand: 'rgb(var(--color-brand) / <alpha-value>)',
-  sage: 'rgb(var(--color-sage) / <alpha-value>)',
-  lavender: 'rgb(var(--color-lavender) / <alpha-value>)',
-  copper: 'rgb(var(--color-copper) / <alpha-value>)',
+  /* ── Semantic palette (maps 1:1 to :root CSS vars) ────────── */
+  background:        'rgb(var(--background) / <alpha-value>)',
+  surface:           'rgb(var(--surface) / <alpha-value>)',
+  'surface-elevated': 'rgb(var(--surface-elevated) / <alpha-value>)',
+  'brand-dark':      'rgb(var(--brand-dark) / <alpha-value>)',
+  'brand-accent':    'rgb(var(--brand-accent) / <alpha-value>)',
+
+  /* ── Text ──────────────────────────────────────────────────── */
   text: {
-    primary: 'rgb(var(--color-text-primary) / <alpha-value>)',
-    muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
-    heading: 'rgb(var(--color-text-heading) / <alpha-value>)',
+    DEFAULT:  'rgb(var(--text) / <alpha-value>)',
+    primary:  'rgb(var(--text) / <alpha-value>)',
+    heading:  'rgb(var(--text-heading) / <alpha-value>)',
+    muted:    'rgb(var(--text-muted) / <alpha-value>)',
+    inverse:  'rgb(var(--text-inverse) / <alpha-value>)',
+    accent:   'rgb(var(--text-accent) / <alpha-value>)',
   },
-  border: 'rgb(var(--color-border) / <alpha-value>)',
-  starlight: 'rgb(var(--color-white) / <alpha-value>)',
+
+  /* ── Border ────────────────────────────────────────────────── */
+  border: {
+    DEFAULT: 'rgb(var(--border) / <alpha-value>)',
+    subtle:  'rgb(var(--border-subtle) / <alpha-value>)',
+  },
+
+  /* ── Primitives by family (for dark sections / one-offs) ──── */
+  purple: {
+    cosmic: 'rgb(var(--purple-cosmic) / <alpha-value>)',
+    mystic: 'rgb(var(--purple-mystic) / <alpha-value>)',
+    brand:  'rgb(var(--purple-brand) / <alpha-value>)',
+    deep:   'rgb(var(--purple-deep) / <alpha-value>)',
+    strip:  'rgb(var(--purple-strip) / <alpha-value>)',
+  },
+  gold: {
+    DEFAULT: 'rgb(var(--gold) / <alpha-value>)',
+    light:   'rgb(var(--gold-light) / <alpha-value>)',
+    deep:    'rgb(var(--gold-deep) / <alpha-value>)',
+    soft:    'rgb(var(--gold-soft) / <alpha-value>)',
+  },
+  cream: {
+    DEFAULT: 'rgb(var(--cream) / <alpha-value>)',
+    dark:    'rgb(var(--cream-dark) / <alpha-value>)',
+    warm:    'rgb(var(--cream-warm) / <alpha-value>)',
+  },
+  brown: {
+    ink:    'rgb(var(--brown-ink) / <alpha-value>)',
+    warm:   'rgb(var(--brown-warm) / <alpha-value>)',
+    muted:  'rgb(var(--brown-muted) / <alpha-value>)',
+    soft:   'rgb(var(--brown-soft) / <alpha-value>)',
+  },
+  ivory:    'rgb(var(--ivory) / <alpha-value>)',
+  whatsapp: 'rgb(var(--whatsapp) / <alpha-value>)',
+  sage:     'rgb(var(--sage) / <alpha-value>)',
+  lavender: 'rgb(var(--lavender) / <alpha-value>)',
+  copper:   'rgb(var(--copper) / <alpha-value>)',
+
+  /* ── Feedback ──────────────────────────────────────────────── */
+  error:   'rgb(var(--error) / <alpha-value>)',
+  success: 'rgb(var(--success) / <alpha-value>)',
+  disabled: 'rgb(var(--disabled) / <alpha-value>)',
+
+  /* ── Legacy aliases (kept so existing Tailwind classes work) ─ */
+  primary:   'rgb(var(--brand-dark) / <alpha-value>)',
+  brand:     'rgb(var(--brand-accent) / <alpha-value>)',
+  starlight: 'rgb(var(--ivory) / <alpha-value>)',
 };
 
 export const typography = {
-  sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
+  sans:    ['var(--font-body)', 'system-ui', 'sans-serif'],
   display: ['var(--font-display)', 'Georgia', 'serif'],
   heading: ['var(--font-heading)', 'Georgia', 'serif'],
-  mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+  script:  ['var(--font-script)', 'Georgia', 'serif'],
+  hand:    ['var(--font-hand)', 'cursive'],
+  mono:    ['var(--font-mono)', 'ui-monospace', 'monospace'],
 };
 
 export const radii = {
@@ -47,25 +98,11 @@ export const breakpoints = {
   '2xl': '1536px',
 } as const;
 
-export const spacing = {
-  '1': '0.25rem',
-  '2': '0.5rem',
-  '3': '0.75rem',
-  '4': '1rem',
-  '5': '1.25rem',
-  '6': '1.5rem',
-  '8': '2rem',
-  '10': '2.5rem',
-  '12': '3rem',
-  '16': '4rem',
-  '20': '5rem',
-  '24': '6rem',
-  '32': '8rem',
-} as const;
-
 export const motion = {
-  durationFast: '120ms',
-  durationStandard: '200ms',
-  durationSlow: '320ms',
+  durationFast: 'var(--duration-fast)',
+  durationStandard: 'var(--duration-standard)',
+  durationSlow: 'var(--duration-slow)',
+  durationEmphasis: 'var(--duration-emphasis)',
   easeStandard: 'var(--ease-standard)',
+  easeDecelerate: 'var(--ease-decelerate)',
 } as const;

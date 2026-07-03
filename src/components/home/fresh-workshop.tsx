@@ -1,13 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-/*
-  design_insp.html — "Fresh from the Workshop" section
-  .hscroll   { display:flex; gap:20px; overflow-x:auto; max-width:1184px; padding-bottom:14px; }
-  .hscroll .p-card { flex:0 0 220px; }
-  .new-badge { position:absolute; top:10px; left:10px; background:var(--copper); }
-*/
-
 type Arrival = { cat: string; name: string; price: string; slug: string; tbd?: boolean; image: string };
 
 const NEW_ARRIVALS: Arrival[] = [
@@ -20,87 +13,48 @@ const NEW_ARRIVALS: Arrival[] = [
 
 export function FreshWorkshop() {
   return (
-    <section
-      className="insp-section"
-      id="new-arrivals"
-      style={{ backgroundColor: 'var(--insp-cream)' }}
-    >
-      {/* Split header — left aligned, no view-all CTA (matches HTML) */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'flex-end',
-        justifyContent: 'space-between',
-        maxWidth: '1184px',
-        margin: '0 auto 44px',
-      }}>
+    <section className="bg-white py-24 px-6 sm:px-12 border-b border-[#E5E7EB]" id="new-arrivals">
+      <div className="flex flex-col md:flex-row items-start md:items-end justify-between max-w-7xl mx-auto mb-12 gap-6">
         <div>
-          <span className="insp-label">New This Week</span>
-          <h2 style={{
-            fontFamily: "'Fraunces', var(--font-display), serif",
-            fontSize: '38px',
-            marginTop: '12px',
-            color: 'var(--insp-indigo)',
-            fontWeight: 600,
-          }}>
+          <span className="inline-block text-[11px] font-semibold tracking-widest text-[#6B7280] uppercase mb-2">
+            New This Week
+          </span>
+          <h2 className="font-display text-4xl sm:text-5xl text-black leading-tight tracking-tight">
             Fresh from the Workshop
           </h2>
         </div>
       </div>
 
-      {/* Horizontal scroll strip */}
-      <div style={{
-        display: 'flex',
-        gap: '20px',
-        overflowX: 'auto',
-        maxWidth: '1184px',
-        margin: '0 auto',
-        paddingBottom: '14px',
-        scrollbarWidth: 'thin',
-      }}>
+      <div className="flex gap-6 overflow-x-auto max-w-7xl mx-auto pb-4 snap-x snap-mandatory hide-scrollbar">
         {NEW_ARRIVALS.map((item) => (
           <Link
             key={item.slug}
             href={`/shop/${item.slug}`}
-            className="insp-p-card"
-            style={{ flex: '0 0 220px', textDecoration: 'none' }}
+            className="flex-none w-[240px] snap-start group border border-[#E5E7EB] rounded-sm bg-white hover:border-black transition-colors"
           >
-            {/* Image */}
-            <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1' }}>
+            <div className="relative w-full aspect-square overflow-hidden bg-[#F9FAFB] border-b border-[#E5E7EB]">
               <Image
                 src={item.image}
                 alt={item.name}
                 fill
-                sizes="220px"
-                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                sizes="240px"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              {/* NEW badge */}
-              <span style={{
-                position: 'absolute',
-                top: '10px',
-                left: '10px',
-                background: 'var(--insp-copper)',
-                color: '#fff',
-                fontFamily: 'var(--font-body)',
-                fontSize: '9.5px',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                padding: '4px 9px',
-                borderRadius: '2px',
-                zIndex: 2,
-              }}>
+              <span className="absolute top-3 left-3 bg-amber-600 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-sm z-10 shadow-sm">
                 New
               </span>
             </div>
 
-            {/* Card body */}
-            <div className="insp-p-body">
-              <div className="insp-p-cat">{item.cat}</div>
-              <div className="insp-p-name">{item.name}</div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span className={item.tbd ? 'insp-p-price-tbd' : 'insp-p-price'}>
+            <div className="p-4">
+              <div className="text-[10px] text-[#6B7280] uppercase tracking-widest mb-1.5">{item.cat}</div>
+              <div className="text-sm font-semibold text-black mb-3 leading-snug">{item.name}</div>
+              <div className="flex items-center justify-between">
+                <span className={`text-xs font-medium ${item.tbd ? 'text-[#9CA3AF]' : 'text-[#4B5563]'}`}>
                   {item.price}
                 </span>
-                <span className="insp-p-view">View →</span>
+                <span className="text-xs text-black font-semibold uppercase tracking-widest flex items-center gap-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                  View <i className="ri-arrow-right-line"></i>
+                </span>
               </div>
             </div>
           </Link>

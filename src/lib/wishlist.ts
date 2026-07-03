@@ -59,6 +59,9 @@ export function writeWishlist(items: WishlistItem[]) {
   }
 
   storage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(items));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event('wishlist-updated'));
+  }
 }
 
 export function addWishlistItem(item: WishlistItem): WishlistItem[] {

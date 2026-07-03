@@ -17,6 +17,13 @@ export function useWishlist() {
   useEffect(() => {
     setItems(readWishlist());
     setReady(true);
+
+    const handleUpdate = () => {
+      setItems(readWishlist());
+    };
+
+    window.addEventListener('wishlist-updated', handleUpdate);
+    return () => window.removeEventListener('wishlist-updated', handleUpdate);
   }, []);
 
   function sync(nextItems: WishlistItem[]) {

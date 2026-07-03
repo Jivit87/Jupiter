@@ -28,20 +28,16 @@ export function ProductForm({ product, categories }: ProductFormProps) {
 
   const [name, setName] = useState(product?.name ?? '');
   const [slug, setSlug] = useState(product?.slug ?? '');
-  const [slugManual, setSlugManual] = useState(false);
+  const [slugManual] = useState(false);
   const [price, setPrice] = useState(product?.price?.toString() ?? '');
   const [categoryId, setCategoryId] = useState(product?.categoryId ?? '');
   const [description, setDescription] = useState(product?.description ?? '');
   const [material, setMaterial] = useState(product?.material ?? '');
-  const [dimensions, setDimensions] = useState(product?.dimensions ?? '');
-  const [weight, setWeight] = useState(product?.weight ?? '');
   const [sku, setSku] = useState(product?.sku ?? '');
   const [handmadeTime, setHandmadeTime] = useState(product?.handmadeTime ?? '');
   const [videoUrl, setVideoUrl] = useState(product?.videoUrl ?? '');
   const [stockStatus, setStockStatus] = useState<'in_stock' | 'out_of_stock' | 'made_to_order' | 'low_stock'>(product?.stockStatus ?? 'in_stock');
   const [images, setImages] = useState<string[]>(product?.images ?? []);
-  const [metaTitle, setMetaTitle] = useState(product?.metaTitle ?? '');
-  const [metaDescription, setMetaDescription] = useState(product?.metaDescription ?? '');
   const [isCustomizable, setIsCustomizable] = useState(product?.isCustomizable ?? false);
   const [isFeatured, setIsFeatured] = useState(product?.isFeatured ?? false);
   const [isNew, setIsNew] = useState(product?.isNew ?? false);
@@ -64,9 +60,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       categoryId: categoryId || undefined,
       description: description || undefined,
       material: material || undefined,
-      dimensions: dimensions || undefined,
-      weight: weight || undefined,
-      sku: sku || undefined,
+      sku: sku.trim() || (!isEdit ? `JUP-${Date.now().toString(36).toUpperCase()}` : undefined),
       handmadeTime: handmadeTime || undefined,
       videoUrl: videoUrl || undefined,
       stockStatus,
@@ -76,8 +70,6 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       isNew,
       isBestseller,
       isPublished,
-      metaTitle: metaTitle || undefined,
-      metaDescription: metaDescription || undefined,
     };
 
     startTransition(async () => {
@@ -93,10 +85,10 @@ export function ProductForm({ product, categories }: ProductFormProps) {
     });
   }
 
-  const inputCls = 'w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-brand';
-  const labelCls = 'block text-sm font-medium text-primary';
+  const inputCls = 'w-full rounded-md border border-[#E5E7EB] bg-white px-3 py-2 text-sm text-black shadow-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black';
+  const labelCls = 'block text-sm font-medium text-[#6B7280] mb-1';
   const toggleCls = (on: boolean) =>
-    `relative inline-flex h-6 w-11 cursor-pointer rounded-full transition-colors ${on ? 'bg-brand' : 'bg-border'}`;
+    `relative inline-flex h-5 w-9 cursor-pointer rounded-full transition-colors ${on ? 'bg-black' : 'bg-[#E5E7EB]'}`;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
@@ -106,16 +98,13 @@ export function ProductForm({ product, categories }: ProductFormProps) {
 
       {/* Basic Info */}
       <section className="space-y-4">
-        <h3 className="font-heading text-xl text-primary">Basic info</h3>
+        <h3 className="font-display text-xl font-semibold text-black">Basic Info</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-1.5">
             <label htmlFor="name" className={labelCls}>Name *</label>
             <input id="name" value={name} onChange={(e) => handleNameChange(e.target.value)} required className={inputCls} />
           </div>
-          <div className="space-y-1.5">
-            <label htmlFor="slug" className={labelCls}>Slug</label>
-            <input id="slug" value={slug} onChange={(e) => { setSlugManual(true); setSlug(e.target.value); }} className={inputCls} />
-          </div>
+
           <div className="space-y-1.5">
             <label htmlFor="price" className={labelCls}>Price (NPR)</label>
             <input id="price" type="number" min="0" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Leave blank for 'Price on request'" className={inputCls} />
@@ -128,9 +117,10 @@ export function ProductForm({ product, categories }: ProductFormProps) {
             </select>
           </div>
           <div className="space-y-1.5">
-            <label htmlFor="sku" className={labelCls}>SKU</label>
-            <input id="sku" value={sku} onChange={(e) => setSku(e.target.value)} className={inputCls} />
+            <label htmlFor="sku" className={labelCls}>Product Code / ID (Optional)</label>
+            <input id="sku" value={sku} onChange={(e) => setSku(e.target.value)} placeholder="Auto-generates if left blank" className={inputCls} />
           </div>
+
           <div className="space-y-1.5">
             <label htmlFor="stock" className={labelCls}>Stock status</label>
             <select id="stock" value={stockStatus} onChange={(e) => setStockStatus(e.target.value as 'in_stock' | 'out_of_stock' | 'made_to_order' | 'low_stock')} className={inputCls}>
@@ -146,39 +136,29 @@ export function ProductForm({ product, categories }: ProductFormProps) {
 
       {/* Description & Details */}
       <section className="space-y-4">
-        <h3 className="font-heading text-xl text-primary">Description & details</h3>
+        <h3 className="font-display text-xl font-semibold text-black">Description & Details</h3>
         <div className="space-y-1.5">
           <label htmlFor="description" className={labelCls}>Description</label>
           <textarea id="description" rows={4} value={description} onChange={(e) => setDescription(e.target.value)} className={inputCls} />
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div className="space-y-1.5">
-            <label htmlFor="material" className={labelCls}>Material</label>
-            <input id="material" value={material} onChange={(e) => setMaterial(e.target.value)} className={inputCls} />
-          </div>
-          <div className="space-y-1.5">
-            <label htmlFor="dimensions" className={labelCls}>Dimensions</label>
-            <input id="dimensions" value={dimensions} onChange={(e) => setDimensions(e.target.value)} className={inputCls} />
-          </div>
-          <div className="space-y-1.5">
-            <label htmlFor="weight" className={labelCls}>Weight</label>
-            <input id="weight" value={weight} onChange={(e) => setWeight(e.target.value)} className={inputCls} />
-          </div>
+        <div className="space-y-1.5">
+          <label htmlFor="material" className={labelCls}>Material</label>
+          <input id="material" value={material} onChange={(e) => setMaterial(e.target.value)} placeholder="e.g. Copper wire, Brass" className={inputCls} />
         </div>
       </section>
 
       {/* Media */}
       <section className="space-y-4">
-        <h3 className="font-heading text-xl text-primary">Images</h3>
+        <h3 className="font-display text-xl font-semibold text-black">Images & Video</h3>
         <CloudinaryUploader images={images} onChange={setImages} />
         <div className="space-y-1.5">
-          <label htmlFor="videoUrl" className={labelCls}>Video URL</label>
+          <label htmlFor="videoUrl" className={labelCls}>Instagram Reel / Video URL (Optional)</label>
           <input
             id="videoUrl"
             type="url"
             value={videoUrl}
             onChange={(e) => setVideoUrl(e.target.value)}
-            placeholder="Cloudinary video URL"
+            placeholder="e.g. https://instagram.com/reel/..."
             className={inputCls}
           />
         </div>
@@ -186,8 +166,8 @@ export function ProductForm({ product, categories }: ProductFormProps) {
 
       {/* Badges */}
       <section className="space-y-4">
-        <h3 className="font-heading text-xl text-primary">Badges & settings</h3>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <h3 className="font-display text-xl font-semibold text-black">Badges & Settings</h3>
+        <div className="grid gap-3 sm:grid-cols-2">
           {(
             [
               ['Featured', isFeatured, setIsFeatured],
@@ -197,36 +177,23 @@ export function ProductForm({ product, categories }: ProductFormProps) {
               ['Published', isPublished, setIsPublished],
             ] as const
           ).map(([label, val, set]) => (
-            <label key={label} className="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-border bg-background px-4 py-3">
-              <span className="text-sm font-medium text-primary">{label}</span>
+            <label key={label} className="flex cursor-pointer items-center justify-between gap-4 rounded-md border border-[#E5E7EB] bg-white px-4 py-3 shadow-sm hover:border-[#D9D9D7] transition-colors">
+              <span className="text-sm font-medium text-black">{label}</span>
               <button type="button" role="switch" aria-checked={val} onClick={() => set(!val)} className={toggleCls(val)}>
-                <span className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${val ? 'translate-x-5' : ''}`} />
+                <span className={`absolute left-0.5 top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${val ? 'translate-x-4' : ''}`} />
               </button>
             </label>
           ))}
         </div>
       </section>
 
-      {/* SEO */}
-      <section className="space-y-4">
-        <h3 className="font-heading text-xl text-primary">SEO</h3>
-        <div className="space-y-4">
-          <div className="space-y-1.5">
-            <label htmlFor="metaTitle" className={labelCls}>Meta title ({metaTitle.length}/60)</label>
-            <input id="metaTitle" value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} maxLength={60} className={inputCls} />
-          </div>
-          <div className="space-y-1.5">
-            <label htmlFor="metaDesc" className={labelCls}>Meta description ({metaDescription.length}/160)</label>
-            <textarea id="metaDesc" rows={3} value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} maxLength={160} className={inputCls} />
-          </div>
-        </div>
-      </section>
 
-      <div className="flex flex-wrap gap-3 border-t border-border pt-6">
-        <button type="submit" disabled={isPending} className="rounded-2xl bg-primary px-6 py-2.5 text-sm font-semibold text-starlight disabled:opacity-60">
+
+      <div className="flex flex-wrap gap-3 border-t border-[#E5E7EB] pt-6">
+        <button type="submit" disabled={isPending} className="rounded-md bg-black px-5 py-2 text-sm font-medium text-white hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-60 transition-colors">
           {isPending ? 'Saving…' : isEdit ? 'Save changes' : 'Create product'}
         </button>
-        <button type="button" onClick={() => router.push('/admin/products')} className="rounded-2xl border border-border px-6 py-2.5 text-sm font-medium text-text-primary hover:border-primary">
+        <button type="button" onClick={() => router.push('/admin/products')} className="rounded-md border border-[#E5E7EB] bg-white px-5 py-2 text-sm font-medium text-black shadow-sm hover:bg-[#F9FAFB] focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors">
           Cancel
         </button>
       </div>

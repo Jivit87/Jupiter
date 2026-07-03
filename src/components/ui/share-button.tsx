@@ -33,8 +33,12 @@ export function ShareButton({ url, title, text, label = 'Share' }: ShareButtonPr
   }
 
   return (
-    <Button type="button" variant="outline" onClick={handleShare}>
-      {status === 'copied' ? 'Copied' : label}
+    <Button type="button" variant="outline" className="flex-1" onClick={handleShare}>
+      {status === 'copied' ? (
+        <><i className="ri-check-line text-lg -ml-1"></i> Copied</>
+      ) : (
+        <><i className="ri-share-line text-lg -ml-1"></i> {label}</>
+      )}
     </Button>
   );
 }

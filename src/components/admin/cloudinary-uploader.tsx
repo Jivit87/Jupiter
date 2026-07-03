@@ -86,7 +86,7 @@ export function CloudinaryUploader({ images, onChange, maxImages = 8 }: Cloudina
       {/* Upload button */}
       {images.length < maxImages && (
         <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-border bg-background px-4 py-3 text-sm text-text-muted hover:border-brand hover:text-brand transition-colors">
-          <span>📎 Upload images ({images.length}/{maxImages})</span>
+          <span><i className="ri-image-add-line mr-2"></i>Upload images ({images.length}/{maxImages})</span>
           <input
             type="file"
             accept="image/*"

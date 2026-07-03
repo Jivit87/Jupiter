@@ -21,7 +21,7 @@ export function WhatsAppOrderButton({ product, productUrl, className }: WhatsApp
   return (
     <Button asChild variant="whatsapp" className={className}>
       <Link href={url} target="_blank" rel="noreferrer">
-        Order via WhatsApp
+        <i className="ri-whatsapp-line text-lg -ml-1"></i> Order via WhatsApp
       </Link>
     </Button>
   );

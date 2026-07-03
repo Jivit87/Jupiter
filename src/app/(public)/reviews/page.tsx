@@ -31,7 +31,7 @@ export default async function ReviewsPage() {
       {/* Stats bar */}
       {reviews.length > 0 && (
         <Section spacing="sm">
-          <div className="flex flex-wrap items-center gap-6 rounded-2xl border border-border bg-background px-6 py-4">
+          <div className="flex flex-wrap items-center gap-6 rounded-sm border border-[#E5E7EB] bg-[#F9FAFB] px-6 py-4">
             {avgRating && (
               <div className="flex items-center gap-2">
                 <span className="font-display text-3xl text-brand">{avgRating}</span>
@@ -63,7 +63,7 @@ export default async function ReviewsPage() {
         {reviews.length > 0 ? (
           <ReviewsGrid reviews={reviews} />
         ) : (
-          <div className="rounded-2xl border border-border bg-background px-6 py-10 text-center">
+          <div className="rounded-sm border border-[#E5E7EB] bg-[#F9FAFB] px-6 py-10 text-center">
             <p className="font-heading text-2xl text-primary">No reviews published yet</p>
             <p className="mt-2 text-sm text-text-muted">
               We&apos;re collecting verified customer feedback and will share it here soon.

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+
 import { PageHeader } from '@/components/ui/page-header';
 import { Section } from '@/components/ui/section';
 import { siteConfig } from '@/config/site';
@@ -34,61 +34,63 @@ export default async function ContactPage() {
 
       <Section spacing="md">
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card>
-            <div className="flex h-full flex-col justify-between p-8">
-              <div className="space-y-3">
-                <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">Primary contact</p>
-                <h2 className="font-heading text-3xl text-primary">Chat on WhatsApp</h2>
-                <p className="text-sm leading-7 text-text-muted">
-                  The fastest way to reach us. Ask about products, place an order, or request a custom piece.
-                </p>
-              </div>
-              <div className="mt-6">
-                {whatsappUrl ? (
-                  <Button asChild variant="whatsapp" className="w-full sm:w-auto">
-                    <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                      Open WhatsApp →
-                    </Link>
-                  </Button>
-                ) : (
-                  <p className="text-sm text-text-muted">
-                    WhatsApp number will appear here once site settings are configured.
-                  </p>
-                )}
-              </div>
+          {/* WhatsApp Box */}
+          <div className="flex h-full flex-col justify-between rounded-sm border border-[#E5E7EB] bg-[#25D366]/[0.03] p-8">
+            <div className="space-y-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] flex items-center">
+                <i className="ri-whatsapp-fill mr-1.5 text-lg text-[#25D366]"></i> Primary contact
+              </p>
+              <h2 className="font-heading text-3xl text-black">Chat on WhatsApp</h2>
+              <p className="text-sm leading-7 text-[#4B5563]">
+                The fastest way to reach us. Ask about products, place an order, or request a custom piece.
+              </p>
             </div>
-          </Card>
-
-          <Card>
-            <div className="flex h-full flex-col justify-between p-8">
-              <div className="space-y-3">
-                <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">Instagram</p>
-                <h2 className="font-heading text-3xl text-primary">@{instagramHandle}</h2>
-                <p className="text-sm leading-7 text-text-muted">
-                  Follow us for new arrivals, behind-the-scenes, and crafting process reels.
-                </p>
-              </div>
-              <div className="mt-6">
-                <Button asChild variant="outline" className="w-full sm:w-auto">
-                  <Link href={instagramUrl} target="_blank" rel="noopener noreferrer">
-                    Follow on Instagram →
+            <div className="mt-8">
+              {whatsappUrl ? (
+                <Button asChild className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1DA851] text-white border-none rounded-sm">
+                  <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                    Open WhatsApp →
                   </Link>
                 </Button>
-              </div>
+              ) : (
+                <p className="text-sm text-[#4B5563]">
+                  WhatsApp number will appear here once site settings are configured.
+                </p>
+              )}
             </div>
-          </Card>
+          </div>
+
+          {/* Instagram Box */}
+          <div className="flex h-full flex-col justify-between rounded-sm border border-[#E5E7EB] bg-[#E1306C]/[0.03] p-8">
+            <div className="space-y-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] flex items-center">
+                <i className="ri-instagram-fill mr-1.5 text-lg bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] bg-clip-text text-transparent inline-block"></i> Instagram
+              </p>
+              <h2 className="font-heading text-3xl text-black">@{instagramHandle}</h2>
+              <p className="text-sm leading-7 text-[#4B5563]">
+                Follow us for new arrivals, behind-the-scenes, and crafting process reels.
+              </p>
+            </div>
+            <div className="mt-8">
+              <Button asChild variant="outline" className="w-full sm:w-auto rounded-sm border-[#E5E7EB] text-black hover:bg-black hover:text-white transition-colors">
+                <Link href={instagramUrl} target="_blank" rel="noopener noreferrer">
+                  Follow on Instagram →
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
 
-        <Card className="mt-6">
-          <div className="p-8 text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">Based in</p>
-            <p className="mt-2 font-heading text-3xl text-primary">Nepal 🇳🇵</p>
-            <p className="mt-2 text-sm text-text-muted">
-              Shipping within Nepal • Kathmandu Valley: 1–2 days • Outside Valley: 3–7 days
-            </p>
-            <p className="mt-1 text-xs text-text-muted">Available Mon–Sat, 10am–7pm NPT</p>
-          </div>
-        </Card>
+        <div className="mt-6 rounded-sm border border-[#E5E7EB] bg-blue-500/[0.03] p-8 text-center">
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] flex items-center justify-center">
+            <i className="ri-map-pin-2-fill mr-1.5 text-lg text-blue-500"></i> Based in
+          </p>
+          <p className="mt-2 font-heading text-3xl text-black">Nepal 🇳🇵</p>
+          <p className="mt-2 text-sm text-[#4B5563]">
+            Shipping within Nepal
+          </p>
+          <p className="mt-1 text-xs text-[#4B5563]">Available Mon–Sat, 10am–7pm NPT</p>
+        </div>
       </Section>
     </>
   );

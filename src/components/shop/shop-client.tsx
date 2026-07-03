@@ -10,7 +10,6 @@ import { InfiniteScroll } from './infinite-scroll';
 import { ProductCardSkeleton } from './product-card-skeleton';
 import { PageHeader } from '@/components/ui/page-header';
 import { Section } from '@/components/ui/section';
-import { Drawer } from '@/components/ui/drawer';
 
 const SORT_OPTIONS = [
   { value: '', label: 'Newest first' },
@@ -21,7 +20,7 @@ const SORT_OPTIONS = [
 ] as const;
 
 const STOCK_OPTIONS = [
-  { value: '', label: 'All' },
+  { value: '', label: 'All Stock' },
   { value: 'in_stock', label: 'In stock' },
   { value: 'made_to_order', label: 'Made to order' },
   { value: 'out_of_stock', label: 'Out of stock' },
@@ -49,9 +48,8 @@ export function ShopClient({ initialProducts, total, categories, initialParams }
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
-  const [filterOpen, setFilterOpen] = useState(false);
 
-  const activeCategory = initialParams.category ?? '';
+  const activeCategory = initialParams.category || '';
   const activeSort = initialParams.sort ?? '';
   const activeStock = initialParams.stock_status ?? '';
   const activeCustomizable = initialParams.is_customizable === 'true';
@@ -95,7 +93,7 @@ export function ShopClient({ initialProducts, total, categories, initialParams }
   }, [loading, products.length, count, page, activeCategory, activeSort, activeStock, activeCustomizable]);
 
   const hasMore = products.length < count;
-  const activeFilterCount = [activeStock, activeCustomizable].filter(Boolean).length;
+  const activeFilterCount = [activeCategory, activeStock, activeSort, activeCustomizable ? 'true' : ''].filter(Boolean).length;
 
   return (
     <>
@@ -106,119 +104,87 @@ export function ShopClient({ initialProducts, total, categories, initialParams }
       />
 
       <Section spacing="sm">
-        <div className="flex flex-wrap gap-2 pb-2">
-          <button
-            onClick={() => setParam('category', '')}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${!activeCategory ? 'bg-primary text-starlight' : 'border border-border bg-background text-text-primary hover:border-primary'}`}
-          >
-            All
-          </button>
-          {categories.map((cat) => (
-            <button
-              key={cat.slug}
-              onClick={() => setParam('category', cat.slug)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${activeCategory === cat.slug ? 'bg-primary text-starlight' : 'border border-border bg-background text-text-primary hover:border-primary'}`}
+        {/* Unified Filter Bar */}
+        <div className="flex flex-col gap-4 border-b border-[#E5E7EB] pb-6 mb-8">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] mr-2">Filters</span>
+            
+            <select
+              value={activeCategory}
+              onChange={(e) => setParam('category', e.target.value)}
+              className="rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB]"
             >
-              {cat.name}
-            </button>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-3">
-          <label htmlFor="sort" className="font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">Sort</label>
-          <select
-            id="sort"
-            value={activeSort}
-            onChange={(e) => setParam('sort', e.target.value)}
-            className="rounded-xl border border-border bg-background px-3 py-2 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-brand"
-          >
-            {SORT_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
-
-          <button
-            type="button"
-            onClick={() => setFilterOpen(true)}
-            className={`ml-auto flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-medium transition-colors ${activeFilterCount > 0 ? 'border-brand bg-brand/10 text-brand' : 'border-border bg-background text-text-primary hover:border-primary'}`}
-          >
-            Filters{activeFilterCount > 0 && <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[11px] text-white">{activeFilterCount}</span>}
-          </button>
-        </div>
-      </Section>
-
-      <Drawer open={filterOpen} onOpenChange={setFilterOpen} title="Filter products">
-        <div className="space-y-6">
-          <div className="space-y-3">
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">Stock status</p>
-            <div className="flex flex-wrap gap-2">
-              {STOCK_OPTIONS.map((opt) => (
-                <button
-                  key={opt.value}
-                  type="button"
-                  onClick={() => setParam('stock_status', opt.value)}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${activeStock === opt.value ? 'bg-primary text-starlight' : 'border border-border bg-background text-text-primary hover:border-primary'}`}
-                >
-                  {opt.label}
-                </button>
+              <option value="">All Categories</option>
+              {categories.map((cat) => (
+                <option key={cat.slug} value={cat.slug}>{cat.name}</option>
               ))}
-            </div>
-          </div>
+            </select>
 
-          <div className="space-y-3">
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">Type</p>
-            <label className="flex cursor-pointer items-center justify-between rounded-xl border border-border bg-background px-4 py-3">
-              <span className="text-sm font-medium text-primary">Customizable only</span>
+            <select
+              value={activeStock}
+              onChange={(e) => setParam('stock_status', e.target.value)}
+              className="rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB]"
+            >
+              {STOCK_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
+
+            <select
+              value={activeSort}
+              onChange={(e) => setParam('sort', e.target.value)}
+              className="rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB]"
+            >
+              {SORT_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
+
+            <label className="flex cursor-pointer items-center gap-2 rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 shadow-sm hover:bg-[#F9FAFB]">
+              <span className="text-[12px] uppercase tracking-[0.1em] text-black">Customizable</span>
               <button
                 type="button"
                 role="switch"
                 aria-checked={activeCustomizable}
                 onClick={() => setParam('is_customizable', activeCustomizable ? '' : 'true')}
-                className={`relative inline-flex h-6 w-11 rounded-full transition-colors ${activeCustomizable ? 'bg-brand' : 'bg-border'}`}
+                className={`relative inline-flex h-4 w-8 rounded-full transition-colors ${activeCustomizable ? 'bg-black' : 'bg-gray-200'}`}
               >
-                <span className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${activeCustomizable ? 'translate-x-5' : ''}`} />
+                <span className={`absolute left-0.5 top-0.5 h-3 w-3 rounded-full bg-white shadow transition-transform ${activeCustomizable ? 'translate-x-4' : ''}`} />
               </button>
             </label>
+
+            {activeFilterCount > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push(pathname);
+                  });
+                }}
+                className="ml-auto text-[11px] uppercase tracking-[0.1em] text-red-500 hover:underline"
+              >
+                Clear Filters
+              </button>
+            )}
           </div>
-
-          {activeFilterCount > 0 && (
-            <button
-              type="button"
-              onClick={() => {
-                startTransition(() => {
-                  const p = new URLSearchParams();
-                  if (activeCategory) p.set('category', activeCategory);
-                  if (activeSort) p.set('sort', activeSort);
-                  router.push(`${pathname}?${p.toString()}`);
-                });
-                setFilterOpen(false);
-              }}
-              className="w-full rounded-xl border border-border py-2 text-sm text-text-muted hover:border-red-300 hover:text-red-500 transition-colors"
-            >
-              Clear filters
-            </button>
-          )}
         </div>
-      </Drawer>
 
-      <Section spacing="md">
+        {/* Product Grid */}
         {isPending ? (
-          <div className="columns-1 gap-4 sm:columns-2 xl:columns-3">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="mb-4 break-inside-avoid"><ProductCardSkeleton /></div>
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
             ))}
           </div>
         ) : products.length === 0 ? (
-          <div className="py-20 text-center">
-            <p className="font-heading text-3xl text-primary">No products found</p>
-            <p className="mt-2 text-sm text-text-muted">Try a different category or remove filters.</p>
+          <div className="py-20 text-center border border-[#E5E7EB] rounded-sm bg-[#F9FAFB]">
+            <p className="font-heading text-3xl text-black">No products found</p>
+            <p className="mt-2 text-sm text-[#4B5563]">Try adjusting your filters.</p>
           </div>
         ) : (
-          <div className="columns-1 gap-4 sm:columns-2 xl:columns-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {products.map((product) => (
-              <div key={product.id} className="mb-4 break-inside-avoid">
-                <ProductCardReal product={product} />
-              </div>
+              <ProductCardReal key={product.id} product={product} />
             ))}
           </div>
         )}
@@ -227,7 +193,7 @@ export function ShopClient({ initialProducts, total, categories, initialParams }
           <InfiniteScroll onLoadMore={loadMore} enabled={!loading}>
             {loading && (
               <div className="flex justify-center py-8">
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-brand border-t-transparent" />
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-black border-t-transparent" />
               </div>
             )}
           </InfiniteScroll>

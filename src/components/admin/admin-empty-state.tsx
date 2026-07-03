@@ -1,5 +1,3 @@
-import { Card } from '@/components/ui/card';
-
 type AdminEmptyStateProps = {
   title: string;
   description: string;
@@ -7,11 +5,9 @@ type AdminEmptyStateProps = {
 
 export function AdminEmptyState({ title, description }: AdminEmptyStateProps) {
   return (
-    <Card>
-      <div className="p-6">
-        <p className="font-heading text-2xl text-primary">{title}</p>
-        <p className="mt-3 max-w-2xl text-sm leading-7 text-text-muted">{description}</p>
-      </div>
-    </Card>
+    <div className="rounded-md border border-[#E5E7EB] bg-[#F9FAFB] p-8 text-center shadow-sm">
+      <p className="font-display text-2xl font-semibold text-black">{title}</p>
+      <p className="mt-2 text-sm text-[#6B7280] mx-auto max-w-md">{description}</p>
+    </div>
   );
 }

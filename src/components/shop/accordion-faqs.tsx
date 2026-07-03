@@ -11,7 +11,6 @@ const faqGroups = [
       { q: 'Do you ship outside Nepal?', a: 'Currently we ship within Nepal only. We are working on international shipping for India and beyond — follow @jupiterrrr_11 on Instagram for updates.' },
       { q: 'How long does delivery take?', a: 'Kathmandu Valley: 1–2 business days. Outside the Valley: 3–7 business days. Custom orders take longer — expect the handmade time (shown on the product) plus shipping time.' },
       { q: 'What shipping service do you use?', a: 'We ship via Pathao and other trusted local delivery partners. You will receive tracking details on WhatsApp once your order is dispatched.' },
-      { q: 'Is there a minimum order for free shipping?', a: 'Orders above NPR 1,500 within Kathmandu Valley qualify for free shipping. For other locations, shipping fees are confirmed on WhatsApp before you place your order.' },
     ],
   },
   {
@@ -83,7 +82,7 @@ export function AccordionFaqs() {
         <div className="mt-4">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+            className="inline-flex items-center gap-2 rounded-xl bg-whatsapp px-5 py-2.5 text-sm font-semibold text-ivory hover:bg-whatsapp/90"
           >
             Chat with us on WhatsApp
           </Link>

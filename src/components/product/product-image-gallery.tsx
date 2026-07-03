@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
 type ProductImageGalleryProps = {
@@ -17,8 +16,8 @@ export function ProductImageGallery({ images, videoUrl, alt, className }: Produc
   const all = images ?? [];
 
   return (
-    <Card className={cn('overflow-hidden', className)}>
-      <div className="relative aspect-square overflow-hidden bg-earthy-cosmos">
+    <div className={cn('relative', className)}>
+      <div className="relative aspect-[4/5] overflow-hidden bg-[#F9FAFB] rounded-sm border border-[#E5E7EB]">
         {all[active] ? (
           <Image
             src={all[active]!}
@@ -29,33 +28,33 @@ export function ProductImageGallery({ images, videoUrl, alt, className }: Produc
             className="object-cover"
           />
         ) : (
-          <div className="absolute inset-0 grid place-items-center bg-earthy-cosmos">
-            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-text-muted">No image</p>
+          <div className="absolute inset-0 grid place-items-center bg-[#F9FAFB]">
+            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#4B5563]">No image</p>
           </div>
         )}
       </div>
 
       {(all.length > 1 || videoUrl) && (
-        <div className="flex gap-2 overflow-x-auto border-t border-border bg-background p-3">
+        <div className="mt-4 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2">
           {all.map((src, i) => (
             <button
               key={src}
               onClick={() => setActive(i)}
               className={cn(
-                'relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl border transition-colors',
-                i === active ? 'border-brand' : 'border-border hover:border-text-muted'
+                'relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-sm border transition-colors',
+                i === active ? 'border-black border-2' : 'border-[#E5E7EB] hover:border-[#9CA3AF]'
               )}
             >
-              <Image src={src} alt={`Thumbnail ${i + 1}`} fill sizes="64px" className="object-cover" />
+              <Image src={src} alt={`Thumbnail ${i + 1}`} fill sizes="80px" className="object-cover" />
             </button>
           ))}
           {videoUrl && (
-            <span className="inline-flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl border border-border bg-brand/10 text-[10px] uppercase tracking-[0.2em] text-brand">
+            <span className="inline-flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-sm border border-[#E5E7EB] bg-white text-[10px] uppercase tracking-[0.2em] text-black">
               Video
             </span>
           )}
         </div>
       )}
-    </Card>
+    </div>
   );
 }

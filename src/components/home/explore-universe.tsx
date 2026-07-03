@@ -1,171 +1,118 @@
+'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 const CATEGORIES = [
-  {
-    icon: 'ri-jewelry-line',
-    name: 'Wire Jewelry',
-    count: 'Rings · Earrings · Pendants',
-    slug: 'jewelry',
-    desc: 'Spirals, coils, and sacred forms shaped from wire by hand.',
-  },
-  {
-    icon: 'ri-shape-line',
-    name: 'Brass & Copper Rings',
-    count: 'Statement pieces',
-    slug: 'rings',
-    desc: 'Bold, earthy rings forged from raw metals and intention.',
-  },
-  {
-    icon: 'ri-palette-line',
-    name: 'Mandala Art',
-    count: 'Hand-drawn framed art',
-    slug: 'art-paintings',
-    desc: 'Intricate mandalas and cosmic paintings, each one-of-a-kind.',
-  },
-  {
-    icon: 'ri-moon-line',
-    name: 'Moon Lamps',
-    count: '3D textured lighting',
-    slug: 'moon-lamps',
-    desc: 'Luminous moons that bring a warm, otherworldly glow home.',
-  },
-  {
-    icon: 'ri-flower-line',
-    name: 'Dried Bouquets',
-    count: 'Everlasting arrangements',
-    slug: 'bouquets',
-    desc: 'Preserved blooms arranged into lasting, natural beauty.',
-  },
-  {
-    icon: 'ri-gift-line',
-    name: 'Customized Gifts',
-    count: 'Made-to-order',
-    slug: 'gifts',
-    desc: 'Personalized gifts crafted with meaning for every occasion.',
-  },
-  {
-    icon: 'ri-home-smile-line',
-    name: 'Home Décor',
-    count: 'For living spaces',
-    slug: 'home-decor',
-    desc: 'Handmade accents that turn any space into a sanctuary.',
-  },
-  {
-    icon: 'ri-key-2-line',
-    name: 'Keychains & Accessories',
-    count: 'Small handmade pieces',
-    slug: 'accessories',
-    desc: 'Tiny treasures — keychains, charms, and everyday magic.',
-  },
+  { name: 'Wire Jewelry', slug: 'wire-jewelry', image: '/products/img7.jpg' },
+  { name: 'Home Decor', slug: 'home-decor', image: '/products/img10.jpg' },
+  { name: 'Mandala Art', slug: 'mandala-art', image: '/products/img8.jpg' },
+  { name: 'Custom Gifts', slug: 'custom-gifts', image: '/products/img9.jpg' },
+  { name: 'Keychains', slug: 'keychains', image: '/products/img11.jpg' },
+  { name: 'Wire Rings', slug: 'rings', image: '/products/img1.jpg' },
+  { name: 'Dried Bouquets', slug: 'dried-bouquets', image: '/products/img5.jpg' },
+  { name: 'Moon Lamps', slug: 'moon-lamps', image: '/products/img21.png' },
 ] as const;
 
 export function ExploreUniverse() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const scroll = (dir: 'left' | 'right') => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir === 'right' ? 300 : -300, behavior: 'smooth' });
+  };
+
+  const onScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 8);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 8);
+  };
+
   return (
-    <section
-      className="insp-section"
-      id="collections"
-      style={{ backgroundColor: 'var(--insp-cream)' }}
-    >
-      <div className="insp-section-head">
-        <span className="insp-label insp-label-center">Find What Speaks to You</span>
-        <h2 style={{
-          fontFamily: "'Fraunces', var(--font-display), serif",
-          fontSize: '38px',
-          marginTop: '14px',
-          color: 'var(--insp-indigo)',
-        }}>
-          Explore Our Universe
+    <section className="py-12 sm:py-20 bg-white border-b border-[#E5E7EB]" id="collections">
+      <div className="text-center px-4 sm:px-6 mb-8 animate-on-scroll">
+        <span className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#6B7280]">
+          Shop by Collection
+        </span>
+        <h2 className="font-display text-3xl sm:text-4xl mt-3 text-black leading-tight tracking-tight">
+          Find What Speaks to You
         </h2>
-        <p style={{
-          color: 'var(--insp-mauve)',
-          marginTop: '14px',
-          fontSize: '15px',
-          lineHeight: '1.7',
-          maxWidth: '520px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        }}>
-          Eight worlds of handmade craft, each shaped by Nepali hands and cosmic intention.
-        </p>
       </div>
 
-      <div className="insp-cat-grid">
-        {CATEGORIES.map((cat) => (
-          <Link
-            key={cat.slug}
-            href={`/collections/${cat.slug}`}
-            className="insp-cat-card"
-          >
-            <div style={{
-              color: 'var(--insp-gold)',
-              fontSize: '28px',
-              marginBottom: '18px',
-              lineHeight: 1,
-            }}>
-              <i className={cat.icon}></i>
-            </div>
-
-            <h3 style={{
-              fontFamily: "'Fraunces', var(--font-display), serif",
-              fontSize: '17px',
-              fontWeight: 600,
-              color: 'var(--insp-indigo)',
-              marginBottom: '6px',
-            }}>
-              {cat.name}
-            </h3>
-
-            <p style={{
-              fontFamily: "'Cormorant Garamond', var(--font-display), serif",
-              fontSize: '15px',
-              fontStyle: 'italic',
-              lineHeight: '1.5',
-              color: 'var(--insp-plum)',
-              marginBottom: '16px',
-            }}>
-              {cat.desc}
-            </p>
-
-            <span style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '10.5px',
-              color: 'var(--insp-gold)',
-              letterSpacing: '0.02em',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}>
-              {cat.count}
-              <svg viewBox="0 0 12 12" fill="none" width="10" height="10">
-                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </Link>
-        ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-12 mb-8 sm:mb-12 animate-on-scroll">
+        <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden">
+          <Image
+            src="/products/img1.jpg"
+            alt="Handcrafted wire rings — find what speaks to you"
+            fill
+            sizes="(max-width: 768px) 100vw, 1200px"
+            className="object-cover object-[75%_center] sm:object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          <div className="absolute bottom-6 left-6 sm:left-10 text-white">
+            <p className="text-sm font-medium tracking-wide opacity-90">Gracefully Handmade</p>
+            <p className="text-lg sm:text-xl font-display mt-1">Every piece tells a story</p>
+          </div>
+        </div>
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: '44px' }}>
-        <Link
-          href="/shop"
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '11.5px',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: 'var(--insp-indigo)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            borderBottom: '1px solid var(--insp-indigo)',
-            paddingBottom: '3px',
-            textDecoration: 'none',
-          }}
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-12 animate-on-scroll">
+        <button
+          onClick={() => scroll('left')}
+          disabled={!canScrollLeft}
+          aria-label="Scroll left"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-8 z-10 w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-black shadow-sm transition-all duration-200 hover:border-black hover:bg-black hover:text-white disabled:opacity-30 disabled:pointer-events-none"
         >
-          View All Collections
-          <svg viewBox="0 0 16 16" fill="none" width="11" height="11">
-            <path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.6" />
-          </svg>
-        </Link>
+          <i className="ri-arrow-left-line"></i>
+        </button>
+
+        <div
+          ref={trackRef}
+          onScroll={onScroll}
+          className="flex gap-6 sm:gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 px-6 sm:px-10"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {CATEGORIES.map((cat, i) => (
+            <Link
+              key={cat.slug}
+              href={`/shop?category=${cat.slug}`}
+              className="flex flex-col items-center gap-4 flex-shrink-0 group snap-start animate-on-scroll"
+              style={{ animationDelay: `${0.1 + (i * 0.1)}s` }}
+            >
+              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-amber-100 bg-amber-50/50 transition-all duration-300 group-hover:scale-105 group-hover:border-amber-400 group-hover:shadow-md">
+                <Image
+                  src={cat.image}
+                  alt={cat.name}
+                  fill
+                  sizes="128px"
+                  className="object-cover object-center transition-transform duration-500"
+                />
+              </div>
+
+              <div className="text-center">
+                <div className="text-sm font-medium text-black mb-1">{cat.name}</div>
+                <div className="text-[10px] font-semibold tracking-wider uppercase text-[#6B7280] group-hover:text-amber-700 transition-colors flex items-center justify-center gap-1">
+                  Explore <i className="ri-arrow-right-s-line"></i>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <button
+          onClick={() => scroll('right')}
+          disabled={!canScrollRight}
+          aria-label="Scroll right"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-8 z-10 w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-black shadow-sm transition-all duration-200 hover:border-black hover:bg-black hover:text-white disabled:opacity-30 disabled:pointer-events-none"
+        >
+          <i className="ri-arrow-right-line"></i>
+        </button>
       </div>
     </section>
   );

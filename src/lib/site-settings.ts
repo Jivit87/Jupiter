@@ -3,9 +3,9 @@ export type SiteSettingsState = {
   instagramHandle?: string;
   heroTagline?: string;
   featuredSectionTitle?: string;
+  shippingInfo?: string;
   announcementBar?: string;
   announcementBarActive?: boolean;
-  shippingInfo?: string;
 };
 
 export function normalizeSiteSettings(settings: Record<string, unknown>): SiteSettingsState {
@@ -15,13 +15,8 @@ export function normalizeSiteSettings(settings: Record<string, unknown>): SiteSe
     heroTagline: typeof settings.hero_tagline === 'string' ? settings.hero_tagline : undefined,
     featuredSectionTitle:
       typeof settings.featured_section_title === 'string' ? settings.featured_section_title : undefined,
-    announcementBar: typeof settings.announcement_bar === 'string' ? settings.announcement_bar : undefined,
-    announcementBarActive:
-      typeof settings.announcement_bar_active === 'boolean'
-        ? settings.announcement_bar_active
-        : typeof settings.announcement_bar_active === 'string'
-          ? settings.announcement_bar_active === 'true'
-          : undefined,
     shippingInfo: typeof settings.shipping_info === 'string' ? settings.shipping_info : undefined,
+    announcementBar: typeof settings.announcement_bar === 'string' ? settings.announcement_bar : undefined,
+    announcementBarActive: typeof settings.announcement_bar_active === 'string' ? settings.announcement_bar_active === 'true' : undefined,
   };
 }

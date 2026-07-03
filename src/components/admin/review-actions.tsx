@@ -14,16 +14,16 @@ export function AdminReviewActions({ id, isFeatured }: { id: string; isFeatured:
     <div className="flex gap-2">
       <Link
         href={`/admin/reviews/${id}/edit`}
-        className="rounded-lg border border-border px-2.5 py-1 text-xs text-text-primary hover:border-brand"
+        className="rounded-md border border-[#E5E7EB] bg-white px-3 py-1.5 text-[13px] font-medium text-black shadow-sm hover:bg-[#F9FAFB] transition-colors"
       >
         Edit
       </Link>
       <button disabled={isPending} onClick={() => run(() => toggleReviewFeatured(id))}
-        className="rounded-lg border border-border px-2.5 py-1 text-xs text-text-primary hover:border-brand disabled:opacity-50">
+        className="rounded-md border border-[#E5E7EB] bg-white px-3 py-1.5 text-[13px] font-medium text-black shadow-sm hover:bg-[#F9FAFB] transition-colors disabled:opacity-50">
         {isFeatured ? 'Unfeature' : 'Feature'}
       </button>
       <button disabled={isPending} onClick={() => { if (confirm('Delete review?')) run(() => deleteReview(id)); }}
-        className="rounded-lg border border-red-200 px-2.5 py-1 text-xs text-red-600 hover:bg-red-50 disabled:opacity-50">
+        className="rounded-md border border-red-200 bg-white px-3 py-1.5 text-[13px] font-medium text-red-600 shadow-sm hover:bg-red-50 transition-colors disabled:opacity-50">
         Delete
       </button>
     </div>

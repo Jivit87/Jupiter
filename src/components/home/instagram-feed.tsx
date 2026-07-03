@@ -35,7 +35,7 @@ export function InstagramFeed({ handle }: InstagramFeedProps) {
               href={profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex self-start rounded-xl border border-border px-5 py-2.5 text-sm font-medium text-primary transition-colors hover:border-primary sm:self-auto"
+              className="inline-flex self-start rounded-sm border border-[#E1306C]/30 bg-[#E1306C]/5 px-5 py-2.5 text-sm font-medium text-[#E1306C] transition-colors hover:bg-[#E1306C] hover:text-white sm:self-auto shadow-sm"
             >
               Follow on Instagram →
             </Link>
@@ -53,10 +53,10 @@ export function InstagramFeed({ handle }: InstagramFeedProps) {
               >
                 <div className="flex h-full flex-col justify-between p-4">
                   <div className="flex items-start justify-between">
-                    <span className="rounded-full border border-border bg-background/70 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-text-muted">
+                    <span className="rounded-sm border border-[#E1306C]/20 bg-white/70 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E1306C]">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="text-lg opacity-70 transition-transform group-hover:scale-110">🪐</span>
+                    <i className="ri-instagram-line text-lg text-[#E1306C] transition-transform group-hover:scale-110"></i>
                   </div>
                   <div className="space-y-1">
                     <p className="font-heading text-lg text-primary">{highlights[i].title}</p>

@@ -1,66 +1,65 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
 
-const PRODUCTS = [
-  { name: 'Spiral Galaxy Pendant', category: 'Necklace', price: 'Rs. 2,450', slug: 'spiral-galaxy-pendant', image: '/products/641709892_17984305259950228_7399867513129634920_n.jpg' },
-  { name: 'Amethyst Crystal Holder', category: 'Home Decor', price: 'Rs. 3,200', slug: 'amethyst-crystal-holder', image: '/products/651472726_17986647296950228_3174629027275745618_n.jpg' },
-  { name: 'Lotus Bloom Painting', category: 'Art & Paintings', price: 'Rs. 4,800', slug: 'lotus-bloom-painting', image: '/products/654232520_17987358506950228_5679907538051172100_n.jpg' },
-  { name: 'Moon Phase Wall Hanging', category: 'Home Decor', price: 'Rs. 2,950', slug: 'moon-phase-wall-hanging', image: '/products/684244165_17993060909950228_3082683601453223140_n.jpg' },
-  { name: 'Dreamy Amethyst Ring', category: 'Ring', price: 'Rs. 1,950', slug: 'dreamy-amethyst-ring', image: '/products/642473663_17984583191950228_4941762643303510181_n.jpg' },
-] as const;
+import type { Product } from '@/types';
+import { formatPrice } from '@/lib/utils';
 
-
-
-function WishIcon() {
-  return <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7.5-4.7-9.8-9.4C.6 6.9 2.6 3 6.4 3c2.1 0 3.7 1.2 4.6 2.7C11.9 4.2 13.5 3 15.6 3c3.8 0 5.8 3.9 4.2 7.6C19.5 15.3 12 20 12 20z" stroke="currentColor" strokeWidth="1.6" /></svg>;
-}
-
-export function CuratedCollections() {
-  const [activeDot, setActiveDot] = useState(0);
-
+export function CuratedCollections({ products = [] }: { products?: Product[] }) {
   return (
-    <section className="section" id="shop" style={{ paddingTop: '10px' }}>
-      <div className="featured-head">
-        <div className="section-head left">
-          <span className="eyebrow">Handpicked for You</span>
-          <h2>Featured Creations</h2>
+    <section className="py-12 sm:py-20 px-4 sm:px-12 bg-[#F9FAFB] border-b border-[#E5E7EB]" id="shop">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end max-w-7xl mx-auto mb-8 sm:mb-12 gap-4 animate-on-scroll">
+        <div>
+          <span className="flex items-center gap-2.5 text-[11px] tracking-[0.28em] uppercase text-[#6B7280] font-semibold">
+            Handpicked for You
+          </span>
+          <h2 className="font-display font-normal text-3xl sm:text-4xl leading-[1.1] mt-3 text-black tracking-tight">
+            Featured Creations
+          </h2>
         </div>
-        <Link href={siteConfig.links.shop} className="view-all">
-          View All Products
-          <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.6" /></svg>
+        <Link
+          href={siteConfig.links.shop}
+          className="text-xs font-semibold tracking-widest uppercase text-black flex items-center gap-2 pb-1 border-b border-black hover:text-[#6B7280] hover:border-[#6B7280] transition-colors duration-200"
+        >
+          View All Products <i className="ri-arrow-right-line text-sm"></i>
         </Link>
       </div>
 
-        <div className="products-grid">
-          {PRODUCTS.map((p) => (
-            <div key={p.slug} className="product-card">
-              <div className="product-media">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+        {products.map((p, index) => {
+          const firstImage = p.images?.[0] || '/products/img1.jpg';
+          const priceStr = typeof p.price === 'number' ? formatPrice(p.price) : 'Price on Request';
+          const categoryName = p.category?.name ?? 'Uncategorized';
+
+          return (
+            <div key={p.slug} className="relative group cursor-pointer animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div className="relative overflow-hidden aspect-[4/5] mb-4 bg-white border border-[#E5E7EB] rounded-sm group-hover:border-black transition-colors duration-300">
                 <Image
-                  src={p.image}
+                  src={firstImage}
                   alt={p.name}
                   fill
-                  sizes="(max-width:1160px) 20vw, 200px"
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  sizes="(max-width:768px) 50vw, (max-width:1160px) 20vw, 220px"
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <button className="wish-btn" aria-label={`Add ${p.name} to wishlist`} onClick={(e) => e.preventDefault()}>
-                  <WishIcon />
+                <button
+                  className="absolute top-3 right-3 w-11 h-11 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] z-10 transition-all duration-200 hover:bg-black hover:border-black hover:text-white"
+                  aria-label={`Add ${p.name} to wishlist`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <i className="ri-heart-3-line text-sm"></i>
                 </button>
               </div>
-              <div className="product-cat">{p.category}</div>
-              <h3>{p.name}</h3>
-              <div className="product-price">{p.price}</div>
-            </div>
-          ))}
-        </div>
 
-      <div className="carousel-dots">
-        {[0, 1, 2, 3, 4].map((i) => (
-          <span key={i} className={activeDot === i ? 'active' : ''} onClick={() => setActiveDot(i)} style={{ cursor: 'pointer' }} />
-        ))}
+              <div className="text-[10px] text-[#6B7280] tracking-wider mb-1 uppercase font-semibold">{categoryName}</div>
+              <h3 className="text-sm font-medium mb-1 text-black leading-tight truncate">{p.name}</h3>
+              <div className="text-sm text-[#4B5563]">{priceStr}</div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

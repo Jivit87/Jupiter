@@ -103,13 +103,13 @@ export function CareGuideContent() {
       <Card className="mt-8">
         <div className="grid gap-0 divide-y divide-border md:grid-cols-2 md:divide-x md:divide-y-0">
           <div className="space-y-3 p-6">
-            <p className="font-heading text-xl text-primary">✓ Do</p>
+            <p className="font-heading text-xl text-primary"><i className="ri-check-line mr-2"></i> Do</p>
             <ul className="space-y-2">
               {dos.map((tip) => <li key={tip} className="flex gap-2 text-sm text-text-muted"><span className="mt-0.5 text-brand">•</span>{tip}</li>)}
             </ul>
           </div>
           <div className="space-y-3 p-6">
-            <p className="font-heading text-xl text-primary">✗ Don&apos;t</p>
+            <p className="font-heading text-xl text-primary"><i className="ri-close-line mr-2"></i> Don&apos;t</p>
             <ul className="space-y-2">
               {donts.map((tip) => <li key={tip} className="flex gap-2 text-sm text-text-muted"><span className="mt-0.5 text-copper">•</span>{tip}</li>)}
             </ul>

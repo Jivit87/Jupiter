@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: 'New Product | Jupiter Admin' };
 export default async function NewProductPage() {
   const categories = await getAdminCategories();
   return (
-    <AdminPageFrame eyebrow="Products" title="Create a product" description="Fill in the details below.">
+    <AdminPageFrame eyebrow="Products" title="New Product" description="Add a new product to the catalog.">
       <ProductForm categories={categories} />
     </AdminPageFrame>
   );

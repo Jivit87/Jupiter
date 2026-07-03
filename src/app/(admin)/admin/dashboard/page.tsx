@@ -48,7 +48,7 @@ export default async function AdminDashboardPage() {
           }
         />
         {recent.length > 0 && (
-          <div className="overflow-hidden rounded-2xl border border-border">
+          <div className="overflow-hidden rounded-sm border border-border">
             <table className="min-w-full text-sm">
               <thead className="bg-background/80">
                 <tr>
@@ -65,7 +65,7 @@ export default async function AdminDashboardPage() {
                     </td>
                     <td className="px-4 py-3 text-text-muted">{p.category?.name ?? '—'}</td>
                     <td className="px-4 py-3 text-text-muted">{p.stockStatus ?? '—'}</td>
-                    <td className="px-4 py-3">{p.isPublished ? '✅' : '⬜'}</td>
+                    <td className="px-4 py-3">{p.isPublished ? <i className="ri-checkbox-circle-fill text-green-500 text-lg" title="Published"></i> : <i className="ri-close-circle-line text-[#E5E7EB] text-lg"></i>}</td>
                   </tr>
                 ))}
               </tbody>

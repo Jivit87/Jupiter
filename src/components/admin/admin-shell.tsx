@@ -1,58 +1,61 @@
-import Link from 'next/link';
+'use client';
+
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { UserButton } from '@clerk/nextjs';
-import { Container } from '@/components/ui/container';
+import { Sidebar } from './sidebar';
 import { cn } from '@/lib/utils';
-
-const adminNav = [
-  { href: '/admin/dashboard', label: 'Dashboard' },
-  { href: '/admin/products', label: 'Products' },
-  { href: '/admin/categories', label: 'Categories' },
-  { href: '/admin/reviews', label: 'Reviews' },
-  { href: '/admin/custom-orders', label: 'Custom Orders' },
-  { href: '/admin/settings', label: 'Settings' },
-] as const;
 
 type AdminShellProps = {
   children: ReactNode;
 };
 
 export function AdminShell({ children }: AdminShellProps) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
   return (
-    <div className="min-h-screen bg-background text-text-primary">
-      <div className="border-b border-border/70 bg-primary text-starlight">
-        <Container>
-          <div className="flex min-h-16 items-center justify-between gap-4 py-3">
-            <Link href="/admin/dashboard" className="font-display text-2xl">
-              Jupiter Admin
-            </Link>
-            <UserButton />
+    <div className="min-h-screen bg-white text-black font-sans selection:bg-[#EFEFEF]">
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div 
+          className="fixed inset-0 z-30 bg-black/20 md:hidden backdrop-blur-sm"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+
+      <Sidebar 
+        isCollapsed={isCollapsed} 
+        setIsCollapsed={setIsCollapsed} 
+        isMobileOpen={isMobileOpen}
+        setIsMobileOpen={setIsMobileOpen}
+      />
+
+      <div
+        className={cn(
+          "flex min-h-screen flex-col transition-all duration-300",
+          isCollapsed ? "md:pl-[64px]" : "md:pl-[240px]"
+        )}
+      >
+        <header className="flex h-14 items-center justify-between md:justify-end px-4 md:px-6 border-b border-[#E5E7EB] bg-white sticky top-0 z-20">
+          <button 
+            onClick={() => setIsMobileOpen(true)}
+            className="md:hidden flex h-8 w-8 items-center justify-center rounded-md text-[#6B7280] hover:bg-[#F9FAFB] hover:text-black"
+          >
+            <i className="ri-menu-line text-lg" />
+          </button>
+
+          <div className="flex items-center gap-3">
+            <UserButton appearance={{ elements: { avatarBox: "h-7 w-7 rounded-md" } }} />
           </div>
-        </Container>
+        </header>
+        
+        <main className="flex-1 p-4 sm:p-8 md:p-12 overflow-x-hidden">
+          <div className="mx-auto max-w-5xl">
+            {children}
+          </div>
+        </main>
       </div>
-
-      <Container className="py-8">
-        <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
-          <aside className="rounded-2xl border border-border bg-surface/70 p-4 shadow-soft">
-            <nav aria-label="Admin" className="space-y-1">
-              {adminNav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    'block rounded-xl px-4 py-3 text-sm font-medium text-text-primary transition-colors',
-                    'hover:bg-background hover:text-primary',
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </aside>
-
-          <main className="min-w-0">{children}</main>
-        </div>
-      </Container>
     </div>
   );
 }

@@ -1,26 +1,14 @@
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
-import type { SiteSettingsState } from '@/lib/site-settings';
-
-/*
-  design_insp.html — Footer
-  footer        { background:indigo; color:#c7bfd9; padding:72px 48px 28px; }
-  .footer-grid  { grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:50px; max-width:1184px; }
-  .footer-logo  { display:flex; align-items:center; gap:10px; }
-  .footer-col h4{ DM Mono 11px letter-spacing:.12em uppercase gold-light }
-  .footer-col a { 13.5px color:#c7bfd9 → gold-light on hover }
-  .footer-social{ circles 34px border rgba(255,255,255,.2) }
-  .footer-bottom{ flex space-between; font-size:12.5px; color:#8f81ac }
-*/
 
 function JupiterMark() {
   return (
-    <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="20" r="18.5" stroke="#E0B860" strokeWidth="1" />
+    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="18.5" stroke="currentColor" strokeWidth="1.5" />
       <path
         d="M20 30c-5.5 0-10-3.6-10-8s4.5-8 10-8 6 2.2 6 5-2.6 5-6 5-4-1.4-4-3 1.3-3 3-3"
-        stroke="#E0B860"
-        strokeWidth="1.3"
+        stroke="currentColor"
+        strokeWidth="1.8"
         fill="none"
         strokeLinecap="round"
       />
@@ -28,51 +16,21 @@ function JupiterMark() {
   );
 }
 
-function InstagramIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" width="15" height="15">
-      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-    </svg>
-  );
-}
-
-function WhatsAppIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" width="15" height="15">
-      <path
-        d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L4 20l1-4.6A8.5 8.5 0 1 1 21 11.5z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-    </svg>
-  );
-}
-
-function SocialBtn({ href, label, children, external }: {
+function SocialBtn({ href, label, children, external, brandClass }: {
   href: string;
   label: string;
   children: React.ReactNode;
   external?: boolean;
+  brandClass?: string;
 }) {
   return (
     <Link
       href={href}
       aria-label={label}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      style={{
-        width: '34px',
-        height: '34px',
-        borderRadius: '50%',
-        border: '1px solid rgba(255,255,255,.2)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#c7bfd9',
-        transition: 'border-color 0.2s, color 0.2s',
-      }}
-      className="insp-footer-social-btn"
+      className={`flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 ${
+        brandClass || 'border-[#E5E7EB] text-black hover:bg-black hover:text-white hover:border-black'
+      }`}
     >
       {children}
     </Link>
@@ -84,16 +42,8 @@ function FooterCol({ title, links }: {
   links: Array<{ label: string; href: string; external?: boolean }>;
 }) {
   return (
-    <div className="footer-col">
-      <h4 style={{
-        fontFamily: 'var(--font-body)',
-        fontSize: '11px',
-        letterSpacing: '0.12em',
-        textTransform: 'uppercase' as const,
-        color: 'var(--insp-gold-light)',
-        marginBottom: '16px',
-        fontWeight: 400,
-      }}>
+    <div className="flex flex-col gap-3">
+      <h4 className="text-[11px] font-bold uppercase tracking-widest text-black mb-1">
         {title}
       </h4>
       {links.map((link) => (
@@ -101,7 +51,7 @@ function FooterCol({ title, links }: {
           key={link.label}
           href={link.href}
           {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-          className="insp-footer-link"
+          className="text-sm text-[#4B5563] hover:text-black transition-colors"
         >
           {link.label}
         </Link>
@@ -110,73 +60,54 @@ function FooterCol({ title, links }: {
   );
 }
 
-export function Footer({ settings: _settings }: { settings?: SiteSettingsState } = {}) {
+export function Footer() {
   const instagramUrl = siteConfig.socials.instagram;
 
   return (
-    <footer style={{
-      backgroundColor: '#17111f',
-      color: '#c7bfd9',
-      padding: '72px 48px 28px',
-    }}>
-      {/* Main grid */}
-      <div style={{
-        maxWidth: '1184px',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: '1.4fr 1fr 1fr 1.2fr',
-        gap: '50px',
-        paddingBottom: '50px',
-        borderBottom: '1px solid rgba(255,255,255,.1)',
-      }}>
-        {/* Column 1 — Brand */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+    <footer className="bg-[#F9FAFB] border-t border-[#E5E7EB] py-16 lg:py-24 px-6 sm:px-12">
+      <div className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-x-6 gap-y-12 lg:gap-16 pb-16 border-b border-[#E5E7EB]">
+        
+        <div className="col-span-2 lg:col-span-1">
+          <div className="flex items-center gap-3 mb-6 text-black">
             <JupiterMark />
-            <span style={{
-              fontFamily: "'Fraunces', var(--font-display), serif",
-              fontWeight: 600,
-              fontSize: '19px',
-              color: '#FDFAF5',
-              letterSpacing: '0.06em',
-            }}>
+            <span className="font-display text-xl font-semibold tracking-wide">
               JUPITER
             </span>
           </div>
 
-          <p style={{
-            fontSize: '13.5px',
-            lineHeight: '1.7',
-            maxWidth: '260px',
-            color: '#a89ac2',
-            marginBottom: '20px',
-            fontFamily: 'var(--font-body)',
-          }}>
-            Handcrafted arts, jewelry &amp; gifts made with cosmic intention in the Kathmandu Valley, Nepal.
+          <p className="text-sm leading-relaxed max-w-[280px] mb-8 text-[#4B5563]">
+            Handcrafted arts, jewelry & gifts made with cosmic intention in the Kathmandu Valley, Nepal.
           </p>
 
-          <div style={{ display: 'flex', gap: '12px', marginTop: '6px' }}>
-            <SocialBtn href={instagramUrl} label="Instagram" external>
-              <InstagramIcon />
+          <div className="flex gap-3">
+            <SocialBtn 
+              href={instagramUrl} 
+              label="Instagram" 
+              external 
+              brandClass="border-[#E1306C]/30 text-[#E1306C] hover:bg-[#E1306C] hover:text-white hover:border-[#E1306C]"
+            >
+              <i className="ri-instagram-line text-lg"></i>
             </SocialBtn>
-            <SocialBtn href={siteConfig.links.custom} label="WhatsApp">
-              <WhatsAppIcon />
+            <SocialBtn 
+              href={siteConfig.links.custom} 
+              label="WhatsApp" 
+              brandClass="border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366] hover:text-white hover:border-[#25D366]"
+            >
+              <i className="ri-whatsapp-line text-lg"></i>
             </SocialBtn>
           </div>
         </div>
 
-        {/* Column 2 — Shop */}
         <FooterCol
           title="Shop"
           links={[
             { label: 'All Products',  href: siteConfig.links.shop        },
-            { label: 'Collections',   href: siteConfig.links.collections },
+            { label: 'Collections',   href: siteConfig.links.shop        },
             { label: 'New Arrivals',  href: siteConfig.links.shop        },
             { label: 'Wishlist',      href: siteConfig.links.wishlist     },
           ]}
         />
 
-        {/* Column 3 — About */}
         <FooterCol
           title="About"
           links={[
@@ -187,7 +118,6 @@ export function Footer({ settings: _settings }: { settings?: SiteSettingsState }
           ]}
         />
 
-        {/* Column 4 — Support */}
         <FooterCol
           title="Support"
           links={[
@@ -199,30 +129,16 @@ export function Footer({ settings: _settings }: { settings?: SiteSettingsState }
         />
       </div>
 
-      {/* Bottom bar */}
-      <div style={{
-        maxWidth: '1184px',
-        margin: '0 auto',
-        paddingTop: '26px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap' as const,
-        gap: '14px',
-        fontSize: '12.5px',
-        color: '#8f81ac',
-        fontFamily: 'var(--font-body)',
-      }}>
-        <span>© {new Date().getFullYear()} Jupiter. All rights reserved.</span>
+      <div className="mx-auto max-w-7xl pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-[#6B7280]">
+        <span>&copy; {new Date().getFullYear()} Jupiter. All rights reserved.</span>
 
-        <span style={{ color: 'var(--insp-gold-light)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          🇳🇵 Handmade in Nepal
+        <span className="flex items-center gap-2 text-black font-semibold tracking-widest uppercase">
+          <i className="ri-map-pin-line text-sm"></i> Handmade in Nepal
         </span>
 
         <Link
           href={siteConfig.links.contact}
-          style={{ color: '#8f81ac', textDecoration: 'none' }}
-          className="insp-footer-link"
+          className="hover:text-black transition-colors"
         >
           Privacy Policy
         </Link>
