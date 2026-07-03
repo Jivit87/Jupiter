@@ -34,18 +34,18 @@ export function ExploreUniverse() {
   };
 
   return (
-    <section className="py-12 sm:py-20 bg-white border-b border-[#E5E7EB]" id="collections">
-      <div className="text-center px-4 sm:px-6 mb-8 animate-on-scroll">
+    <section className="py-10 sm:py-20 bg-white border-b border-[#E5E7EB]" id="collections">
+      <div className="text-center px-4 sm:px-6 mb-6 sm:mb-8 animate-on-scroll">
         <span className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#6B7280]">
           Shop by Collection
         </span>
-        <h2 className="font-display text-3xl sm:text-4xl mt-3 text-black leading-tight tracking-tight">
+        <h2 className="font-display text-2xl sm:text-4xl mt-2 sm:mt-3 text-black leading-tight tracking-tight">
           Find What Speaks to You
         </h2>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-12 mb-8 sm:mb-12 animate-on-scroll">
-        <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-12 mb-6 sm:mb-12 animate-on-scroll">
+        <div className="relative w-full h-52 sm:h-80 rounded-2xl overflow-hidden">
           <Image
             src="/products/img1.jpg"
             alt="Handcrafted wire rings — find what speaks to you"

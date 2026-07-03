@@ -52,21 +52,21 @@ const materials = [
     color: 'Warm rose-gold tone',
     properties: 'Soft, highly workable, develops a beautiful patina over time. The easiest metal to shape into complex wire forms.',
     care: 'Keep dry, store in a pouch. Occasional polish with a soft cloth keeps it bright.',
-    image: '/products/img1.jpg',
+    image: '/products/img7.jpg',
   },
   {
     name: 'Brass',
     color: 'Yellow-gold tone',
     properties: 'Harder than copper, holds shape well, and has a bold golden look. Great for statement rings and structural pieces.',
     care: 'Wipe with a dry cloth after wearing. Avoid prolonged water contact.',
-    image: '/products/img3.jpg',
+    image: '/products/img.webp',
   },
   {
     name: 'Mixed metals',
     color: 'Varies by piece',
     properties: 'Some pieces combine copper and brass for contrast and dimension. These are often the most visually interesting and take the longest to make.',
     care: 'Follow the care instructions for the most delicate metal in the piece — usually copper.',
-    image: '/products/img5.jpg',
+    image: '/products/img10.jpg',
   },
 ] as const;
 
@@ -83,10 +83,10 @@ export default function TheCraftPage() {
       <Section spacing="md">
         <div className="space-y-4 mb-16 text-center">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#4B5563]">The process</p>
-          <h2 className="font-heading text-3xl text-black md:text-4xl">Five steps from wire to wearable</h2>
+          <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black md:text-4xl">Five steps from wire to wearable</h2>
         </div>
         
-        <div className="space-y-24 md:space-y-32">
+        <div className="space-y-16 md:space-y-32">
           {steps.map(({ step, title, body, image }, index) => (
             <div key={step} className={cn("flex flex-col gap-10 md:items-center", index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse")}>
               <div className="flex-1 w-full relative aspect-[4/3] md:aspect-square lg:aspect-[4/3] overflow-hidden rounded-sm border border-[#E5E7EB] shadow-sm bg-[#F9FAFB]">
@@ -97,7 +97,7 @@ export default function TheCraftPage() {
                   {step}
                 </span>
                 <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563]">Phase {step}</p>
-                <h3 className="font-heading text-3xl text-black md:text-4xl">{title}</h3>
+                <h3 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black md:text-4xl">{title}</h3>
                 <p className="text-base leading-relaxed text-[#4B5563] relative z-10">{body}</p>
               </div>
             </div>
@@ -107,17 +107,17 @@ export default function TheCraftPage() {
 
       {/* Materials */}
       <Section spacing="md">
-        <div className="space-y-4 mb-16 text-center">
+        <div className="space-y-4 mb-12 sm:mb-16 text-center">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#4B5563]">Materials guide</p>
-          <h2 className="font-heading text-3xl text-black md:text-4xl">What we work with</h2>
+          <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black md:text-4xl">What we work with</h2>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#4B5563]">
             Each material has its own personality. Understanding them helps you care for your piece for years to come.
           </p>
         </div>
         
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory gap-6 md:gap-8 pb-4 md:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] -mx-4 px-4 sm:mx-0 sm:px-0">
           {materials.map((m) => (
-            <div key={m.name} className="flex flex-col rounded-sm border border-[#E5E7EB] bg-white overflow-hidden shadow-sm">
+            <div key={m.name} className="flex flex-col w-[85vw] sm:w-auto shrink-0 snap-center md:snap-start rounded-sm border border-[#E5E7EB] bg-white overflow-hidden shadow-sm">
               <div className="relative aspect-square w-full border-b border-[#E5E7EB] bg-[#F9FAFB]">
                 <Image src={m.image} alt={m.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
               </div>
@@ -145,10 +145,12 @@ export default function TheCraftPage() {
         <div className="rounded-sm bg-black p-12 md:p-20 text-center shadow-xl">
           <div className="flex flex-col items-center gap-6">
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-gray-400">Ready to own one?</p>
-            <h2 className="font-heading text-3xl md:text-4xl text-white">Take a piece of the craft home</h2>
-            <div className="flex flex-wrap justify-center gap-4 mt-4">
-              <Button asChild className="rounded-sm bg-white text-black hover:bg-gray-100 px-8"><Link href="/shop">Shop collection</Link></Button>
-              <Button asChild variant="outline" className="rounded-sm border-gray-600 text-white hover:bg-white/10 hover:text-white px-8 bg-transparent">
+            <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] md:text-4xl text-white">Take a piece of the craft home</h2>
+            <div className="flex flex-col w-full sm:w-auto sm:flex-row justify-center gap-4 mt-4">
+              <Button asChild className="rounded-sm bg-white text-black hover:bg-gray-100 px-8 min-h-[44px]">
+                <Link href="/shop">Shop collection</Link>
+              </Button>
+              <Button asChild variant="outline" className="rounded-sm border-gray-600 text-white hover:bg-white/10 hover:text-white px-8 bg-transparent min-h-[44px]">
                 <Link href="/custom">Custom order</Link>
               </Button>
             </div>

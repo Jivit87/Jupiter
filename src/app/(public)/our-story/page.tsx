@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/ui/page-header';
 import { Section } from '@/components/ui/section';
+import { StoryStats } from '@/components/story/story-stats';
 import { buildMetadata } from '@/lib/seo';
 import { cn } from '@/lib/utils';
 
@@ -57,7 +58,7 @@ export default function OurStoryPage() {
 
       {/* Story sections */}
       <Section spacing="md">
-        <div className="space-y-24 md:space-y-32">
+        <div className="space-y-16 md:space-y-32">
           {story.map((item, index) => (
             <div key={item.title} className={cn("flex flex-col gap-10 md:items-center", index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse")}>
               <div className="flex-1 w-full relative aspect-[4/3] md:aspect-square lg:aspect-[4/3] overflow-hidden rounded-sm border border-[#E5E7EB] shadow-sm bg-[#F9FAFB]">
@@ -65,7 +66,7 @@ export default function OurStoryPage() {
               </div>
               <div className="flex-1 space-y-4 md:px-6 lg:px-12">
                 <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563]">{item.eyebrow}</p>
-                <h2 className="font-heading text-3xl text-black md:text-4xl">{item.title}</h2>
+                <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black md:text-4xl">{item.title}</h2>
                 <p className="text-base leading-relaxed text-[#4B5563]">{item.body}</p>
               </div>
             </div>
@@ -75,28 +76,19 @@ export default function OurStoryPage() {
 
       {/* By the numbers */}
       <Section spacing="md">
-        <div className="overflow-hidden rounded-sm bg-black text-white shadow-xl">
-          <div className="grid gap-0 divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
-            {stats.map(({ value, label }) => (
-              <div key={label} className="flex flex-col items-center gap-2 p-12">
-                <span className="font-display text-5xl text-white">{value}</span>
-                <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-gray-400">{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <StoryStats stats={stats} />
       </Section>
 
       {/* Artisan profile */}
       <Section spacing="md">
         <div className="overflow-hidden rounded-sm border border-[#E5E7EB] bg-[#F9FAFB] shadow-sm">
           <div className="grid gap-0 lg:grid-cols-[1fr_1.5fr]">
-            <div className="relative min-h-[350px] lg:min-h-full">
+            <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full w-full">
                <Image src="/story/6.jpg" alt="Meet the maker" fill className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 40vw" />
             </div>
             <div className="space-y-6 p-8 lg:p-14 flex flex-col justify-center">
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563]">Meet the maker</p>
-              <h2 className="font-heading text-3xl text-black md:text-4xl">Hands behind Jupiter</h2>
+              <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black md:text-4xl">Hands behind Jupiter</h2>
               <p className="max-w-lg text-base leading-relaxed text-[#4B5563]">
                 Jupiter is made by a young artisan in Nepal who learned wire wrapping and metal craft through
                 curiosity and countless hours of practice. Every collection reflects a personal journey —
@@ -117,9 +109,9 @@ export default function OurStoryPage() {
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#4B5563]">Experience it</p>
           <h2 className="mt-3 font-heading text-3xl text-black">See the collection</h2>
           <p className="mt-3 text-base text-[#4B5563]">Every piece is ready to be yours.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button asChild className="rounded-sm bg-black text-white hover:bg-black/90 px-8"><Link href="/shop">Browse collection</Link></Button>
-            <Button asChild variant="outline" className="rounded-sm border-[#E5E7EB] hover:bg-white text-black px-8 bg-transparent"><Link href="/custom">Custom order</Link></Button>
+          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+            <Button asChild className="rounded-sm bg-black text-white hover:bg-black/90 px-8 min-h-[44px]"><Link href="/shop">Browse collection</Link></Button>
+            <Button asChild variant="outline" className="rounded-sm border-[#E5E7EB] hover:bg-white text-black px-8 bg-transparent min-h-[44px]"><Link href="/custom">Custom order</Link></Button>
           </div>
         </div>
       </Section>

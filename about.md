@@ -42,7 +42,7 @@
 | **Tech Stack** | Next.js 15 + TypeScript + Tailwind CSS + Framer Motion |
 | **Database** | PostgreSQL via Supabase |
 | **Storage** | Cloudinary |
-| **Auth** | Clerk (Admin-only) |
+| **Auth** | Clerk (Email/Password) + Strict `ADMIN_EMAIL` Verification |
 | **Deployment** | Vercel |
 | **Analytics** | Google Analytics 4 + Microsoft Clarity |
 | **SEO** | Next.js Metadata API + Schema.org structured data |
@@ -498,7 +498,7 @@ CREATE TABLE reviews (
   rating         INTEGER CHECK (rating BETWEEN 1 AND 5),
   product_id     UUID REFERENCES products(id) ON DELETE SET NULL,
   reviewer_image TEXT,                       -- Cloudinary URL
-  review_image   TEXT,                       -- Customer product photo, Cloudinary URL
+  review_image   TEXT,                       -- JSON string containing `location` and `instagramUrl`
   platform       TEXT DEFAULT 'whatsapp'
                  CHECK (platform IN ('whatsapp','instagram','in_person','other')),
   is_featured    BOOLEAN DEFAULT false,
@@ -582,23 +582,25 @@ CREATE POLICY "Public can read site settings"
 
 ## 7. Admin Dashboard
 
-### 7.1 Authentication
+### 7.1 Authentication (Double-Layer Security)
 
 - **Provider:** Clerk
-- **Method:** Email + Password (single admin account)
+- **Method:** Email + Password (Google Auth disabled)
 - **Protected routes:** All `/admin/*` paths
-- **Middleware:** `middleware.ts` checks Clerk session on every `/admin` route
-- **Session:** Persistent across browser sessions
+- **Layer 1 (Middleware):** `middleware.ts` forces unauthenticated users to `/admin/sign-in`.
+- **Layer 2 (Layout Validation):** `src/app/(admin)/layout.tsx` verifies the authenticated user's email against `process.env.ADMIN_EMAIL`. If it does not match exactly, the user is shown an "Access Denied" screen.
+- **Layer 3 (Backend Mutations):** Server actions use a `requireAdmin()` helper to verify the `ADMIN_EMAIL` before executing database writes.
 
 ```typescript
-// middleware.ts
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+// src/app/(admin)/layout.tsx (Email Verification)
+const adminEmail = process.env.ADMIN_EMAIL;
+const isAuthorized = user.emailAddresses.some(
+  (e) => e.emailAddress.toLowerCase() === adminEmail.toLowerCase()
+);
 
-const isAdminRoute = createRouteMatcher(['/admin(.*)']);
-
-export default clerkMiddleware((auth, req) => {
-  if (isAdminRoute(req)) auth().protect();
-});
+if (!isAuthorized) {
+  return <AccessDeniedScreen />; // Renders a screen with a SignOutButton
+}
 ```
 
 ### 7.2 Dashboard Sections
@@ -1108,6 +1110,12 @@ jupiter/
 │   │   ├── layout.tsx           # Root layout — fonts, providers
 │   │   ├── globals.css          # Tailwind + CSS custom properties
 │   │   ├── not-found.tsx
+│   │   ├── error.tsx            # Production error boundary
+│   │   ├── global-error.tsx     # Catch-all root error boundary
+│   │   │
+│   │   ├── sign-up/
+│   │   │   └── [[...sign-up]]/
+│   │   │       └── page.tsx     # Clerk Sign-up route
 │   │   │
 │   │   ├── (public)/            # Route group — public pages
 │   │   │   ├── layout.tsx       # Navbar + Footer
@@ -1142,6 +1150,9 @@ jupiter/
 │   │   │
 │   │   └── admin/               # Protected route group
 │   │       ├── layout.tsx       # Admin sidebar + header
+│   │       ├── sign-in/
+│   │       │   └── [[...sign-in]]/
+│   │       │       └── page.tsx # Clerk Sign-in route
 │   │       ├── dashboard/
 │   │       │   └── page.tsx
 │   │       ├── products/
@@ -1208,6 +1219,7 @@ jupiter/
 ## 11. API Design (Server Actions)
 
 > Using Next.js 15 Server Actions for all data mutations. No separate API routes needed except for Cloudinary upload signatures.
+> **Security Note:** All mutations that modify the database are protected by a `requireAdmin()` helper located in `src/actions/shared.ts` to strictly enforce the `ADMIN_EMAIL` requirement on the server side.
 
 ### 11.1 Product Actions (`actions/products.ts`)
 
@@ -1832,10 +1844,14 @@ NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret                      # NEVER expose to client
 
-# ─── CLERK ───────────────────────────────────────────────────────
+# ─── CLERK & AUTH ────────────────────────────────────────────────
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...
 CLERK_SECRET_KEY=sk_live_...                               # NEVER expose to client
+ADMIN_EMAIL=your_admin_email@gmail.com                     # The ONLY email allowed to access /admin
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/admin/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/admin/dashboard
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/admin/dashboard
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/admin/dashboard
 
 # ─── WHATSAPP ────────────────────────────────────────────────────

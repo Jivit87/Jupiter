@@ -42,9 +42,19 @@ const config: Config = {
           '0%':   { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
         },
+        'slide-in-right': {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up var(--duration-emphasis) var(--ease-decelerate) both',
+        'slide-in-right': 'slide-in-right 0.4s var(--ease-decelerate) both',
+        'fade-in': 'fade-in 0.3s ease-out both',
         shimmer:      'shimmer 1.6s linear infinite',
         marquee:      'marquee 28s linear infinite',
       },

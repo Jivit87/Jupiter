@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
+import { HowToOrderFeatures } from './how-to-order-features';
 
 function BrowseIllustration() {
   return (
@@ -81,13 +82,13 @@ function Step({ num, pill, desc, illustration }: StepProps) {
   return (
     <div className="flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-6 md:gap-0 relative z-10 bg-white">
       <div className="flex flex-col items-center shrink-0">
-        <div className="w-[40px] md:w-[60px] h-[40px] md:h-[60px] rounded-full bg-white border border-[#E5E7EB] shadow-[0_0_0_4px_white] md:shadow-[0_0_0_6px_white] flex items-center justify-center font-display text-base md:text-xl text-black -mb-[20px] md:-mb-[30px] relative z-[3]">
+        <div className="w-[32px] md:w-[60px] h-[32px] md:h-[60px] rounded-full bg-white border border-[#E5E7EB] shadow-[0_0_0_3px_white] md:shadow-[0_0_0_6px_white] flex items-center justify-center font-display text-sm md:text-xl text-black -mb-[16px] md:-mb-[30px] relative z-[3]">
           {num}
         </div>
 
-        <div className="w-[100px] md:w-[210px] h-[100px] md:h-[210px] rounded-full border border-[#E5E7EB] flex items-center justify-center relative mt-2 shrink-0 bg-white">
-          <div className="w-[85px] md:w-[170px] h-[85px] md:h-[170px] rounded-full bg-[#F9FAFB] flex items-center justify-center relative">
-            <div className="scale-[0.5] md:scale-100 origin-center">
+        <div className="w-[72px] md:w-[210px] h-[72px] md:h-[210px] rounded-full border border-[#E5E7EB] flex items-center justify-center relative mt-2 shrink-0 bg-white">
+          <div className="w-[60px] md:w-[170px] h-[60px] md:h-[170px] rounded-full bg-[#F9FAFB] flex items-center justify-center relative">
+            <div className="scale-[0.4] md:scale-100 origin-center">
               {illustration}
             </div>
           </div>
@@ -95,59 +96,36 @@ function Step({ num, pill, desc, illustration }: StepProps) {
       </div>
 
       <div className="flex flex-col items-start md:items-center pt-2 md:pt-0">
-        <div className="md:-mt-5 z-[3] relative bg-black text-white rounded-sm py-1.5 md:py-2 px-4 md:px-6 font-semibold text-[10px] md:text-xs tracking-widest uppercase">
+        <div className="md:-mt-5 z-[3] relative bg-black text-white rounded-sm py-1.5 md:py-2 px-3 md:px-6 font-semibold text-[10px] md:text-xs tracking-widest uppercase">
           {pill}
         </div>
 
         <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-black mt-5" />
 
-        <p className="mt-3 md:mt-4 text-[13px] md:text-sm leading-relaxed text-[#4B5563] max-w-[230px]">
+        <p className="mt-2 md:mt-4 text-[13px] md:text-sm leading-relaxed text-[#4B5563] max-w-[230px]">
           {desc}
         </p>
       </div>
     </div>
   );
 }
-
-function FootItem({ icon, title, text }: {
-  icon:  React.ReactNode;
-  title: string;
-  text:  React.ReactNode;
-}) {
-  return (
-    <div className="flex items-start gap-4 p-8">
-      <div className="w-8 h-8 shrink-0 text-black mt-0.5">
-        {icon}
-      </div>
-      <div>
-        <h4 className="text-sm font-semibold text-black mb-1 tracking-wide uppercase">
-          {title}
-        </h4>
-        <p className="text-xs text-[#4B5563] leading-relaxed">
-          {text}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 export function HowToOrder() {
   return (
-    <section className="bg-white py-12 md:py-24 px-4 md:px-12 border-b border-[#E5E7EB] flex justify-center">
+    <section className="bg-white py-16 sm:py-24 px-4 md:px-12 border-b border-[#E5E7EB] flex justify-center">
       <div className="w-full max-w-7xl mx-auto">
 
-        <div className="text-center mb-10 sm:mb-16">
+        <div className="text-center mb-8 sm:mb-16">
           <span className="inline-block text-[11px] font-semibold tracking-widest text-[#6B7280] uppercase mb-4">
             Simple & Personal
           </span>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-black leading-tight tracking-tight">
+          <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl text-black leading-tight tracking-tight">
             How to Order
           </h2>
         </div>
 
-        <div className="relative flex flex-col md:grid md:grid-cols-[1fr_auto_1fr_auto_1fr] items-start md:items-start gap-y-12 md:gap-x-1 mb-12 md:mb-20">
+        <div className="relative flex flex-col md:grid md:grid-cols-[1fr_auto_1fr_auto_1fr] items-start md:items-start gap-y-10 md:gap-x-1 mb-10 md:mb-20">
           {/* Vertical line for mobile */}
-          <div className="absolute left-[50px] md:hidden top-[40px] bottom-[40px] w-px border-l border-dashed border-[#9CA3AF] z-0" />
+          <div className="absolute left-[36px] md:hidden top-[24px] bottom-[24px] w-px border-l border-dashed border-[#9CA3AF] z-0" />
 
           <Step
             num="01" pill="BROWSE"
@@ -168,45 +146,7 @@ export function HowToOrder() {
           />
         </div>
 
-        <div className="border border-[#E5E7EB] rounded-sm grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#E5E7EB]">
-          <FootItem
-            icon={
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
-                width="32" height="32">
-                <path d="M12 3 L20 6 V11 C20 16 16.5 19.5 12 21 C7.5 19.5 4 16 4 11 V6 Z"/>
-                <path d="M9 12 l2 2 l4 -5"/>
-              </svg>
-            }
-            title="SAFE & SECURE"
-            text={<>Your data and conversations<br/>are always protected.</>}
-          />
-          <FootItem
-            icon={
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
-                width="32" height="32">
-                <path d="M3 13 c2 3 6 4 8 2 l7 -6 c1 -1 2.6 -0.6 2 1 c-0.4 1 -1.4 2 -2.4 2.8 l-4.6 3.7"/>
-                <path d="M13 14 l3 -2.4 c1 -0.8 2.4 -0.3 2 1 c-0.3 1 -1.2 1.8 -2.1 2.4 L11 18.5 c-1.4 1 -3 1 -4.4 -0.1 L3 15.8"/>
-                <path d="M8.5 6.5 C7 5 4.5 5.3 4.5 8 c0 2.3 3 4.3 4.5 5.4 C10.5 12.3 13.5 10.3 13.5 8 c0 -2.7 -2.5 -3 -4 -1.5 Z"/>
-              </svg>
-            }
-            title="MADE WITH CARE"
-            text={<>Every piece is handmade<br/>with love and attention.</>}
-          />
-          <FootItem
-            icon={
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
-                width="32" height="32">
-                <path d="M12 21 C12 21 5 14.5 5 9.5 A7 7 0 0 1 19 9.5 C19 14.5 12 21 12 21 Z"/>
-                <circle cx="12" cy="9.5" r="2.5"/>
-              </svg>
-            }
-            title="DELIVERED TO YOU"
-            text={<>Pan-Nepal delivery,<br/>straight to your doorstep.</>}
-          />
-        </div>
+        <HowToOrderFeatures />
 
         <div className="text-center mt-12">
           <Link

@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 type ReviewCardProps = {
   review: Pick<
     Review,
-    'reviewerName' | 'reviewText' | 'rating' | 'reviewerImage' | 'reviewImage' | 'platform' | 'reviewDate'
+    'reviewerName' | 'reviewText' | 'rating' | 'reviewerImage' | 'location' | 'platform' | 'reviewDate'
   > & {
     linkedProductName?: string | null;
   };
@@ -15,10 +15,10 @@ type ReviewCardProps = {
 };
 
 const platformToneMap = {
-  whatsapp: 'brand',
-  instagram: 'lavender',
-  in_person: 'sage',
-  other: 'neutral',
+  whatsapp: 'amber',
+  instagram: 'black',
+  in_person: 'outline',
+  other: 'gray',
 } as const;
 
 const platformLabelMap = {
@@ -47,12 +47,6 @@ export function ReviewCard({ review, className }: ReviewCardProps) {
         </div>
 
         <p className="text-sm leading-7 text-text-muted">“{review.reviewText}”</p>
-
-        {review.reviewImage ? (
-          <div className="rounded-sm border border-[#E5E7EB] bg-[#F9FAFB] p-4 text-xs uppercase tracking-[0.25em] text-[#6B7280]">
-            Review image shell
-          </div>
-        ) : null}
 
         {review.linkedProductName ? (
           <p className="text-xs uppercase tracking-[0.28em] text-text-muted">

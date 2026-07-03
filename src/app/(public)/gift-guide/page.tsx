@@ -76,7 +76,7 @@ export default function GiftGuidePage() {
                 <div className="text-4xl"><i className={item.icon}></i></div>
                 <div className="space-y-3">
                   <div>
-                    <h2 className="font-heading text-2xl text-primary">{item.occasion}</h2>
+                    <h2 className="font-heading text-[clamp(1.5rem,2.5vw+1rem,2rem)] text-primary">{item.occasion}</h2>
                     <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">{item.tagline}</p>
                   </div>
                   <p className="text-sm leading-7 text-text-muted">{item.description}</p>
@@ -91,14 +91,14 @@ export default function GiftGuidePage() {
                 <div className="flex flex-col gap-2 md:items-end">
                   <Link
                     href={item.shopLink}
-                    className="rounded-xl border border-brand px-4 py-2 text-sm font-medium text-brand hover:bg-brand hover:text-white transition-colors"
+                    className="inline-flex items-center justify-center min-h-[44px] rounded-sm border border-brand px-4 py-2 text-sm font-medium text-brand hover:bg-brand hover:text-white transition-colors"
                   >
                     Browse →
                   </Link>
                   {item.customLink && (
                     <Link
                       href={item.customLink}
-                      className="rounded-xl border border-border px-4 py-2 text-sm font-medium text-text-primary hover:border-primary transition-colors"
+                      className="inline-flex items-center justify-center min-h-[44px] rounded-sm border border-border px-4 py-2 text-sm font-medium text-text-primary hover:border-primary transition-colors"
                     >
                       Custom order
                     </Link>
@@ -114,14 +114,14 @@ export default function GiftGuidePage() {
         <Card className="bg-primary">
           <div className="p-8 text-center">
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-starlight/70">Not sure?</p>
-            <h2 className="mt-2 font-heading text-3xl text-starlight">Let us help you choose</h2>
+            <h2 className="mt-2 font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-starlight">Let us help you choose</h2>
             <p className="mt-3 text-sm text-starlight/80">
               Tell us about the person and the occasion on WhatsApp — we will suggest the perfect piece.
             </p>
             <div className="mt-6">
               <Link
                 href="/contact"
-                className="inline-flex rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-primary hover:opacity-90"
+                className="inline-flex items-center justify-center min-h-[44px] w-full sm:w-auto rounded-sm bg-brand px-6 py-3 text-sm font-semibold text-primary hover:opacity-90"
               >
                 Chat with us
               </Link>

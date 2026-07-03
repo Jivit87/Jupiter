@@ -104,12 +104,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       <Section spacing="md">
         <div className="grid gap-8 lg:grid-cols-2">
-          <ProductImageGallery
-            images={product.images}
-            videoUrl={product.videoUrl}
-            alt={product.name}
-          />
-          <div className="space-y-6">
+          <div className="min-w-0">
+            <ProductImageGallery
+              images={product.images}
+              videoUrl={product.videoUrl}
+              alt={product.name}
+            />
+          </div>
+          <div className="space-y-6 min-w-0">
             <ProductInfo product={{ ...product, categoryName: product.category?.name ?? null }} />
             <div className="flex flex-col gap-3">
               <WhatsAppOrderButton
@@ -126,7 +128,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </Section>
 
-      <Section spacing="md">
+      <Section spacing="md" className="border-t border-[#E5E7EB]">
         <ProductDetails
           details={[
             { label: 'Material', value: product.material },
@@ -139,7 +141,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </Section>
 
       {reviews.length > 0 && (
-        <Section spacing="md">
+        <Section spacing="md" className="border-t border-[#E5E7EB]">
           <ProductReviews reviews={reviews} />
         </Section>
       )}

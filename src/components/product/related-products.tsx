@@ -16,7 +16,7 @@ export function RelatedProducts({ products, className }: RelatedProductsProps) {
         <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#4B5563]">You may also like</p>
         <h2 className="mt-2 font-heading text-3xl text-black">Related pieces</h2>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
           <ProductCardReal key={product.id} product={product} />
         ))}

@@ -10,7 +10,7 @@ const staticRoutes = [
   routeConstants.custom,
   routeConstants.story,
   routeConstants.craft,
-  routeConstants.reviews,
+  '/reviews',
   routeConstants.careGuide,
   routeConstants.faq,
   routeConstants.giftGuide,

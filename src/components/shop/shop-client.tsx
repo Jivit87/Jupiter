@@ -105,14 +105,14 @@ export function ShopClient({ initialProducts, total, categories, initialParams }
 
       <Section spacing="sm">
         {/* Unified Filter Bar */}
-        <div className="flex flex-col gap-4 border-b border-[#E5E7EB] pb-6 mb-8">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] mr-2">Filters</span>
+        <div className="border-b border-[#E5E7EB] pb-4 mb-8">
+          <div className="flex items-center gap-3 overflow-x-auto snap-x md:flex-wrap pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] mr-2 shrink-0">Filters</span>
             
             <select
               value={activeCategory}
               onChange={(e) => setParam('category', e.target.value)}
-              className="rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB]"
+              className="shrink-0 rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 min-h-[44px] text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB] snap-start"
             >
               <option value="">All Categories</option>
               {categories.map((cat) => (
@@ -123,7 +123,7 @@ export function ShopClient({ initialProducts, total, categories, initialParams }
             <select
               value={activeStock}
               onChange={(e) => setParam('stock_status', e.target.value)}
-              className="rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB]"
+              className="shrink-0 rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 min-h-[44px] text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB] snap-start"
             >
               {STOCK_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -133,23 +133,23 @@ export function ShopClient({ initialProducts, total, categories, initialParams }
             <select
               value={activeSort}
               onChange={(e) => setParam('sort', e.target.value)}
-              className="rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB]"
+              className="shrink-0 rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 min-h-[44px] text-[12px] uppercase tracking-[0.1em] text-black focus:outline-none focus:border-black cursor-pointer shadow-sm hover:bg-[#F9FAFB] snap-start"
             >
               {SORT_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
 
-            <label className="flex cursor-pointer items-center gap-2 rounded-sm border border-[#E5E7EB] bg-white px-3 py-2 shadow-sm hover:bg-[#F9FAFB]">
+            <label className="shrink-0 flex cursor-pointer items-center gap-2 rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 min-h-[44px] shadow-sm hover:bg-[#F9FAFB] snap-start">
               <span className="text-[12px] uppercase tracking-[0.1em] text-black">Customizable</span>
               <button
                 type="button"
                 role="switch"
                 aria-checked={activeCustomizable}
                 onClick={() => setParam('is_customizable', activeCustomizable ? '' : 'true')}
-                className={`relative inline-flex h-4 w-8 rounded-full transition-colors ${activeCustomizable ? 'bg-black' : 'bg-gray-200'}`}
+                className={`relative inline-flex h-5 w-9 rounded-full transition-colors ${activeCustomizable ? 'bg-black' : 'bg-gray-200'}`}
               >
-                <span className={`absolute left-0.5 top-0.5 h-3 w-3 rounded-full bg-white shadow transition-transform ${activeCustomizable ? 'translate-x-4' : ''}`} />
+                <span className={`absolute left-0.5 top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${activeCustomizable ? 'translate-x-4' : ''}`} />
               </button>
             </label>
 
@@ -161,7 +161,7 @@ export function ShopClient({ initialProducts, total, categories, initialParams }
                     router.push(pathname);
                   });
                 }}
-                className="ml-auto text-[11px] uppercase tracking-[0.1em] text-red-500 hover:underline"
+                className="shrink-0 ml-2 min-h-[44px] px-3 flex items-center justify-center text-[11px] uppercase tracking-[0.1em] text-red-500 hover:underline snap-start"
               >
                 Clear Filters
               </button>

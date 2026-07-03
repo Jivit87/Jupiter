@@ -57,9 +57,9 @@ export function ProductCardReal({ product }: ProductCardRealProps) {
         <button
           onClick={handleWishlist}
           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
-          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-black z-20 cursor-pointer transition-all duration-200 hover:border-black hover:scale-110 shadow-sm"
+          className="absolute top-2 right-2 w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm border border-[#E5E7EB] flex items-center justify-center text-black z-20 cursor-pointer transition-all duration-200 hover:bg-white hover:border-black hover:scale-105 shadow-sm"
         >
-          <i className={wishlisted ? "ri-heart-fill text-red-500 text-base" : "ri-heart-line text-base hover:text-red-500"}></i>
+          <i className={wishlisted ? "ri-heart-fill text-red-500 text-[18px]" : "ri-heart-line text-[18px] hover:text-red-500"}></i>
         </button>
       </div>
 

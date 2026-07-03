@@ -7,20 +7,20 @@ import Image from 'next/image';
 export function InstagramSection() {
   const [isPlaying, setIsPlaying] = useState(false);
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 min-h-[400px] md:min-h-[540px] border-b border-[#E5E7EB]" id="story">
+    <section className="grid grid-cols-1 md:grid-cols-2 min-h-[360px] md:min-h-[540px] border-b border-[#E5E7EB]" id="story">
       {/* Left side text */}
-      <div className="bg-black text-white px-6 sm:px-16 py-12 md:py-20 flex flex-col justify-center relative overflow-hidden">
+      <div className="bg-black text-white px-5 sm:px-16 py-10 sm:py-20 flex flex-col justify-center relative overflow-hidden">
         
-        <span className="inline-block text-[11px] font-semibold tracking-widest text-[#9CA3AF] uppercase mb-6">
+        <span className="inline-block text-[11px] font-semibold tracking-widest text-[#9CA3AF] uppercase mb-3 sm:mb-6">
           Our Story
         </span>
 
-        <h2 className="text-4xl sm:text-5xl leading-tight font-display text-white mb-6 tracking-tight">
+        <h2 className="text-3xl sm:text-5xl leading-tight font-display text-white mb-3 sm:mb-6 tracking-tight">
           Crafted with Purpose.<br />
           Inspired by <span className="italic text-[#9CA3AF]">Everything.</span>
         </h2>
 
-        <p className="text-sm leading-relaxed text-[#D1D5DB] max-w-md mb-10">
+        <p className="text-sm leading-relaxed text-[#D1D5DB] max-w-md mb-6 sm:mb-10">
           Every piece from Jupiter is a reflection of our journey, our roots, and our deep connection with the universe and nature. Thank you for being part of our story.
         </p>
 
@@ -31,7 +31,7 @@ export function InstagramSection() {
           Discover Our Story <i className="ri-arrow-right-line text-sm"></i>
         </Link>
 
-        <div className="mt-16 flex items-center gap-3">
+        <div className="mt-8 sm:mt-16 flex items-center gap-3">
           <i className="ri-heart-2-fill text-[#9CA3AF]"></i>
           <span className="font-sans text-sm text-[#9CA3AF] font-medium tracking-wide">With love, Jupiter Team</span>
         </div>
@@ -45,7 +45,7 @@ export function InstagramSection() {
               src="/story/12.jpg"
               alt="Jupiter story video poster"
               fill
-              className="object-cover scale-110 sm:scale-125"
+              className="object-cover scale-100 sm:scale-125"
             />
             <div 
               className="absolute inset-0 flex items-center justify-center z-20 cursor-pointer group"

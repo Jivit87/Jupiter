@@ -9,7 +9,6 @@ export const routeConstants = {
   custom: siteConfig.links.custom,
   story: siteConfig.links.story,
   craft: siteConfig.links.craft,
-  reviews: siteConfig.links.reviews,
   careGuide: siteConfig.links.careGuide,
   faq: siteConfig.links.faq,
   giftGuide: siteConfig.links.giftGuide,

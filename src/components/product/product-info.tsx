@@ -48,7 +48,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#4B5563]">
               {product.categoryName ?? 'Handmade collection'}
             </p>
-            <h1 className="font-display text-3xl sm:text-4xl text-black">{product.name}</h1>
+            <h1 className="font-display leading-tight text-black tracking-[0.005em] text-[clamp(1.875rem,5vw,2.5rem)]">{product.name}</h1>
           </div>
           <p className="text-sm leading-7 text-[#4B5563]">
             {product.description ?? 'Product description shell reserved for the full product record.'}

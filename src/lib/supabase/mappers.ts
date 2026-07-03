@@ -56,6 +56,19 @@ export function mapProductRecord(record: ProductRecordWithCategory): Product {
 }
 
 export function mapReviewRecord(record: ReviewRecord): Review {
+  let location = record.review_image;
+  let instagramUrl = null;
+
+  if (record.review_image && record.review_image.startsWith('{')) {
+    try {
+      const parsed = JSON.parse(record.review_image);
+      location = parsed.location || null;
+      instagramUrl = parsed.instagramUrl || null;
+    } catch {
+      // ignore
+    }
+  }
+
   return {
     id: record.id,
     reviewerName: record.reviewer_name,
@@ -63,8 +76,8 @@ export function mapReviewRecord(record: ReviewRecord): Review {
     rating: record.rating,
     productId: record.product_id,
     reviewerImage: record.reviewer_image,
-    reviewImage: record.review_image,
-    platform: record.platform,
+    location,
+    instagramUrl,
     isFeatured: record.is_featured,
     reviewDate: record.review_date,
     createdAt: record.created_at,

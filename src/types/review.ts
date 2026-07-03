@@ -7,7 +7,8 @@ export type Review = {
   rating?: number | null;
   productId?: string | null;
   reviewerImage?: string | null;
-  reviewImage?: string | null;
+  location?: string | null;
+  instagramUrl?: string | null;
   platform?: ReviewPlatform | null;
   isFeatured?: boolean | null;
   reviewDate?: string | null;

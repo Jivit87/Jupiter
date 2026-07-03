@@ -27,10 +27,12 @@ export function WishlistClient() {
           </div>
         ) : isEmpty ? (
           <div className="py-20 text-center">
-            <p className="font-heading text-3xl text-primary">Nothing saved yet</p>
+            <p className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black">Nothing saved yet</p>
             <p className="mt-2 text-sm text-text-muted">Tap the heart on any product to save it here.</p>
             <div className="mt-6">
-              <Button asChild variant="primary"><Link href="/shop">Browse the shop</Link></Button>
+              <Button asChild variant="primary" className="w-full sm:w-auto min-h-[44px]">
+                <Link href="/shop">Browse the shop</Link>
+              </Button>
             </div>
           </div>
         ) : (

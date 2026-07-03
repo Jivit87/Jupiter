@@ -100,8 +100,8 @@ export function ReelGrid({ reels, handle, profileUrl }: { reels: ReelItem[]; han
   const slots = LAYOUTS.slice(0, 5);
 
   return (
-    <section className="bg-white py-24 px-6 sm:px-12 border-b border-[#E5E7EB]">
-      <div className="text-center max-w-2xl mx-auto mb-16">
+    <section className="bg-white py-16 sm:py-24 px-6 sm:px-12 border-b border-[#E5E7EB]">
+      <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
         <Link
           href={profileUrl}
           target="_blank"

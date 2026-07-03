@@ -6,8 +6,6 @@ import type { Review, Product } from '@/types';
 import { createReview, updateReview } from '@/actions/reviews';
 import { getAdminProducts } from '@/actions/products';
 
-const PLATFORMS = ['whatsapp', 'instagram', 'in_person', 'other'] as const;
-
 type AdminReviewFormProps = {
   review?: Review;
 };
@@ -18,11 +16,11 @@ export function AdminReviewForm({ review }: AdminReviewFormProps) {
   const [reviewerName, setReviewerName] = useState(review?.reviewerName ?? '');
   const [reviewText, setReviewText] = useState(review?.reviewText ?? '');
   const [rating, setRating] = useState(String(review?.rating ?? '5'));
-  const [platform, setPlatform] = useState<'whatsapp' | 'instagram' | 'in_person' | 'other'>(review?.platform ?? 'whatsapp');
+  const [location, setLocation] = useState(review?.location ?? '');
+  const [instagramUrl, setInstagramUrl] = useState(review?.instagramUrl ?? '');
   const [isFeatured, setIsFeatured] = useState(review?.isFeatured ?? false);
   const [reviewDate, setReviewDate] = useState(review?.reviewDate ?? '');
   const [reviewerImage, setReviewerImage] = useState(review?.reviewerImage ?? '');
-  const [reviewImage, setReviewImage] = useState(review?.reviewImage ?? '');
   const [productId, setProductId] = useState(review?.productId ?? '');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -49,11 +47,11 @@ export function AdminReviewForm({ review }: AdminReviewFormProps) {
         reviewerName,
         reviewText,
         rating: rating ? Number(rating) : undefined,
-        platform,
+        location: location || undefined,
+        instagramUrl: instagramUrl || undefined,
         isFeatured,
         reviewDate: reviewDate || undefined,
         reviewerImage: reviewerImage || undefined,
-        reviewImage: reviewImage || undefined,
         productId: productId || undefined,
       };
       const result = review?.id
@@ -69,7 +67,8 @@ export function AdminReviewForm({ review }: AdminReviewFormProps) {
         setRating('5');
         setReviewDate('');
         setIsFeatured(false);
-        setPlatform('whatsapp');
+        setLocation('');
+        setInstagramUrl('');
       }
       setSuccess(true); router.refresh();
     });
@@ -86,10 +85,12 @@ export function AdminReviewForm({ review }: AdminReviewFormProps) {
           <input required value={reviewerName} onChange={(e) => setReviewerName(e.target.value)} className={inputCls} />
         </div>
         <div className="space-y-1.5">
-          <label className={labelCls}>Platform</label>
-          <select value={platform} onChange={(e) => setPlatform(e.target.value as 'whatsapp' | 'instagram' | 'in_person' | 'other')} className={inputCls}>
-            {PLATFORMS.map((p) => <option key={p} value={p}>{p}</option>)}
-          </select>
+          <label className={labelCls}>Location (City)</label>
+          <input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Kathmandu" className={inputCls} />
+        </div>
+        <div className="space-y-1.5">
+          <label className={labelCls}>Instagram URL (optional)</label>
+          <input type="url" value={instagramUrl} onChange={(e) => setInstagramUrl(e.target.value)} placeholder="https://instagram.com/..." className={inputCls} />
         </div>
         <div className="space-y-1.5">
           <label className={labelCls}>Rating (1–5)</label>
@@ -104,12 +105,8 @@ export function AdminReviewForm({ review }: AdminReviewFormProps) {
           <textarea required rows={3} value={reviewText} onChange={(e) => setReviewText(e.target.value)} className={inputCls} />
         </div>
         <div className="space-y-1.5 sm:col-span-2">
-          <label className={labelCls}>Reviewer image (Cloudinary URL)</label>
+          <label className={labelCls}>Reviewer profile image (Cloudinary URL - Optional)</label>
           <input value={reviewerImage} onChange={(e) => setReviewerImage(e.target.value)} placeholder="https://res.cloudinary.com/..." className={inputCls} />
-        </div>
-        <div className="space-y-1.5 sm:col-span-2">
-          <label className={labelCls}>Review image (Cloudinary URL)</label>
-          <input value={reviewImage} onChange={(e) => setReviewImage(e.target.value)} placeholder="https://res.cloudinary.com/..." className={inputCls} />
         </div>
         <div className="space-y-1.5 sm:col-span-2">
           <label className={labelCls}>Linked product (optional)</label>

@@ -6,8 +6,8 @@ export const reviewSchema = z.object({
   rating: z.number().int().min(1).max(5).optional(),
   productId: z.string().uuid().optional(),
   reviewerImage: z.string().url().optional(),
-  reviewImage: z.string().url().optional(),
-  platform: z.enum(['whatsapp', 'instagram', 'in_person', 'other']).optional(),
+  location: z.string().max(120).optional(),
+  instagramUrl: z.string().url().optional(),
   isFeatured: z.boolean().optional(),
   reviewDate: z.string().date().optional(),
 });

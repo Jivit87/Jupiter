@@ -72,7 +72,7 @@ export function SearchTrigger({ className }: { className?: string }) {
         className={className}
         onClick={() => {
           if (open && query) {
-            handleSubmit(new Event('submit') as any);
+            handleSubmit(new Event('submit') as unknown as React.FormEvent);
           } else {
             setOpen(!open);
           }

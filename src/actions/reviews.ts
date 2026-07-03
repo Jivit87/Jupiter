@@ -80,14 +80,20 @@ export async function createReview(data: unknown): Promise<ActionResult> {
 
   const input = parsed.data;
   const supabase = createSupabaseAdminClient();
+  
+  const reviewImageValue = JSON.stringify({
+    location: input.location ?? null,
+    instagramUrl: input.instagramUrl ?? null,
+  });
+
   const { error } = await supabase.from('reviews').insert({
     reviewer_name: input.reviewerName,
     review_text: input.reviewText,
     rating: input.rating ?? null,
     product_id: input.productId ?? null,
     reviewer_image: input.reviewerImage ?? null,
-    review_image: input.reviewImage ?? null,
-    platform: input.platform ?? 'whatsapp',
+    review_image: reviewImageValue,
+    platform: 'whatsapp',
     is_featured: input.isFeatured ?? false,
     review_date: input.reviewDate ?? null,
   });
@@ -104,19 +110,27 @@ export async function updateReview(id: string, data: unknown): Promise<ActionRes
 
   const input = parsed.data;
   const supabase = createSupabaseAdminClient();
+
+  const updateData: Record<string, unknown> = {
+    ...(input.reviewerName !== undefined && { reviewer_name: input.reviewerName }),
+    ...(input.reviewText !== undefined && { review_text: input.reviewText }),
+    ...(input.rating !== undefined && { rating: input.rating }),
+    ...(input.productId !== undefined && { product_id: input.productId }),
+    ...(input.reviewerImage !== undefined && { reviewer_image: input.reviewerImage }),
+    ...(input.isFeatured !== undefined && { is_featured: input.isFeatured }),
+    ...(input.reviewDate !== undefined && { review_date: input.reviewDate }),
+  };
+
+  if (input.location !== undefined || input.instagramUrl !== undefined) {
+    updateData.review_image = JSON.stringify({
+      location: input.location ?? null,
+      instagramUrl: input.instagramUrl ?? null,
+    });
+  }
+
   const { error } = await supabase
     .from('reviews')
-    .update({
-      ...(input.reviewerName !== undefined && { reviewer_name: input.reviewerName }),
-      ...(input.reviewText !== undefined && { review_text: input.reviewText }),
-      ...(input.rating !== undefined && { rating: input.rating }),
-      ...(input.productId !== undefined && { product_id: input.productId }),
-      ...(input.reviewerImage !== undefined && { reviewer_image: input.reviewerImage }),
-      ...(input.reviewImage !== undefined && { review_image: input.reviewImage }),
-      ...(input.platform !== undefined && { platform: input.platform }),
-      ...(input.isFeatured !== undefined && { is_featured: input.isFeatured }),
-      ...(input.reviewDate !== undefined && { review_date: input.reviewDate }),
-    })
+    .update(updateData)
     .eq('id', id);
 
   if (error) return { success: false, error: error.message };

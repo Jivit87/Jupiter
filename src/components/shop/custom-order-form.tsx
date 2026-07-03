@@ -69,8 +69,8 @@ export function CustomOrderForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <label htmlFor="description" className="block text-sm font-medium text-black">
-          What do you want? <span className="text-amber-600">*</span>
+        <label htmlFor="description" className="block text-sm font-medium text-emerald-950">
+          What do you want? <span className="text-emerald-600">*</span>
         </label>
         <textarea
           id="description"
@@ -78,7 +78,7 @@ export function CustomOrderForm() {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Describe your dream piece — type, style, colors, size, anything..."
           rows={4}
-          className="w-full rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black"
+          className="w-full rounded-sm border border-emerald-200/60 bg-emerald-50/30 px-4 py-3 text-sm text-emerald-950 placeholder:text-emerald-900/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
           required
         />
         {error && <p className="text-xs text-red-600">{error}</p>}
@@ -86,12 +86,12 @@ export function CustomOrderForm() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="occasion" className="block text-sm font-medium text-black">Occasion</label>
+          <label htmlFor="occasion" className="block text-sm font-medium text-emerald-950">Occasion</label>
           <select
             id="occasion"
             value={occasion}
             onChange={(e) => setOccasion(e.target.value)}
-            className="w-full rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full rounded-sm border border-emerald-200/60 bg-emerald-50/30 px-4 py-3 text-sm text-emerald-950 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
           >
             <option value="">Select occasion (optional)</option>
             {OCCASIONS.map((o) => <option key={o} value={o}>{o}</option>)}
@@ -99,12 +99,12 @@ export function CustomOrderForm() {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="budget" className="block text-sm font-medium text-black">Budget</label>
+          <label htmlFor="budget" className="block text-sm font-medium text-emerald-950">Budget</label>
           <select
             id="budget"
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
-            className="w-full rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full rounded-sm border border-emerald-200/60 bg-emerald-50/30 px-4 py-3 text-sm text-emerald-950 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
           >
             <option value="">Select budget (optional)</option>
             {BUDGETS.map((b) => <option key={b} value={b}>{b}</option>)}
@@ -114,68 +114,68 @@ export function CustomOrderForm() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="name" className="block text-sm font-medium text-black">Your name</label>
+          <label htmlFor="name" className="block text-sm font-medium text-emerald-950">Your name</label>
           <input
             type="text"
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Optional"
-            className="w-full rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full rounded-sm border border-emerald-200/60 bg-emerald-50/30 px-4 py-3 text-sm text-emerald-950 placeholder:text-emerald-900/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
           />
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="phone" className="block text-sm font-medium text-black">Your WhatsApp number</label>
+          <label htmlFor="phone" className="block text-sm font-medium text-emerald-950">Your WhatsApp number</label>
           <input
             type="tel"
             id="phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Optional"
-            className="w-full rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full rounded-sm border border-emerald-200/60 bg-emerald-50/30 px-4 py-3 text-sm text-emerald-950 placeholder:text-emerald-900/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
           />
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="deadline" className="block text-sm font-medium text-black">Need it by <span className="font-normal text-gray-500">(optional)</span></label>
+          <label htmlFor="deadline" className="block text-sm font-medium text-emerald-950">Need it by <span className="font-normal text-emerald-900/50">(optional)</span></label>
           <input
             type="date"
             id="deadline"
             value={deadline}
             onChange={(e) => setDeadline(e.target.value)}
             min={new Date().toISOString().split('T')[0]}
-            className="w-full rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full rounded-sm border border-emerald-200/60 bg-emerald-50/30 px-4 py-3 text-sm text-emerald-950 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
           />
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="reference" className="block text-sm font-medium text-black">Reference image URL <span className="font-normal text-gray-500">(optional)</span></label>
+          <label htmlFor="reference" className="block text-sm font-medium text-emerald-950">Reference image URL <span className="font-normal text-emerald-900/50">(optional)</span></label>
           <input
             type="url"
             id="reference"
             value={referenceUrl}
             onChange={(e) => setReferenceUrl(e.target.value)}
             placeholder="https://..."
-            className="w-full rounded-sm border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full rounded-sm border border-emerald-200/60 bg-emerald-50/30 px-4 py-3 text-sm text-emerald-950 placeholder:text-emerald-900/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
           />
         </div>
       </div>
 
-      <div className="space-y-2">
-        <p className="text-sm font-medium text-black">Preferred material <span className="font-normal text-gray-500">(optional)</span></p>
+      <div className="space-y-3">
+        <p className="text-sm font-medium text-emerald-950">Preferred material <span className="font-normal text-emerald-900/50">(optional)</span></p>
         <div className="flex flex-wrap gap-2">
           {MATERIALS.map((m) => (
             <button
               key={m}
               type="button"
               onClick={() => toggleMaterial(m)}
-              className={`rounded-sm px-4 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-sm px-4 py-3 min-h-[44px] text-sm font-medium transition-colors flex items-center justify-center ${
                 materials.includes(m)
-                  ? 'bg-black text-white'
-                  : 'border border-[#E5E7EB] bg-white text-black hover:border-black'
+                  ? 'bg-emerald-600 text-white shadow-sm'
+                  : 'border border-emerald-200/60 bg-emerald-50/30 text-emerald-950 hover:border-emerald-400 hover:bg-emerald-50'
               }`}
             >
               {m}
@@ -197,7 +197,7 @@ export function CustomOrderForm() {
         {isSubmitting ? 'Sending...' : 'Send via WhatsApp'}
       </button>
 
-      <p className="text-center text-xs text-[#4B5563]">
+      <p className="text-center text-xs text-emerald-900/60 font-medium">
         This will open WhatsApp with your request pre-filled. We&apos;ll respond within 2–3 hours.
       </p>
     </form>

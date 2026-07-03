@@ -54,7 +54,7 @@ export default function MadeInNepalPage() {
             <div className="min-h-72 bg-jupiter-aura" />
             <div className="space-y-5 p-8 lg:p-10">
               <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-text-muted">Provenance</p>
-              <h2 className="font-heading text-3xl text-primary">
+              <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-primary">
                 The mountains are in the metal
               </h2>
               <p className="text-sm leading-7 text-text-muted">
@@ -75,7 +75,7 @@ export default function MadeInNepalPage() {
       <Section spacing="md">
         <div className="space-y-4">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-text-muted">Why it matters</p>
-          <h2 className="font-heading text-3xl text-primary">What &ldquo;Made in Nepal&rdquo; really means</h2>
+          <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-primary">What &ldquo;Made in Nepal&rdquo; really means</h2>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {reasons.map((r) => (
@@ -108,13 +108,17 @@ export default function MadeInNepalPage() {
       <Section spacing="md">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-text-muted">Own a piece</p>
-          <h2 className="mt-3 font-heading text-3xl text-primary">Take Nepal home with you</h2>
+          <h2 className="mt-3 font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-primary">Take Nepal home with you</h2>
           <p className="mt-3 max-w-sm mx-auto text-sm text-text-muted">
             Browse our full collection of handmade jewelry, art, and gifts — all made by hand in Nepal.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Button asChild variant="primary"><Link href="/shop">Shop the collection</Link></Button>
-            <Button asChild variant="outline"><Link href="/our-story">Our story</Link></Button>
+          <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
+            <Button asChild variant="primary" className="w-full sm:w-auto min-h-[44px]">
+              <Link href="/shop">Shop the collection</Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full sm:w-auto min-h-[44px]">
+              <Link href="/our-story">Our story</Link>
+            </Button>
           </div>
         </div>
       </Section>

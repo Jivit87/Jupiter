@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-// @ts-ignore
+// @ts-expect-error - dotenv is used in the script but causes TS issues in Next.js config
 import { config } from 'dotenv';
 config({ path: '.env.local' });
 

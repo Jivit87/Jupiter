@@ -27,12 +27,12 @@ export default function CustomPage() {
       />
 
       <Section spacing="md">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-row sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {steps.map(({ step, title, desc }) => (
-            <div key={step} className="rounded-sm border border-[#E5E7EB] bg-[#F9FAFB] p-6">
-              <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563]">Step {step}</p>
-              <p className="mt-3 font-heading text-2xl text-black">{title}</p>
-              <p className="mt-2 text-sm leading-6 text-[#4B5563]">{desc}</p>
+            <div key={step} className="w-[85vw] sm:w-auto shrink-0 sm:shrink rounded-sm border border-emerald-200/60 bg-gradient-to-br from-emerald-50/80 to-teal-50/30 p-6 snap-start">
+              <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-emerald-600 font-semibold">Step {step}</p>
+              <p className="mt-3 font-heading text-2xl text-emerald-950">{title}</p>
+              <p className="mt-2 text-sm leading-6 text-emerald-900/70">{desc}</p>
             </div>
           ))}
         </div>
@@ -41,10 +41,10 @@ export default function CustomPage() {
       <Section spacing="md">
         <div className="mx-auto max-w-2xl">
           <div className="mb-8">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#4B5563]">Your request</p>
-            <h2 className="mt-2 font-heading text-3xl text-black">Tell us your vision</h2>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-emerald-600 font-semibold">Your request</p>
+            <h2 className="mt-2 font-heading text-3xl text-emerald-950">Tell us your vision</h2>
           </div>
-          <div className="rounded-sm border border-[#E5E7EB] bg-white p-6 sm:p-8">
+          <div className="rounded-sm border border-emerald-200/60 bg-white p-6 sm:p-8 shadow-[0_8px_30px_rgb(5,150,105,0.06)]">
             <CustomOrderForm />
           </div>
         </div>

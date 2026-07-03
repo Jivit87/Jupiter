@@ -1,5 +1,6 @@
 import { getSiteSettings } from '@/actions/settings';
 import { getFeaturedProducts } from '@/actions/products';
+import { getFeaturedReviews } from '@/actions/reviews';
 import { normalizeSiteSettings } from '@/lib/site-settings';
 import { isBuildPhase } from '@/lib/supabase/utils';
 import { Hero } from './hero';
@@ -14,11 +15,12 @@ import { FeatureStrip } from './feature-strip';
 import { FadeIn } from '@/components/ui/fade-in';
 
 export async function HomePage() {
-  const [settings, featuredProducts] = isBuildPhase()
-    ? [{} as Record<string, unknown>, []]
+  const [settings, featuredProducts, featuredReviews] = isBuildPhase()
+    ? [{} as Record<string, unknown>, [], []]
     : await Promise.all([
         getSiteSettings().catch(() => ({} as Record<string, unknown>)),
         getFeaturedProducts(5).catch(() => []),
+        getFeaturedReviews().catch(() => []),
       ]);
 
   const siteSettings = normalizeSiteSettings(settings);
@@ -31,7 +33,7 @@ export async function HomePage() {
       <FadeIn delay={0.05}><CuratedCollections products={featuredProducts} /></FadeIn>
       <FadeIn delay={0.05}><InstagramSection /></FadeIn>
       <FadeIn delay={0.05}><HowToOrder /></FadeIn>
-      <FadeIn delay={0.05}><WallOfLove /></FadeIn>
+      <FadeIn delay={0.05}><WallOfLove reviews={featuredReviews} /></FadeIn>
       <FadeIn delay={0.05}><FollowJourney /></FadeIn>
       <FadeIn delay={0.05}><FeatureStrip /></FadeIn>
     </div>

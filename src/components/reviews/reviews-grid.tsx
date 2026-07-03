@@ -5,7 +5,7 @@ type ReviewsGridProps = {
   reviews: ReadonlyArray<
     Pick<
       Review,
-      'id' | 'reviewerName' | 'reviewText' | 'rating' | 'reviewerImage' | 'reviewImage' | 'platform' | 'reviewDate'
+      'id' | 'reviewerName' | 'reviewText' | 'rating' | 'reviewerImage' | 'location' | 'platform' | 'reviewDate'
     > & {
       linkedProductName?: string | null;
     }

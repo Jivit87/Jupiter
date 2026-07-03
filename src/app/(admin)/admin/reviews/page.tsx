@@ -3,6 +3,7 @@ import { AdminPageFrame } from '@/components/admin/admin-page-frame';
 import { getAllReviews } from '@/actions/reviews';
 import { AdminReviewActions } from '@/components/admin/review-actions';
 import { AdminReviewForm } from '@/components/admin/review-form';
+import { AdminToolbar } from '@/components/admin/admin-toolbar';
 
 export const metadata: Metadata = { title: 'Reviews | Jupiter Admin' };
 
@@ -18,7 +19,7 @@ export default async function AdminReviewsPage() {
             <table className="min-w-full text-sm">
               <thead className="bg-background/80">
                 <tr>
-                  {['Reviewer', 'Text', 'Platform', 'Rating', 'Featured', 'Actions'].map((col) => (
+                  {['Reviewer', 'Text', 'Location', 'Rating', 'Featured', 'Actions'].map((col) => (
                     <th key={col} className="border-b border-border px-4 py-3 text-left font-mono text-[11px] uppercase tracking-[0.28em] text-text-muted">{col}</th>
                   ))}
                 </tr>
@@ -32,7 +33,7 @@ export default async function AdminReviewsPage() {
                     <td className="max-w-xs px-4 py-3 text-text-muted">
                       <span className="line-clamp-1">{r.reviewText}</span>
                     </td>
-                    <td className="px-4 py-3 text-text-muted">{r.platform ?? '—'}</td>
+                    <td className="px-4 py-3 text-text-muted">{r.location ?? '—'}</td>
                     <td className="px-4 py-3 text-text-muted">{r.rating ?? '—'}</td>
                     <td className="px-4 py-3">{r.isFeatured ? <i className="ri-star-fill text-yellow-500 text-lg" title="Featured"></i> : <i className="ri-star-line text-[#E5E7EB] text-lg"></i>}</td>
                     <td className="px-4 py-3"><AdminReviewActions id={r.id} isFeatured={r.isFeatured ?? false} /></td>

@@ -64,10 +64,10 @@ export function Footer() {
   const instagramUrl = siteConfig.socials.instagram;
 
   return (
-    <footer className="bg-[#F9FAFB] border-t border-[#E5E7EB] py-16 lg:py-24 px-6 sm:px-12">
-      <div className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-x-6 gap-y-12 lg:gap-16 pb-16 border-b border-[#E5E7EB]">
+    <footer className="bg-[#F9FAFB] border-t border-[#E5E7EB] py-12 lg:py-24 px-6 sm:px-12">
+      <div className="mx-auto max-w-7xl grid grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-x-2 sm:gap-x-6 gap-y-10 lg:gap-16 pb-12 lg:pb-16 border-b border-[#E5E7EB]">
         
-        <div className="col-span-2 lg:col-span-1">
+        <div className="col-span-3 lg:col-span-1">
           <div className="flex items-center gap-3 mb-6 text-black">
             <JupiterMark />
             <span className="font-display text-xl font-semibold tracking-wide">

@@ -19,7 +19,6 @@ export const siteConfig = {
     custom: '/custom',
     story: '/our-story',
     craft: '/the-craft',
-    reviews: '/reviews',
     careGuide: '/care-guide',
     faq: '/faq',
     giftGuide: '/gift-guide',

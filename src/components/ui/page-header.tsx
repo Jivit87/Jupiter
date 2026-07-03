@@ -22,7 +22,7 @@ export function PageHeader({
   const alignClass = align === 'center' ? 'items-center text-center' : 'items-start text-left';
 
   return (
-    <section className={cn('pt-12 pb-0 sm:pt-16 sm:pb-0', className)}>
+    <section className={cn('pt-8 pb-0 sm:pt-16 sm:pb-0', className)}>
       <Container>
         <div className={cn('flex max-w-3xl flex-col gap-4', alignClass)}>
           {eyebrow ? (
@@ -34,7 +34,7 @@ export function PageHeader({
             </span>
           ) : null}
           <div className="space-y-3">
-            <h1 className="font-display text-4xl leading-tight text-black sm:text-5xl lg:text-6xl tracking-[0.005em]">{title}</h1>
+            <h1 className="font-display leading-tight text-black tracking-[0.005em] text-[clamp(2.25rem,4vw+1rem,3.75rem)]">{title}</h1>
             {description ? (
               <p className="text-base leading-7 text-[#4B5563] sm:text-lg font-body">{description}</p>
             ) : null}

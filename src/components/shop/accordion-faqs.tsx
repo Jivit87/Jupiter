@@ -82,7 +82,7 @@ export function AccordionFaqs() {
         <div className="mt-4">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl bg-whatsapp px-5 py-2.5 text-sm font-semibold text-ivory hover:bg-whatsapp/90"
+            className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#1DA851] min-h-[44px] w-full sm:w-auto transition-colors"
           >
             Chat with us on WhatsApp
           </Link>

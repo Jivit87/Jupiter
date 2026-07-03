@@ -35,19 +35,19 @@ export default async function ContactPage() {
       <Section spacing="md">
         <div className="grid gap-6 lg:grid-cols-2">
           {/* WhatsApp Box */}
-          <div className="flex h-full flex-col justify-between rounded-sm border border-[#E5E7EB] bg-[#25D366]/[0.03] p-8">
+          <div className="flex h-full flex-col justify-between rounded-sm border border-[#E5E7EB] bg-[#25D366]/[0.03] p-6 sm:p-8">
             <div className="space-y-3">
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] flex items-center">
                 <i className="ri-whatsapp-fill mr-1.5 text-lg text-[#25D366]"></i> Primary contact
               </p>
-              <h2 className="font-heading text-3xl text-black">Chat on WhatsApp</h2>
+              <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black">Chat on WhatsApp</h2>
               <p className="text-sm leading-7 text-[#4B5563]">
                 The fastest way to reach us. Ask about products, place an order, or request a custom piece.
               </p>
             </div>
             <div className="mt-8">
               {whatsappUrl ? (
-                <Button asChild className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1DA851] text-white border-none rounded-sm">
+                <Button asChild className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1DA851] text-white border-none rounded-sm min-h-[44px]">
                   <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                     Open WhatsApp →
                   </Link>
@@ -61,18 +61,18 @@ export default async function ContactPage() {
           </div>
 
           {/* Instagram Box */}
-          <div className="flex h-full flex-col justify-between rounded-sm border border-[#E5E7EB] bg-[#E1306C]/[0.03] p-8">
+          <div className="flex h-full flex-col justify-between rounded-sm border border-[#E5E7EB] bg-[#E1306C]/[0.03] p-6 sm:p-8">
             <div className="space-y-3">
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] flex items-center">
                 <i className="ri-instagram-fill mr-1.5 text-lg bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] bg-clip-text text-transparent inline-block"></i> Instagram
               </p>
-              <h2 className="font-heading text-3xl text-black">@{instagramHandle}</h2>
+              <h2 className="font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black">@{instagramHandle}</h2>
               <p className="text-sm leading-7 text-[#4B5563]">
                 Follow us for new arrivals, behind-the-scenes, and crafting process reels.
               </p>
             </div>
             <div className="mt-8">
-              <Button asChild variant="outline" className="w-full sm:w-auto rounded-sm border-[#E5E7EB] text-black hover:bg-black hover:text-white transition-colors">
+              <Button asChild variant="outline" className="w-full sm:w-auto rounded-sm border-[#E5E7EB] text-black hover:bg-black hover:text-white transition-colors min-h-[44px]">
                 <Link href={instagramUrl} target="_blank" rel="noopener noreferrer">
                   Follow on Instagram →
                 </Link>
@@ -81,11 +81,11 @@ export default async function ContactPage() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-sm border border-[#E5E7EB] bg-blue-500/[0.03] p-8 text-center">
+        <div className="mt-6 rounded-sm border border-[#E5E7EB] bg-blue-500/[0.03] p-6 sm:p-8 text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#4B5563] flex items-center justify-center">
             <i className="ri-map-pin-2-fill mr-1.5 text-lg text-blue-500"></i> Based in
           </p>
-          <p className="mt-2 font-heading text-3xl text-black">Nepal 🇳🇵</p>
+          <p className="mt-2 font-heading text-[clamp(1.75rem,3vw+1rem,2.25rem)] text-black">Nepal 🇳🇵</p>
           <p className="mt-2 text-sm text-[#4B5563]">
             Shipping within Nepal
           </p>

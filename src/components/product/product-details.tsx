@@ -12,7 +12,7 @@ type ProductDetailsProps = {
 
 export function ProductDetails({ details, className }: ProductDetailsProps) {
   return (
-    <div className={cn('border-t border-[#E5E7EB] pt-12', className)}>
+    <div className={cn('', className)}>
       <div className="space-y-6">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#4B5563]">Details</p>
