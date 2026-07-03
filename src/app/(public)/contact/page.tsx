@@ -8,6 +8,7 @@ import { siteConfig } from '@/config/site';
 import { getSiteSettings } from '@/actions/settings';
 import { buildMetadata } from '@/lib/seo';
 import { normalizeSiteSettings } from '@/lib/site-settings';
+import { getPublicEnv } from '@/lib/env';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Contact | Jupiter — Handmade in Nepal',
@@ -16,8 +17,9 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function ContactPage() {
+  const publicEnv = getPublicEnv();
   const settings = normalizeSiteSettings(await getSiteSettings().catch(() => ({} as Record<string, unknown>)));
-  const whatsappNumber = settings.whatsappNumber;
+  const whatsappNumber = settings.whatsappNumber || publicEnv.NEXT_PUBLIC_WHATSAPP_NUMBER;
   const instagramHandle = settings.instagramHandle ?? siteConfig.handles.instagram;
   const whatsappUrl = whatsappNumber
     ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hi Jupiter! 🪐 I'd like to know more about your products.")}`
