@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
+node_modules.nosync
 .next
+.next.nosync
 out
 dist
 coverage
@@ -10,3 +12,4 @@ coverage
 !.env.example
 *.tsbuildinfo
 vite.svg
+.agents.nosync

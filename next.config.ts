@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   output: 'standalone',
+  experimental: {
+    // Speed up dev server
+    optimizePackageImports: ['framer-motion', 'remixicon'],
+  },
   images: {
     remotePatterns: [
       {
